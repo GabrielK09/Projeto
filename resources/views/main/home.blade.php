@@ -6,7 +6,13 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>Home Page</h1>
-    
+    @yield('header')
+    <header>
+        <h1>Title</h1>
+    </header>
+    <nav>
+        <a href="http://127.0.0.1:8000/pedidos">Todos os pedidos</a>
+        
+    </nav>
 </body>
 </html>
