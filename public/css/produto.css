@@ -1,0 +1,30 @@
+/* Reset básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+    color: #333;
+}
+
+/* Área principal */
+.scope {
+    flex: 1;
+    padding: 40px;
+    background-color: #fff;
+}
+
+.scope h1 {
+    font-size: 24px;
+    color: #34495e;
+}
+
+.new_btn {
+    display: flex;
+    justify-content: flex-end;
+    
+}

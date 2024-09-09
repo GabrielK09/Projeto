@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>PDV - Sistema de Vendas</title>
+</head>
+<body>
+    @include('main.lateral_bar')
+    <form action="/pdv" method="get">
+        @csrf
+        <input type="search" name="query" placeholder="Buscar item" value="{{ request('query') }}">
+        <input type="hidden" name="total" value="{{ $total ?? 0 }}"> 
+        <button type="submit">Buscar</button>
+
+    </form>
+
+    @if($produtos)
+        <h2>Produto Encontrado:</h2>
+        <ul>
+            <li>Código: {{ $produtos->id }} | {{ $produtos->nome }} - Preço: R$ {{ number_format($produtos->preco_venda, 2) }}</li>
+            
+        </ul>
+    @else
+        <p>Nenhum produto encontrado.</p>
+    @endif
+
+    <!-- Exibir Total -->
+    <h2>Total da Venda: R$ {{ number_format($total, 2, ',', '.') }}</h2>
+
+</body>
+</html>

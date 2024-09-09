@@ -2,17 +2,21 @@
 
 use Illuminate\Support\Facades\Route;
 
-use App\Http\Controllers\PedidosController;
-use App\Http\Controllers\ClienteController;
+use App\Http\Controllers\ProdutosController;
+use App\Http\Controllers\PDVController;
 
 Route::get('/', function () {
-    return view('main/home');
+    return view('dashboard');
 
 });
 
-Route::get('/pedidos', [PedidosController::class, 'index']);
-Route::get('/pedido/{id}', [PedidosController::class, 'getId']);
-Route::get('/addItemTeste', [PedidosController::class, 'addItemTeste']);
+Route::get('/produto', [ProdutosController::class, 'produto']);
+Route::post('/produto', [ProdutosController::class, 'store'])->name('produto.store');
 
-Route::get('/cliente/{id}', [ClienteController::class, 'getId']);
-Route::get('/addClienteTeste', [ClienteController::class, 'addClienteTeste']);
+Route::get('/produto/cadastro', function() {
+    return view('cadastroProduto');
+
+});
+
+
+Route::get('/pdv', [PDVController::class, 'pdv']);
