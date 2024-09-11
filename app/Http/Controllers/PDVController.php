@@ -11,10 +11,8 @@ class PDVController extends Controller
     public function pdv(Request $request)
     {
         try {
-            // Captura o parâmetro da query
             $query = $request->input('query');
 
-            // Inicializa a variável $produtos como null
             $produtos = null;
             $total = $request->input('total', 0);
 
@@ -25,10 +23,11 @@ class PDVController extends Controller
 
                 if ($produtos && is_object($produtos)) {
                     $total += $produtos->preco_venda; 
-
+                    
                 } else {
                     return response()->json([
                         'message' => 'Produto não encontrado.'
+                        
                     ]);
                 }
 
@@ -41,10 +40,7 @@ class PDVController extends Controller
             ]);
             
         } catch (\Throwable $th) {
-            return response()->json([
-                'message' => 'Erro ao buscar produto',
-                'th' => $th->getMessage()
-            ]);
-        }
+
+        };
     }
 }

@@ -30,6 +30,8 @@ class ProdutosController extends Controller
 
     public function store(Request $request)
     {
+        $validate = [];
+
         try {
             $validate = $request->validate([
                 'nome' => 'required|string|max:255',
@@ -40,6 +42,9 @@ class ProdutosController extends Controller
                 'ncm' => 'required|numeric|gt:0',
                 'qte' => 'required|numeric|gt:0'
                 
+            ], [
+                'nome.required' => 'O nome precisa ser preenchido.',
+                'preco_venda.gt' => 'O preço de venda deve ser maior que 0.'
             ]);
         
             Tprodutos::create($validate);
@@ -47,12 +52,9 @@ class ProdutosController extends Controller
             return redirect('/produto')->with('success', 'Produto cadastrado com sucesso!');
          
         } catch (\Throwable $th) {
-            return response()->json([
-                'message' => 'Erro',
-                'th' => $th->getMessage()
+            return redirect()->back()->withErrors($validate)->withInput();
 
-            ], 500);
-        };
+        }
     
     }
     
