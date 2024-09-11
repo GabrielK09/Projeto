@@ -13,7 +13,7 @@ class MyNewExcpetion extends Exception
      */
     public function report()
     {
-        //
+        
     }
 
     /**
