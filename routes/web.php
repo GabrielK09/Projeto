@@ -20,3 +20,4 @@ Route::get('/produto/cadastro', function() {
 
 
 Route::get('/pdv', [PDVController::class, 'pdv']);
+Route::get('/pdv', [PDVController::class, 'pdv']);
