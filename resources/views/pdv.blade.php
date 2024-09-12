@@ -8,13 +8,20 @@
 </head>
 <body>
     @include('main.lateral_bar')
-    <form action="/pdv" method="get">
+    <form action="/pdv" method="GET">
         @csrf
         <input type="search" name="query" placeholder="Buscar item" value="{{ request('query') }}">
         <input type="hidden" name="total" value="{{ $total ?? 0 }}"> 
         <button type="submit">Buscar</button>
 
     </form>
+
+    @if(session('message'))
+        <div class="alert alert-danger">
+            {{ session('message') }}
+        </div>
+    @endif
+
 
     @if($produtos)
         <h2>Produto Encontrado:</h2>
@@ -26,7 +33,6 @@
         <p>Nenhum produto encontrado.</p>
     @endif
 
-    <!-- Exibir Total -->
     <h2>Total da Venda: R$ {{ number_format($total, 2, ',', '.') }}</h2>
 
 </body>

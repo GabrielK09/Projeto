@@ -16,9 +16,10 @@ return new class extends Migration
             $table->string('nome');
             $table->bigInteger('cod_gtin');
             $table->decimal('preco_venda');
+            $table->decimal('qte');
             $table->integer('cfop');
             $table->integer('csosn');
-            $table->integer('ncm');
+            $table->bigInteger('ncm');
             $table->timestamps();
         });
     }
