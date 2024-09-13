@@ -33,7 +33,10 @@ body {
 
 }
 
-.cadastrarProduto:hover {
+.cadastrarProduto:hover, 
+button.inativar:hover,
+button.ativar:hover,
+button.editarProduto:hover{
     background-color: #AAD2BA;
 
 }
@@ -46,12 +49,25 @@ body {
 
 
 
-button.cadastrarProduto{
+button.cadastrarProduto, button.inativar, button.ativar, button.editarProduto{
     padding: .3rem;
-    
+    cursor: pointer;
 }
 
 #painel {
     display: flex;
     margin: 0 1rem 0 1rem;
+
+}
+
+button.inativar,
+button.ativar,
+button.editarProduto {
+    text-decoration: none;
+    color: #fff;
+    background: #6B8F71;
+    border: none;
+    border-radius: 5px;
+    font-size: 15px;
+
 }

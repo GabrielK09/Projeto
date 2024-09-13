@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Produto</title>
+    <title>Produtos</title>
     <link rel="stylesheet" href="css/produto.css">
 </head>
 <body>
@@ -36,14 +36,14 @@
                     <p>NCM: {{ $produto->ncm }}</p>
                     <p>Ativo: {{ $produto->ativo === 1 ? "Ativo" : "Inativo" }}</p>
 
-                    <a href="/produto/editar/{{ $produto->id }}"><button>Editar produto</button></a>
+                    <a href="/produto/editar/{{ $produto->id }}"><button class="btn editarProduto">Editar produto</button></a>
                  
 
                     @if ($produto->ativo === 1)
                     <form action="{{ route('produto.inativar', $produto->id) }}" method="POST" style="display:inline;">
                         @csrf
                         @method('POST') <!-- Use PATCH se preferir o método PATCH -->
-                        <button type="submit" onclick="return confirm('Você tem certeza que deseja inativar este produto?');">
+                        <button type="submit" class="btn inativar" onclick="return confirm('Você tem certeza que deseja inativar este produto?');">
                             Inativar produto
                         </button>
                     </form>
@@ -51,13 +51,13 @@
                     <form action="{{ route('produto.ativar', $produto->id) }}" method="POST" style="display:inline;">
                         @csrf
                         @method('POST') <!-- Use PATCH se preferir o método PATCH -->
-                        <button type="submit" onclick="return confirm('Você tem certeza que deseja inativar este produto?');">
+                        <button type="submit" class="btn ativar" onclick="return confirm('Você tem certeza que deseja inativar este produto?');">
                             Ativar produto
                         </button>
                     </form>
                         
                     @endif
-                                   
+
                 </div>
             @endforeach
     
