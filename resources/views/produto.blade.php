@@ -14,8 +14,8 @@
 
             <div class="header">
                 <div id="painel">
-                    <h1>Itens ativos: </h1>
-                    <h1>Itens Inativos: </h1>
+                    <h1>Itens ativos: {{ count($ativos) }}</h1>
+                    <h1>Itens Inativos: {{ count($inativos) }}</h1>
                 </div>
                 <div class="btn_container">
                     <a class="cadastrarProduto" target="_blank" href="produto/cadastro">
@@ -37,7 +37,6 @@
                     <p>Ativo: {{ $produto->ativo === 1 ? "Ativo" : "Inativo" }}</p>
 
                     <a href="/produto/editar/{{ $produto->id }}"><button class="btn editarProduto">Editar produto</button></a>
-                 
 
                     @if ($produto->ativo === 1)
                     <form action="{{ route('produto.inativar', $produto->id) }}" method="POST" style="display:inline;">

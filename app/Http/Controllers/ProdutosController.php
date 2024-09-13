@@ -13,8 +13,19 @@ class ProdutosController extends Controller
         try {
             $produtos = Tprodutos::all();
 
+            $ativos = $produtos->filter(function ($produto) {
+                return $produto->ativo === 1;
+
+            });
+
+            $inativos = $produtos->filter(function ($produto) {
+                return $produto->ativo === 0;
+
+            });
             return view('produto', [
-                'produtos' => $produtos
+                'produtos' => $produtos,
+                'ativos' => $ativos,
+                'inativos' => $inativos
 
             ]);
 
@@ -23,7 +34,7 @@ class ProdutosController extends Controller
                 'message' => 'Deu errok',
                 'th' => $th->getMessage()
             
-            ]);
+            ], 500);
         }
 
     }
