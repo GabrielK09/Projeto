@@ -34,8 +34,30 @@
                     <p>CFOP: {{ $produto->cfop }}</p>
                     <p>CSOSN/CST: {{ $produto->csosn }}</p>
                     <p>NCM: {{ $produto->ncm }}</p>
+                    <p>Ativo: {{ $produto->ativo === 1 ? "Ativo" : "Inativo" }}</p>
 
                     <a href="/produto/editar/{{ $produto->id }}"><button>Editar produto</button></a>
+                 
+
+                    @if ($produto->ativo === 1)
+                    <form action="{{ route('produto.inativar', $produto->id) }}" method="POST" style="display:inline;">
+                        @csrf
+                        @method('POST') <!-- Use PATCH se preferir o método PATCH -->
+                        <button type="submit" onclick="return confirm('Você tem certeza que deseja inativar este produto?');">
+                            Inativar produto
+                        </button>
+                    </form>
+                    @else
+                    <form action="{{ route('produto.ativar', $produto->id) }}" method="POST" style="display:inline;">
+                        @csrf
+                        @method('POST') <!-- Use PATCH se preferir o método PATCH -->
+                        <button type="submit" onclick="return confirm('Você tem certeza que deseja inativar este produto?');">
+                            Ativar produto
+                        </button>
+                    </form>
+                        
+                    @endif
+                                   
                 </div>
             @endforeach
     

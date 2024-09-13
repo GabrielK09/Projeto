@@ -14,8 +14,17 @@ class Tprodutos extends Model
         'cfop',
         'csosn',
         'ncm',
-        'qte'
+        'qte',
+        'ativo'
     
     ];
 
+    protected static function ativo() {
+        parent::ativo();
+
+        static::addGlobalScope('ativo', function (\Illuminate\Database\Eloquent\Builder $builder) {
+            $builder->where('ativo', true);
+            
+        });
+    }
 }

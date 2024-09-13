@@ -85,8 +85,27 @@ class ProdutosController extends Controller
         return redirect()->route('produto.store')->with('sucess', 'Produto alterado com sucessso!');
     }
 
-    public function destroy(string $id)
+    public function inativar(string $id)
     {
+        $produto = Tprodutos::find($id);
+
+        $produto->ativo = false;
+
+        $produto->save();
+
+        return redirect()->route('produto.store')->with('sucess', 'Produto deletado com sucessso!');
+        
+    }
+
+    public function ativar(string $id)
+    {
+        $produto = Tprodutos::find($id);
+
+        $produto->ativo = true;
+
+        $produto->save();
+
+        return redirect()->route('produto.store')->with('sucess', 'Produto deletado com sucessso!');
         
     }
 }

@@ -20,7 +20,7 @@ return new class extends Migration
             $table->integer('cfop');
             $table->integer('csosn');
             $table->bigInteger('ncm');
-            //$table->boolean('status_produto')->default(true);
+            $table->boolean('ativo')->default(true);
             $table->timestamps();
         });
     }
