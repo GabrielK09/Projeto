@@ -1,3 +1,7 @@
+<head>
+    <title>Editar Produto {{ $produto->id}} </title>
+</head>
+
 <form action="{{ url('/produto/' . $produto->id  ) }}" method="POST">
     @csrf
     @method('PUT')
