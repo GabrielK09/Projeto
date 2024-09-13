@@ -8,8 +8,17 @@ use App\Http\Controllers\PDVController;
 Route::get('/', function () {
     return view('dashboard');
 
-});
+}); // <- Home
 
+
+
+// Rota PDV ( EM TESTES )
+Route::get('/pdv', [PDVController::class, 'pdv']);
+
+// ------------------------
+
+
+// Rotas dos produtos
 Route::get('/produto', [ProdutosController::class, 'produto']);
 Route::post('/produto', [ProdutosController::class, 'store'])->name('produto.store');
 
@@ -20,6 +29,4 @@ Route::get('/produto/cadastro', function() {
 
 Route::get('/produto/editar/{id}', [ProdutosController::class, 'show']);
 Route::put('produto/{id}', [ProdutosController::class, 'update']);
-
-
-Route::get('/pdv', [PDVController::class, 'pdv']);
+// --------------------

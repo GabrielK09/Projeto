@@ -7,7 +7,7 @@
     <title>PDV Mobile</title>
 </head>
 <body>
-    @include('main.lateral_bar')
+    @include('main.sidebar')
     <form action="/pdv" method="GET">
         @csrf
         <input type="search" name="query" placeholder="Buscar item" value="{{ request('query') }}">

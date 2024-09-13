@@ -3,6 +3,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    
 }
 
 body {
@@ -11,30 +12,17 @@ body {
     color: #333;
 }
 
-/* Área principal */
+
 .scope {
     flex: 1;
     padding: 40px;
     background-color: #fff;
+    font-size: 25px;
 }
 
 .scope h1 {
-    font-size: 24px;
     color: #34495e;
+
 }
 
-/* Responsividade básica */
-/* @media (max-width: 768px) {
-    .container {
-        flex-direction: column;
-    }
 
-    .sidebar {
-        width: 100%;
-        padding: 10px;
-    }
-
-    .scope {
-        padding: 20px;
-    }
-} */

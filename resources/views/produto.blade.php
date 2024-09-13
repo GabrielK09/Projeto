@@ -9,7 +9,7 @@
 </head>
 <body>
     <div class="container">
-        @include('main.lateral_bar')
+        @include('main.sidebar')
         <main class="scope">
 
             <div class="header">

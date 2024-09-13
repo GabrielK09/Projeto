@@ -8,9 +8,9 @@
     <link rel="stylesheet" href="/css/dashboard.css">
     
 </head>
-<body>
-    <div class="container">
-        @include('main.lateral_bar')
+<body>     
+    <div class="container">   
+    @include('main.sidebar')
         <main class="scope">
             <h1>Página inicial</h1>
             

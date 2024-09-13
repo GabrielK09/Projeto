@@ -62,7 +62,7 @@
 </head>
 <body>
     <div class="scope">
-        @include('main.lateral_bar')
+        @include('main.sidebar')
         <form action="{{ route('produto.store') }}" method="POST">
             @csrf
             <div class="form-group">

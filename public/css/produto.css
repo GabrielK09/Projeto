@@ -19,15 +19,22 @@ body {
 .btn_container{
     display: flex;
     justify-content: flex-end;
+
 }
 
 .cadastrarProduto {
-    width: 120px;
+    width: 220px;
     text-decoration: none;
     color: #fff;
     background: #6B8F71;
     border: none;
     border-radius: 5px;
+    font-size: 25px;
+
+}
+
+.cadastrarProduto:hover {
+    background-color: #AAD2BA;
 
 }
 
@@ -37,10 +44,7 @@ body {
     align-items: center; 
 }
 
-.cadastrarProduto:hover {
-    background-color: #AAD2BA;
 
-}
 
 button.cadastrarProduto{
     padding: .3rem;

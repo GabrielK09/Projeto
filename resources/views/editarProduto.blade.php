@@ -2,6 +2,7 @@
     <title>Editar Produto {{ $produto->id}} </title>
 </head>
 
+@include('main.sidebar')
 <form action="{{ url('/produto/' . $produto->id  ) }}" method="POST">
     @csrf
     @method('PUT')
@@ -11,6 +12,7 @@
         @error('nome')
             <div class="text-danger">{{ $message }}</div>
         @enderror
+
     </div>
 
     <div class="form-group">
@@ -19,6 +21,7 @@
         @error('qte')
             <div class="text-danger">{{ $message }}</div>
         @enderror
+
     </div>
 
     <div class="form-group">
@@ -27,6 +30,7 @@
         @error('cod_gtin')
             <div class="text-danger">{{ $message }}</div>
         @enderror
+
     </div>
 
     <div class="form-group">
@@ -35,6 +39,7 @@
         @error('preco_venda')
             <div class="text-danger">{{ $message }}</div>
         @enderror
+
     </div>
 
     <div class="form-group">
@@ -43,6 +48,7 @@
         @error('cfop')
             <div class="text-danger">{{ $message }}</div>
         @enderror
+
     </div>
     
     <div class="form-group">
@@ -51,6 +57,7 @@
         @error('csosn')
             <div class="text-danger">{{ $message }}</div>
         @enderror
+
     </div>
     
     <div class="form-group">
@@ -59,6 +66,7 @@
         @error('ncm')
             <div class="text-danger">{{ $message }}</div>
         @enderror
+        
     </div>
     <button type="submit">Update Product</button>
 </form>
