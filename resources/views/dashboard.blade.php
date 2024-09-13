@@ -12,7 +12,7 @@
     <div class="container">
         @include('main.lateral_bar')
         <main class="scope">
-            <h1>Page</h1>
+            <h1>Página inicial</h1>
             
         </main>
     </div>

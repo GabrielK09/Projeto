@@ -3,10 +3,8 @@
     min-height: 100vh;
 }
 
-/* Barra lateral */
 .sidebar {
     width: 250px;
-    /* background-color: #58735B; */
     background-color: #7BA084;
     padding: 20px;
     display: flex;

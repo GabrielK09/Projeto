@@ -11,7 +11,22 @@
     <div class="container">
         @include('main.lateral_bar')
         <main class="scope">
-            <a class="new_btn" target="_blank" href="produto/cadastro"><button>Cadastrar produto</button></a>
+
+            <div class="header">
+                <div id="painel">
+                    <h1>Itens ativos: </h1>
+                    <h1>Itens Inativos: </h1>
+                </div>
+                <div class="btn_container">
+                    <a class="cadastrarProduto" target="_blank" href="produto/cadastro">
+                        <button class="btn cadastrarProduto">Cadastrar produto</button>
+                    </a>
+                </div>
+                
+            </div>
+
+
+
             @foreach ($produtos as $produto)
                 <div class="produto" style="margin: 15px">
                     <p>Produto: {{ $produto->nome }}</p>
