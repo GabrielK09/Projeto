@@ -18,5 +18,8 @@ Route::get('/produto/cadastro', function() {
 
 });
 
+Route::get('/produto/editar/{id}', [ProdutosController::class, 'show']);
+Route::put('produto/{id}', [ProdutosController::class, 'update']);
+
 
 Route::get('/pdv', [PDVController::class, 'pdv']);

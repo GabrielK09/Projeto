@@ -35,7 +35,7 @@ class ProdutosController extends Controller
             'qte' => 'required|numeric|gt:0',
             'cod_gtin' => 'required|string|max:14|min:8',
             'preco_venda' => 'required|numeric|gt:0',
-            'cfop' => 'required|numeric|gt:0|max:4s',
+            'cfop' => 'required|numeric|gt:0',
             'csosn' => 'required|numeric|gt:0',
             'ncm' => 'required|numeric|gt:0',
                 
@@ -68,12 +68,21 @@ class ProdutosController extends Controller
     
     public function show(string $id)
     {
+        $produto = Tprodutos::findOrFail($id);
+
+        return view('editarProduto', [
+            'produto' => $produto
+        ]);
 
     }
 
     public function update(Request $request, string $id)
     {
+        $produto = Tprodutos::findOrFail($id);
 
+        $produto->update($request->all());
+
+        return redirect()->route('produto.store')->with('sucess', 'Produto alterado com sucessso!');
     }
 
     public function destroy(string $id)

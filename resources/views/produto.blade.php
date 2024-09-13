@@ -25,10 +25,8 @@
                 
             </div>
 
-
-
             @foreach ($produtos as $produto)
-                <div class="produto" style="margin: 15px">
+                <div class="produtos" style="margin: 15px">
                     <p>Produto: {{ $produto->nome }}</p>
                     <p>Quantia: {{ $produto->qte }}</p>
                     <p>Código de barras GTIN: {{ $produto->cod_gtin }}</p>
@@ -37,7 +35,7 @@
                     <p>CSOSN/CST: {{ $produto->csosn }}</p>
                     <p>NCM: {{ $produto->ncm }}</p>
 
-                    <a href=""><button>Editar produto</button></a>
+                    <a href="/produto/editar/{{ $produto->id }}"><button>Editar produto</button></a>
                 </div>
             @endforeach
     
