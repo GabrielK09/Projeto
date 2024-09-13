@@ -14,8 +14,9 @@
 
             <div class="header">
                 <div id="painel">
-                    <h1>Itens ativos: {{ count($ativos) }}</h1>
-                    <h1>Itens Inativos: {{ count($inativos) }}</h1>
+                    <h1>Total de produtos: {{ count($produtos) }}</h1>
+                    <h1>Produtos ativos: {{ count($ativos) }}</h1>
+                    <h1>Produtos Inativos: {{ count($inativos) }}</h1>
                 </div>
                 <div class="btn_container">
                     <a class="cadastrarProduto" target="_blank" href="produto/cadastro">
