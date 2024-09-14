@@ -1,0 +1,57 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+    color: #333;
+}
+
+.scope {
+    flex: 1;
+    padding: 40px;
+    background-color: #fff;
+}
+
+.btn_container{
+    display: flex;
+    justify-content: flex-end;
+
+}
+
+.cadastrarProduto {
+    width: 220px;
+    text-decoration: none;
+    color: #fff;
+    background: #6B8F71;
+    border: none;
+    border-radius: 5px;
+    font-size: 25px;
+
+}
+
+.cadastrarProduto:hover {
+    background-color: #AAD2BA;
+
+}
+
+.header {
+    display: flex;
+    justify-content: space-between; 
+    align-items: center; 
+}
+
+
+
+button.cadastrarProduto{
+    padding: .3rem;
+    
+}
+
+#painel {
+    display: flex;
+    margin: 0 1rem 0 1rem;
+}
