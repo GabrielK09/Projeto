@@ -47,7 +47,9 @@
                             Inativar produto
                         </button>
                     </form>
+                    
                     @else
+
                     <form action="{{ route('produto.ativar', $produto->id) }}" method="POST" style="display:inline;">
                         @csrf
                         @method('POST') <!-- Use PATCH se preferir o método PATCH -->
