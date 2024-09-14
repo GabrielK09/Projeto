@@ -22,7 +22,7 @@ Route::get('/pdv', [PDVController::class, 'pdv']);
 Route::get('/produto', [ProdutosController::class, 'produto']); //<- Todos os produtos
 Route::post('/produto', [ProdutosController::class, 'store'])->name('produto.store'); //<- Cadastrar produtos
 Route::get('/produto/cadastro', function() {
-    return view('cadastroProduto');
+    return view('produtos.cadastroProduto');
 
 }); //<- Apenas renderiza o forms do cadastro
 
@@ -33,3 +33,16 @@ Route::post('/produto/{id}/inativar', [ProdutosController::class, 'inativar'])->
 Route::post('/produto/{id}/ativar', [ProdutosController::class, 'ativar'])->name('produto.ativar'); // <- Inativar
 
 // --------------------
+
+
+
+
+// Rotas pessoas
+Route::get('/pessoas', function () {
+    return view('pessoas.pessoas');
+    
+});
+
+
+
+// -------------------

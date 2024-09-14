@@ -11,7 +11,7 @@ class ProdutosController extends Controller
     public function produto()
     {
         try {
-            $produtos = Tprodutos::all();
+            $produtos = Tprodutos::paginate(20);
 
             $ativos = $produtos->filter(function ($produto) {
                 return $produto->ativo === 1;
@@ -22,7 +22,7 @@ class ProdutosController extends Controller
                 return $produto->ativo === 0;
 
             });
-            return view('produto', [
+            return view('produtos.produto', [
                 'produtos' => $produtos,
                 'ativos' => $ativos,
                 'inativos' => $inativos
@@ -81,7 +81,7 @@ class ProdutosController extends Controller
     {
         $produto = Tprodutos::findOrFail($id);
 
-        return view('editarProduto', [
+        return view('produtos.editarProduto', [
             'produto' => $produto
         ]);
 
