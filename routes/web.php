@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
 use App\Http\Controllers\ProdutosController;
 use App\Http\Controllers\PDVController;
 
@@ -33,16 +32,3 @@ Route::post('/produto/{id}/inativar', [ProdutosController::class, 'inativar'])->
 Route::post('/produto/{id}/ativar', [ProdutosController::class, 'ativar'])->name('produto.ativar'); // <- Inativar
 
 // --------------------
-
-
-
-
-// Rotas pessoas
-Route::get('/pessoas', function () {
-    return view('pessoas.pessoas');
-    
-});
-
-
-
-// -------------------
