@@ -1,12 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
-<<<<<<< HEAD
-Route::get('/', function () {
-    return view('welcome');
-});
-=======
 use App\Http\Controllers\ProdutosController;
 use App\Http\Controllers\PDVController;
 
@@ -37,5 +31,3 @@ Route::put('produto/{id}', [ProdutosController::class, 'update']); // <- Editar 
 Route::post('/produto/{id}/inativar', [ProdutosController::class, 'inativar'])->name('produto.inativar'); // <- Inativar
 Route::post('/produto/{id}/ativar', [ProdutosController::class, 'ativar'])->name('produto.ativar'); // <- Inativar
 
-// --------------------
->>>>>>> bef3923013517297b1138068cab37ba7c46b2c61
