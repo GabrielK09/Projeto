@@ -21,7 +21,7 @@ class PDVController extends Controller
                     ->orWhere('nome', 'like', '%' . $query . '%')
                     ->first();
 
-                if ($produtos && is_object($produtos) && $produtos->ativo === 1) {
+                if ($produtos && $produtos->ativo === 1) {
                     $total += $produtos->preco_venda; 
                     
                 } else {
