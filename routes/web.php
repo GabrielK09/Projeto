@@ -33,3 +33,8 @@ Route::post('/produto/{id}/inativar', [ProdutosController::class, 'inativar'])->
 Route::post('/produto/{id}/ativar', [ProdutosController::class, 'ativar'])->name('produto.ativar'); // <- Inativar
 
 // --------------------
+
+Route::get('/pessoas', function () {
+    return view('pessoas');
+    
+});
