@@ -30,12 +30,12 @@ class ProdutosController extends Controller
             ]);
 
         } catch (\Throwable $th) {
-            return response()->json([
-                'message' => 'Deu errok',
-                'th' => $th->getMessage()
-            
-            ], 500);
-        }
+            return view('error_pages.500', [
+                'th' => $th
+                
+            ]);
+
+        };
 
     }
 
@@ -67,7 +67,8 @@ class ProdutosController extends Controller
             'preco_venda.numeric' => 'O preço de venda precisa ser um número.',
 
             'cfop.required' => 'O CFOP precisa ser preenchido.',
-            'cfop.max' => 'O CFOP deve ter no máximo 4 caracteres'             
+            'cfop.max' => 'O CFOP deve ter no máximo 4 caracteres',          
+            'cfop.min' => 'O CFOP deve ter menos 4 caracteres'             
 
         ]);
         

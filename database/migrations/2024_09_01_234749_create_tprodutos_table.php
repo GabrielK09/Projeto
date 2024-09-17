@@ -21,6 +21,8 @@ return new class extends Migration
             $table->integer('csosn');
             $table->bigInteger('ncm');
             $table->boolean('ativo')->default(true);
+
+            $table->
             $table->timestamps();
         });
     }
