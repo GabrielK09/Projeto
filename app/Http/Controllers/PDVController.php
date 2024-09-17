@@ -21,16 +21,13 @@ class PDVController extends Controller
                     ->orWhere('nome', 'like', '%' . $query . '%')
                     ->first();
 
-                if ($produtos && is_object($produtos) && $produtos->ativo === 1) {
+                if ($produtos && $produtos->ativo === 1) {
                     $total += $produtos->preco_venda; 
                     
                 } else {
-                    return response()->json([
-                        'message' => 'Não deu',
-                        'th' => 'Produto não encontrado ou inativado'
-                    ]);
+                    $produtos = null;
+
                 }
-                    
             }
 
             return view('pdv', [
@@ -40,8 +37,11 @@ class PDVController extends Controller
             ]);
             
         } catch (\Throwable $th) {
-
+            return view('error_pages.500', [
+                'th' => $th
+                
+            ]);
+            
         };
     }
 }
- 

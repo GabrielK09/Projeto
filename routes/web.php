@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
 use App\Http\Controllers\ProdutosController;
 use App\Http\Controllers\PDVController;
 
@@ -22,7 +21,7 @@ Route::get('/pdv', [PDVController::class, 'pdv']);
 Route::get('/produto', [ProdutosController::class, 'produto']); //<- Todos os produtos
 Route::post('/produto', [ProdutosController::class, 'store'])->name('produto.store'); //<- Cadastrar produtos
 Route::get('/produto/cadastro', function() {
-    return view('cadastroProduto');
+    return view('produtos.cadastroProduto');
 
 }); //<- Apenas renderiza o forms do cadastro
 

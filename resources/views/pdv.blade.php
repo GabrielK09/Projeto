@@ -75,6 +75,7 @@
 
         <div class="Grid">
             @if($produtos)
+<<<<<<< HEAD
                 
                     <div class="teste">
                         {{ $produtos->id }}
@@ -97,6 +98,20 @@
             <h2>Total da Venda: <span class="total">R$ {{ number_format($total, 2, ',', '.') }}</span></h2>
         </div>
 
+=======
+                <ul>
+                    <li>
+                        Código: {{ $produtos->id }} | {{ $produtos->nome }} - Preço: R$ {{ number_format($produtos->preco_venda, 2) }}
+                    </li>
+                </ul>
+        @else
+            <p>Nenhum produto encontrado.</p>
+        @endif
+        <div class="total">
+            <h2>Total da Venda: <span class="total">R$ {{ number_format($total, 2, ',', '.') }}</span></h2>
+        </div>
+
+>>>>>>> f084749d7f5ea2f59dbdcf0acbade14f8884406e
         <form action="/finalizar-venda" method="POST">
             @csrf
             <button type="submit">Finalizar</button>
