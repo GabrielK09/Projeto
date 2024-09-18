@@ -1,5 +1,5 @@
 <head>
-    <style src= "../../css/app.css"></style>
+    <link rel="stylesheet" type="text/css" href="/css/sidebar.css">
 </head>
 
 <aside class="sidebar">

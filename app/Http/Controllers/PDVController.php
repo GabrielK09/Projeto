@@ -10,28 +10,23 @@ class PDVController extends Controller
 {
     public function pdv(Request $request)
     {
+        $acrescimo = $request->input('acrescimo');
+        $acrescimo = $request->input('desconto');
         $query = $request->input('query');
-
-        $produtos = null;
         $total = $request->input('total', 0);
 
-        if ($query) {
-            $produtos = Tprodutos::where('id', 'like', '%' . $query . '%')
-                ->orWhere('nome', 'like', '%' . $query . '%')
-                ->first();
+        $produto = Tprodutos::where('id', 'like', '%' . $query . '%')
+                                    ->orWhere('nome', 'like', '%' . $query . '%')
+                                    ->first();
 
-            if ($produtos && is_object($produtos) && $produtos->ativo === 1) {
-                $total += $produtos->preco_venda; 
-                    
-            } 
-                    
-        };
+        if ($query != null && $produto && $produto->ativo === 1) {
+            $total += $produto->preco_venda;
+        } 
 
         return view('nfce.pdv', [
-            'produtos' => $produtos,
+            'produto' => $produto,
             'total' => $total
-            
-        ]);
+        ])->with('message', 'Operação realizada com sucesso!');
+
     }
 }
- 

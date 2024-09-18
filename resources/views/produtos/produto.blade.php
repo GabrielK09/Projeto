@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Produtos</title>
-    <link rel="stylesheet" href="css/produto.css">
+    <link rel="stylesheet" href="/css/produto.css">
 </head>
 <body>
     <div class="container">
@@ -47,7 +47,9 @@
                             Inativar produto
                         </button>
                     </form>
+                    
                     @else
+
                     <form action="{{ route('produto.ativar', $produto->id) }}" method="POST" style="display:inline;">
                         @csrf
                         @method('POST') <!-- Use PATCH se preferir o método PATCH -->

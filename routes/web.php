@@ -5,7 +5,7 @@ use App\Http\Controllers\ProdutosController;
 use App\Http\Controllers\PDVController;
 
 Route::get('/', function () {
-    return view('dashboard');
+    return view('dashboard.dashboard');
 
 }); // <- Home
 
@@ -31,20 +31,10 @@ Route::put('produto/{id}', [ProdutosController::class, 'update']); // <- Editar 
 Route::post('/produto/{id}/inativar', [ProdutosController::class, 'inativar'])->name('produto.inativar'); // <- Inativar
 Route::post('/produto/{id}/ativar', [ProdutosController::class, 'ativar'])->name('produto.ativar'); // <- Inativar
 
-<<<<<<< HEAD
 // --------------------
-
-
 
 
 // Rotas pessoas
 Route::get('/pessoas', function () {
-    return view('pessoas.pessoas');
-    
+    return view('pessoas');
 });
-
-
-
-// -------------------
-=======
->>>>>>> 80f9a967fcf2b68e8c8205c20b87b751fca992f6
