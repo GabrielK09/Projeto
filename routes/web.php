@@ -5,7 +5,7 @@ use App\Http\Controllers\ProdutosController;
 use App\Http\Controllers\PDVController;
 
 Route::get('/', function () {
-    return view('dashboard');
+    return view('dashboard.dashboard');
 
 }); // <- Home
 
@@ -33,7 +33,8 @@ Route::post('/produto/{id}/ativar', [ProdutosController::class, 'ativar'])->name
 
 // --------------------
 
+
+// Rotas pessoas
 Route::get('/pessoas', function () {
     return view('pessoas');
-    
 });

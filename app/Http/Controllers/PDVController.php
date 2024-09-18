@@ -10,38 +10,22 @@ class PDVController extends Controller
 {
     public function pdv(Request $request)
     {
-        try {
-            $query = $request->input('query');
+        $query = $request->input('query');
+        $total = $request->input('total', 0);
 
-            $produtos = null;
-            $total = $request->input('total', 0);
+        $produto = Tprodutos::where('id', 'like', '%' . $query . '%')
+                                    ->orWhere('nome', 'like', '%' . $query . '%')
+                                    ->first();
 
-            if ($query) {
-                $produtos = Tprodutos::where('id', 'like', '%' . $query . '%')
-                    ->orWhere('nome', 'like', '%' . $query . '%')
-                    ->first();
+        if ($query != null && $produto && $produto->ativo === 1) {
+            $total += $produto->preco_venda;
 
-                if ($produtos && $produtos->ativo === 1) {
-                    $total += $produtos->preco_venda; 
-                    
-                } else {
-                    $produtos = null;
+        } 
 
-                }
-            }
+        return view('nfce.pdv', [
+            'produto' => $produto,
+            'total' => $total
+        ])->with('message', 'Operação realizada com sucesso!');
 
-            return view('pdv', [
-                'produtos' => $produtos,
-                'total' => $total
-            
-            ]);
-            
-        } catch (\Throwable $th) {
-            return view('error_pages.500', [
-                'th' => $th
-                
-            ]);
-            
-        };
     }
 }
