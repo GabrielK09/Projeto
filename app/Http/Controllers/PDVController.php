@@ -36,7 +36,7 @@ class PDVController extends Controller
         ])->with('message', 'Operação realizada com sucesso!');
 
     }
-
+    
     public function addItemVenda(Request $request, ItemVendaNFCe $itemVendaNFCe) {
         $request->validate([
             'produto_id' => 'required|exists:tprodutos,id',
