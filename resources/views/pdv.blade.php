@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+{{-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -73,18 +73,9 @@
             </div>
         @endif
 
-        <div class="Grid">
-            @if($produtos)
-                <ul>
-                    <li>
-                        Código: {{ $produtos->id }} | {{ $produtos->nome }} - Preço: R$ {{ number_format($produtos->preco_venda, 2) }}
-                    </li>
-                </ul>
-        @else
-            <p>Nenhum produto encontrado.</p>
-        @endif
+
         <div class="total">
-            <h2>Total da Venda: <span class="total">R$ {{ number_format($total, 2, ',', '.') }}</span></h2>
+            <h2>Total da Venda: <span class="total">R$ {{ old($total) }}</span></h2>
         </div>
 
         <form action="/finalizar-venda" method="POST">
@@ -94,4 +85,4 @@
     </main>
     </div>
 </body>
-</html>
+</html> --}}

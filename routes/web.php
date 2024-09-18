@@ -5,7 +5,7 @@ use App\Http\Controllers\ProdutosController;
 use App\Http\Controllers\PDVController;
 
 Route::get('/', function () {
-    return view('dashboard');
+    return view('dashboard.dashboard');
 
 }); // <- Home
 
@@ -13,6 +13,7 @@ Route::get('/', function () {
 
 // Rota PDV ( EM TESTES )
 Route::get('/pdv', [PDVController::class, 'pdv']);
+Route::post('/produto', [ProdutosController::class, 'addItemVenda'])->name('produto.store'); //<- Cadastrar produtos
 
 // ------------------------
 
@@ -33,8 +34,8 @@ Route::post('/produto/{id}/ativar', [ProdutosController::class, 'ativar'])->name
 
 // --------------------
 
-// Rotas pessoas
 
+// Rotas pessoas
 Route::get('/pessoas', function () {
-    return view('pessoas.pessoas');
+    return view('pessoas');
 });

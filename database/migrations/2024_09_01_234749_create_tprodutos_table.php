@@ -21,9 +21,19 @@ return new class extends Migration
             $table->integer('csosn');
             $table->bigInteger('ncm');
             $table->boolean('ativo')->default(true);
-
-            $table->
             $table->timestamps();
+        });
+
+        Schema::create('titemvendanfce', function (Blueprint $table) {
+            $table->increments('id');
+            $table->unsignedInteger('produto_id');
+            $table->integer('qte');
+            $table->decimal('preco_unitario');
+            $table->decimal('total');
+
+            $table->foreign('produto_id')->references('id')->on('tprodutos')->onDelete('cascade');
+            
+            
         });
     }
 
@@ -33,5 +43,6 @@ return new class extends Migration
     public function down(): void
     {
         Schema::dropIfExists('tprodutos');
+        Schema::dropIfExists('titemvendanfce');
     }
 };
