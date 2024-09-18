@@ -27,7 +27,7 @@ class PDVController extends Controller
                     
         };
 
-        return view('pdv', [
+        return view('nfce.pdv', [
             'produtos' => $produtos,
             'total' => $total
             
