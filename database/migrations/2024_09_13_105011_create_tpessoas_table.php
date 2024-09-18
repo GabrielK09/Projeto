@@ -17,7 +17,6 @@ return new class extends Migration
             $table->string('cfp');
             $table->string('nome_completo');
             $table->string('data_nascimento');
-
             $table->integer('tipo_cadastro');
             
             $table->timestamps();

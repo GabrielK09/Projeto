@@ -93,7 +93,7 @@
 
             <div class="form-group">
                 <label for="preco_venda">Preco venda*</label>
-                <input type="text" name="preco_venda" id="preco_venda" value="{{ number_format(old('preco_venda', 2, ',', '.')) }}">
+                <input type="text" name="preco_venda" id="preco_venda" value="{{ old('preco_venda') }}">
                 @error('preco_venda')
                     <div class="text-danger">{{ $message }}</div>              
                 @enderror
