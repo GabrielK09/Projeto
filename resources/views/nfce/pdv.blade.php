@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -27,6 +26,10 @@
             </div>
         @endif
 
+        <div class="total">
+            <h2>Total da Venda: <span class="total">R$ {{ number_format($total, 2, ',', '.') }}</span></h2>
+        </div>
+
         <div class="Grid">
             @if($query)
                 <div class="produto">
@@ -37,10 +40,6 @@
                     <input type="hidden" class="preco" value="{{ $produto->preco_venda }}">
                 </div>
             @endif
-        </div>
-
-        <div class="total">
-            <h2>Total da Venda: <span class="total">R$ {{ number_format($total, 2, ',', '.') }}</span></h2>
         </div>
 
         <div class="valores">
