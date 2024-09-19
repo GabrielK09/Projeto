@@ -13,12 +13,11 @@ return new class extends Migration
     {
         Schema::create('tpessoas', function (Blueprint $table) {
             $table->id();
-            $table->integer('tipo_pessoa');
-            $table->string('cfp');
             $table->string('nome_completo');
+            $table->integer('tipo_pessoa');
+            $table->string('cpf');
             $table->string('data_nascimento');
             $table->integer('tipo_cadastro');
-            
             $table->timestamps();
         });
     }

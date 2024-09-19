@@ -1,8 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+
 use App\Http\Controllers\ProdutosController;
 use App\Http\Controllers\PDVController;
+use App\Http\Controllers\PessoasController;
 
 Route::get('/', function () {
     return view('dashboard.dashboard');
@@ -37,5 +39,11 @@ Route::post('/produto/{id}/ativar', [ProdutosController::class, 'ativar'])->name
 
 // Rotas pessoas
 Route::get('/pessoas', function () {
-    return view('pessoas');
+    return view('pessoas.pessoas');
 });
+
+Route::get('/pessoas/cadastro', function () {
+    return view('pessoas.cadastroPessoa');
+     
+});
+Route::post('/pessoas', [PessoasController::class, 'store'])->name('pessoas.store');
