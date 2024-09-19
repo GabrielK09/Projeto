@@ -24,7 +24,7 @@
 
             <div class="form-group">
                 <label for="tipo_pessoa">Tipo de cadastro*</label>
-                <input type="text" name="tipo_pessoa" id="qte">
+                <input type="text" name="tipo_pessoa">
                 {{-- @error('qte')
                     <div class="text-danger">{{ $message }}</div>     
 
@@ -33,7 +33,7 @@
         
             <div class="form-group">
                 <label for="cpf">CPF*</label>
-                <input type="text" name="cpf" id="cod_gtin" >
+                <input type="text" name="cpf">
                 {{-- @error('cod_gtin')
                     <div class="text-danger">{{ $message }}</div>              
                 @enderror --}}
@@ -49,7 +49,7 @@
 
             <div class="form-group">
                 <label for="tipo_cadastro">Tipo de cadastro*</label>
-                <input type="text" name="tipo_cadastro" id="cfop">
+                <input type="text" name="tipo_cadastro">
                 {{-- @error('cfop')
                     <div class="text-danger">{{ $message }}</div>              
                 @enderror --}}

@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+=======
+<!DOCTYPE html>
+>>>>>>> 0a4453a19bd407e1c203e1e90c4f8314d2e555e1
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -31,11 +35,14 @@
         </div>
 
         <div class="Grid">
-            @if($produto)
+            @if($query)
                 <div class="produto">
-                    Código: {{ $produto->id }} | {{ $produto->nome }} - Preço: R$ {{ number_format($produto->preco_venda, 2, ',', '.') }}
+                    Código: {{ $produto->id }}  {{ $produto->nome }}  
                 </div>
-
+                <div class="precoproduto">
+                    Preço: R$ {{ number_format($produto->preco_venda, 2, ',', '.') }}
+                    <input type="hidden" class="preco" value="{{ $produto->preco_venda }}">
+                </div>
             @endif
         </div>
 
@@ -48,16 +55,7 @@
             </form>
         </div>
 
-        <div class="formas" style="display: none">
-            @include('nfce.finalizar')
-        </div>
         
-        <form action="/finalizar" method="POST">
-            @csrf
-            <button type="submit">Finalizar</button>
-        </form>
-
-    </main>
     </div>
 </body>
 </html>
