@@ -31,7 +31,7 @@
         </div>
 
         <div class="Grid">
-            @if($query)
+            @if($query && $produto)
                 <div class="produto">
                     Código: {{ $produto->id }}  {{ $produto->nome }}  
                 </div>

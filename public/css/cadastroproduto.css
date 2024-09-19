@@ -3,15 +3,33 @@ body {
     margin: 0;
     padding: 0;
     background-color: #f4f4f4;
+    height: 100%;
 }
 
-form {
-    margin: 20px auto;
+.scope {
+    display: flex;
+    height: 100vh;
+}
+
+/* .forms_show_de_bola {
+     margin: 20px auto; 
     padding: 0px;
     background-color: #fff;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    max-width: 90%; 
+    justify-content: center;
+    flex: 1; 
+    margin: 20px; 
+} */
+
+.forms_show_de_bola {
+    flex: 1; /* O formulário ocupará o restante do espaço disponível */
+    margin: 20px; /* Margem ao redor do formulário */
 }
+
 
 label {
     display: block;
