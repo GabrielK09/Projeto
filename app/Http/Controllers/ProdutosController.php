@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Tprodutos;
+use App\Services\ItemVendaNFCe;
+
 use Illuminate\Http\Request;
 
 class ProdutosController extends Controller
@@ -119,5 +121,21 @@ class ProdutosController extends Controller
 
         return redirect()->route('produto.store')->with('sucess', 'Produto deletado com sucessso!');
         
+    }
+
+    public function addItemVenda(Request $request, ItemVendaNFCe $itemVendaNFCe) {
+        $request->validate([
+            'produto_id' => 'required|exists:tprodutos,id',
+            'qte' => 'required|integer|min:1'
+        ]);
+
+        $produtoId = $request->input('produto_id');
+        $qte = $request->input('qte');
+        
+        if ($itemVendaNFCe->addProduto($produtoId, $qte)) {
+            return response()->json([
+                'message' => 'item aqui'
+            ]);
+        }
     }
 }

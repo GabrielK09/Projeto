@@ -4,6 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>NFC-e</title>
     <link rel="stylesheet" type="text/css" href="/css/nfce.css">
 </head>
@@ -28,13 +34,12 @@
         @endif
 
         <div class="Grid">
-            @if(isset($produto) && $produto)
+            @if($produto)
                 <div class="produto">
                     Código: {{ $produto->id }} | {{ $produto->nome }} - Preço: R$ {{ number_format($produto->preco_venda, 2, ',', '.') }}
                     <input type="hidden" class="preco" value="{{ $produto->preco_venda }}">
                 </div>
-            @else
-                <p>Nenhum produto encontrado.</p>
+
             @endif
         </div>
 
@@ -50,16 +55,29 @@
                 <input type="search" name="desconto" placeholder="Inserir desconto" value="{{ request('desconto') }}">
             </form>
         </div>
+<<<<<<< HEAD
         
         <div id="total"></div>
 
         <form action="" method="POST">
+=======
+
+        <div class="formas" style="display: none">
+            @include('nfce.finalizar')
+        </div>
+        
+        <form action="/finalizar" method="POST">
+>>>>>>> 594fe6a0c65af31c5a29764f6d4bb847c092fb9b
             @csrf
             <div id="formaspagamento" style="display: none">
                 @include('nfce.finalizar')
             </div>
             <button id="finalizar" type="button">Finalizar</button>
         </form>
+<<<<<<< HEAD
+=======
+
+>>>>>>> 594fe6a0c65af31c5a29764f6d4bb847c092fb9b
     </main>
     </div>
 </body>
