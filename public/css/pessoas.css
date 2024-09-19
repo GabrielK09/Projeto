@@ -28,6 +28,7 @@ body {
 .forms_show_de_bola {
     flex: 1; /* O formulário ocupará o restante do espaço disponível */
     margin: 20px; /* Margem ao redor do formulário */
+    
 }
 
 
