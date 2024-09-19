@@ -31,7 +31,6 @@
     display: flex;
     align-items: center; 
     justify-content: left; 
-    
 }
 
 .img_produto, .img_pessoas, .img_pdv, .img_dashboard{
@@ -39,5 +38,4 @@
     width: 29px;
     height: 29px;
     color: #fff;
-    
 }

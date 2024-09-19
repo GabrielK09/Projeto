@@ -17,7 +17,6 @@ class Titemvendanfce extends Model
         'total'
     ];
 
-    // Define o relacionamento com Tprodutos
     public function produto()
     {
         return $this->belongsTo(Tprodutos::class, 'produto_id');

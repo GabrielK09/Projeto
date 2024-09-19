@@ -14,7 +14,7 @@ Route::get('/', function () {
 
 
 // Rota PDV ( EM TESTES )
-Route::get('/pdv', [PDVController::class, 'pdv']);
+Route::get('pdv', [PDVController::class, 'pdv']);
 Route::post('/produto', [ProdutosController::class, 'addItemVenda'])->name('produto.store'); //<- Cadastrar produtos
 
 // ------------------------
