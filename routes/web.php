@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\ProdutosController;
 use App\Http\Controllers\PDVController;
-use App\Http\Controllers\PessoasController;
+use App\Http\Controllers\ClientesController;
 
 Route::get('/', function () {
     return view('dashboard.dashboard');
@@ -46,4 +46,4 @@ Route::get('/pessoas/cadastro', function () {
     return view('pessoas.cadastroPessoa');
      
 });
-Route::post('/pessoas', [PessoasController::class, 'store'])->name('pessoas.store');
+Route::post('/pessoas', [ClientesController::class, 'store'])->name('pessoas.store');

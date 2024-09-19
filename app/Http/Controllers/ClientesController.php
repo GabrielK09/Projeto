@@ -7,7 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
-use App\Models\Tpessoas;
+use App\Models\Tclientes;
 
 class PessoasController extends Controller
 {
@@ -28,7 +28,7 @@ class PessoasController extends Controller
     
             ]);
     
-            $pessoa = Tpessoas::create($validate);
+            $pessoa = Tclientes::create($validate);
             
             return response()->json([
                 'message' => 'Pessoa criada com sucesso!',
