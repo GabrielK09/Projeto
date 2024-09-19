@@ -52,7 +52,12 @@
             </form>
         </div>
 
-        
+        <div class="clientes">
+            <label for="cliente">Selecione o cliente:</label>
+            <input type="search" name="cliente" placeholder="Escolher cliente" value="{{ request('cliente') }}">
+        </div>
+
+    
     </div>
 </body>
 </html>
