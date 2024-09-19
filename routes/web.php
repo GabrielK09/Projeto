@@ -38,12 +38,12 @@ Route::post('/produto/{id}/ativar', [ProdutosController::class, 'ativar'])->name
 
 
 // Rotas pessoas
-Route::get('/pessoas', function () {
-    return view('pessoas.pessoas');
+Route::get('/clientes', function () {
+    return view('clientes.clientes');
 });
 
-Route::get('/pessoas/cadastro', function () {
-    return view('pessoas.cadastroPessoa');
+Route::get('/clientes/cadastro', function () {
+    return view('clientes.cadastroClientes');
      
 });
-Route::post('/pessoas', [ClientesController::class, 'store'])->name('pessoas.store');
+Route::post('/clientes', [ClientesController::class, 'store'])->name('clientes.store');

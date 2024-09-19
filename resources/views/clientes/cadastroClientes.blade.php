@@ -5,13 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Novo Produto</title>
-    <link rel="stylesheet" href="/css/pessoas.css">
+    <link rel="stylesheet" href="/css/clientes.css">
 </head>
 <body>
     <div class="scope">
         @include('main.sidebar')
         <div class="forms_show_de_bola">
-            <form action="{{ route('pessoas.store') }}" method="POST">
+            <form action="{{ route('clientes.store') }}" method="POST">
                 @csrf
                 <div class="form-group">
                     <label for="nome_completo">Nome completo*</label>

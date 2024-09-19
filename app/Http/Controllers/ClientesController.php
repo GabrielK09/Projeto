@@ -9,9 +9,9 @@ use Illuminate\Support\Facades\Hash;
 
 use App\Models\Tclientes;
 
-class PessoasController extends Controller
+class ClientesController extends Controller
 {
-    public function pessoas()
+    public function clientes()
     {
         //
     }
@@ -28,11 +28,11 @@ class PessoasController extends Controller
     
             ]);
     
-            $pessoa = Tclientes::create($validate);
+            $cliente = Tclientes::create($validate);
             
             return response()->json([
                 'message' => 'Pessoa criada com sucesso!',
-                'pessoa' => $pessoa
+                'cliente' => $cliente
     
             ]);
 
