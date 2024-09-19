@@ -26,6 +26,10 @@
             </div>
         @endif
 
+        <div class="total">
+            <h2>Total da Venda: <span class="total">R$ {{ number_format($total, 2, ',', '.') }}</span></h2>
+        </div>
+
         <div class="Grid">
             @if($produto)
                 <div class="produto">
@@ -33,10 +37,6 @@
                 </div>
 
             @endif
-        </div>
-
-        <div class="total">
-            <h2>Total da Venda: <span class="total">R$ {{ number_format($total, 2, ',', '.') }}</span></h2>
         </div>
 
         <div class="valores">
