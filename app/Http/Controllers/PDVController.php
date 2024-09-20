@@ -20,7 +20,7 @@ class PDVController extends Controller
         if ($acrescimo && $desconto) {
             return redirect()->back()->with('message', 'Você não pode inserir acréscimo e desconto ao mesmo tempo.');
         }
-
+        
         $produto = null;
         if ($query) {
             $produto = Tprodutos::where('id', 'like', '%' . $query . '%')

@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('tprodutos', function (Blueprint $table) {
-            $table->increments('id');
+            $table->id();
             $table->string('nome');
             $table->bigInteger('cod_gtin');
             $table->decimal('preco_venda');
@@ -25,15 +25,17 @@ return new class extends Migration
         });
 
         Schema::create('titemvendanfce', function (Blueprint $table) {
-            $table->increments('id');
-            $table->unsignedInteger('produto_id');
-            $table->integer('qte');
-            $table->decimal('preco_unitario');
-            $table->decimal('total');
+            $table->id();
+            
+            $table->unsignedBigInteger('tprodutos_id');
+            $table->foreign('tprodutos_id')->references('id')->on('tprodutos')->onDelete('cascade');
+        });
 
-            $table->foreign('produto_id')->references('id')->on('tprodutos')->onDelete('cascade');
-            
-            
+        Schema::create('tvendanfce', function (Blueprint $table) {
+            $table->id();
+
+            $table->unsignedBigInteger('titemvendanfce_id');
+            $table->foreign('titemvendanfce_id')->references('id')->on('titemvendanfce')->onDelete('cascade');
         });
     }
 
@@ -44,5 +46,7 @@ return new class extends Migration
     {
         Schema::dropIfExists('tprodutos');
         Schema::dropIfExists('titemvendanfce');
+        Schema::dropIfExists('titemvendanfce');
+        
     }
 };
