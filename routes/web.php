@@ -35,15 +35,8 @@ Route::post('/produto/{id}/ativar', [ProdutosController::class, 'ativar'])->name
 // --------------------
 
 
-<<<<<<< HEAD
 // Rotas pessoas
 Route::get('/clientes', [ClientesController::class, 'clientes']);
-=======
-// Rotas clientes
-Route::get('/clientes', function () { // <- Puxar os clientes
-    return view('clientes.clientes');
-});
->>>>>>> b722ced247f125b41c4ccb397fea5ba1698380cd
 
 Route::get('/clientes/cadastro', function () { // <- Rederiza tela de cadastro
     return view('clientes.cadastroClientes');
