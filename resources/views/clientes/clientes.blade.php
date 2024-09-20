@@ -9,4 +9,17 @@
 
     <a href="/clientes/cadastro"><button class="btn cadastrarCliente">Cadastrar Clientes</button></a>
 
+    <div class="grid">
+        @foreach ($clientes as $cliente)   
+            <p> Nome: {{$cliente->nome_completo }} </p>
+            <p> CPF: {{$cliente->cpf }} </p>
+            <p> Data de Nascimento: {{$cliente->data_nascimento }} </p>
+
+        @endforeach
+
+    </div>
+
+
+
 </div>
+

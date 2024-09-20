@@ -65,7 +65,8 @@ button:hover {
     margin-bottom: 16px;
 }
 
-.error {
-    color: red;
-    font-size: 0.875em;
+.scope .grid {
+    display: flex;
+    flex-direction: column;
+
 }

@@ -36,9 +36,7 @@ Route::post('/produto/{id}/ativar', [ProdutosController::class, 'ativar'])->name
 
 
 // Rotas pessoas
-Route::get('/clientes', function () {
-    return view('clientes.clientes');
-});
+Route::get('/clientes', [ClientesController::class, 'clientes']);
 
 Route::get('/clientes/cadastro', function () {
     return view('clientes.cadastroClientes');

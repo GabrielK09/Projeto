@@ -22,13 +22,17 @@ return new class extends Migration
             $table->bigInteger('ncm');
             $table->boolean('ativo')->default(true);
             $table->timestamps();
+
         });
 
         Schema::create('titemvendanfce', function (Blueprint $table) {
             $table->id();
             
-            $table->unsignedBigInteger('tprodutos_id');
-            $table->foreign('tprodutos_id')->references('id')->on('tprodutos')->onDelete('cascade');
+            $table->unsignedBigInteger('cod_produto')->default(1);
+            $table->date('cadastro');
+            $table->foreign('cod_produto')->references('id')->on('tprodutos')->onDelete('cascade');    
+            $table->timestamps();
+
         });
 
         Schema::create('tvendanfce', function (Blueprint $table) {
@@ -36,6 +40,9 @@ return new class extends Migration
 
             $table->unsignedBigInteger('titemvendanfce_id');
             $table->foreign('titemvendanfce_id')->references('id')->on('titemvendanfce')->onDelete('cascade');
+
+            $table->timestamps();
+
         });
     }
 

@@ -1,4 +1,5 @@
 <?php
+// By Kochem
 
 namespace App\Http\Controllers;
 
@@ -13,7 +14,11 @@ class ClientesController extends Controller
 {
     public function clientes()
     {
-        //
+        $clientes = Tclientes::all();
+        return view('clientes.clientes', [
+            'clientes' => $clientes
+            
+        ]);
     }
 
     public function store(Request $request)
