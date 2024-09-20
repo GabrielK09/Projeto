@@ -20,6 +20,8 @@ class PDVController extends Controller
         $acrescimo = is_numeric($acrescimo) ? floatval($acrescimo) : 0;
         $desconto = is_numeric($desconto) ? floatval($desconto) : 0;
 
+        
+
         $produto = Tprodutos::where('id', 'like', '%' . $query . '%')
                                     ->orWhere('nome', 'like', '%' . $query . '%')
                                     ->first();
