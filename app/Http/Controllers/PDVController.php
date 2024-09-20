@@ -16,6 +16,7 @@ class PDVController extends Controller
         $acrescimo = (float) $request->input('acrescimo', 0);
         $desconto = (float) $request->input('desconto', 0);
         $query = $request->input('query');
+        $cliente = $request->input('cliente');
         $total = array_sum(array_column($produtos, 'preco_venda'));
         
         if ($acrescimo && $desconto) {
@@ -54,5 +55,18 @@ class PDVController extends Controller
             'clientes' => Tclientes::all(),
             'message' => 'Nenhum produto encontrado.',
         ]);
+    }
+
+    public function cancelarVenda(){
+        session()->forget('produtos');
+
+        return redirect()->route('pdv')->with('message', 'Venda cancelada!');
+    }
+
+    public function buscar(Request $request){
+        $query = $request->input('query');
+        $clientes = Tclientes::where('nome', 'like', '%' . $query . '%')->get();
+
+        return response()->json($clientes);
     }
 }   
