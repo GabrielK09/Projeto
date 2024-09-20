@@ -15,18 +15,34 @@ class PDVController extends Controller
         $acrescimo = (float) $request->input('acrescimo', 0);
         $desconto = (float) $request->input('desconto', 0);
         $query = $request->input('query');
-        $total = (float) $request->input('total', 0);
+        $total = 0;
 
-        $acrescimo = is_numeric($acrescimo) ? floatval($acrescimo) : 0;
-        $desconto = is_numeric($desconto) ? floatval($desconto) : 0;
+        if ($acrescimo && $desconto) {
+            return redirect()->back()->with('message', 'Você não pode inserir acréscimo e desconto ao mesmo tempo.');
+        }
 
-        $produto = Tprodutos::where('id', 'like', '%' . $query . '%')
-                                    ->orWhere('nome', 'like', '%' . $query . '%')
-                                    ->first();
+        $produto = null;
+        if ($query) {
+            $produto = Tprodutos::where('id', 'like', '%' . $query . '%')
+                                ->orWhere('nome', 'like', '%' . $query . '%')
+                                ->where('ativo', 1)
+                                ->first();
+        }
 
-        if ($query != null && $produto && $produto->ativo === 1) {
+        //NÃO MEXER NESSE CARALHO AQUI EM BAIXO
+        if ($produto) {
             $total += $produto->preco_venda;
-        } 
+    
+            return view('nfce.pdv', [
+                'produto' => $produto,
+                'total' => max(0, $total + $acrescimo - $desconto),
+                'query' => $query,
+                'clientes' => Tclientes::all(),
+                'message' => 'Produto inserido com sucesso!',
+            ]);
+        }
+
+        //return redirect()->back()->with('message', 'Nenhum produto encontrado.');
 
         $total += $acrescimo;
         $total -= $desconto;
@@ -39,10 +55,7 @@ class PDVController extends Controller
             'produto' => $produto,
             'total' => max(0, $total),
             'query' => $query,
-            'clientes' => $clientes
-
+            'clientes' => $clientes,
         ])->with('message', 'Operação realizada com sucesso!');
-
     }
-
 }

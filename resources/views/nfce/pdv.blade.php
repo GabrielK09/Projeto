@@ -12,19 +12,15 @@
         @include('main.sidebar')
 
         <div class="Buscar">
-            <form action="/pdv" method="GET" id="search-form">
+            <form action="/pdv" method="GET" id="search-form myForm">
                 @csrf
-                <input id="teste" type="search" name="query" placeholder="Buscar item" value="{{ request('query') }}">
+                <input id="myInput" type="search" name="query" placeholder="Buscar item" value="{{ request('query') }}">
                 <input type="hidden" name="total" value="{{ $total ?? 0 }}"> 
-                <button type="submit" onclick="">Buscar</button>
+                <button type="submit">Buscar</button>
             </form>
         </div>
 
-        @if(session('message'))
-            <div class="alert alert-success">
-                {{ session('message') }}
-            </div>
-        @endif
+        
 
         <div class="Grid">
             @if($query && $produto)
@@ -41,7 +37,7 @@
         </div>
 
         <div class="valores">
-            <form action="/pdv" method="GET">
+            <form action="pdv" method="GET">
                 @csrf
                 <label for="acrescimo">Acréscimo:</label>
                 <input type="number" name="acrescimo" placeholder="Inserir acréscimo" value="{{ request('acrescimo', 0) }}" step="0.01">
@@ -53,6 +49,12 @@
                 <input type="hidden" name="total" value="{{ $total }}">
 
                 <h2>Total da Venda: <span id="total-display">R$ {{ number_format($total, 2, ',', '.') }}</span></h2>
+
+                @if(session('message'))
+            <div class="alert alert-success">
+                {{ session('message') }}
+            </div>
+        @endif
                 
                 <button type="submit">Atualizar Total</button>
             </form>
