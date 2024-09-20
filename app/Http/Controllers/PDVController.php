@@ -12,15 +12,16 @@ class PDVController extends Controller
 {
     public function pdv(Request $request)
     {
+        $produtos = session('produtos', []);
         $acrescimo = (float) $request->input('acrescimo', 0);
         $desconto = (float) $request->input('desconto', 0);
         $query = $request->input('query');
-        $total = 0;
-
+        $total = array_sum(array_column($produtos, 'preco_venda'));
+        
         if ($acrescimo && $desconto) {
             return redirect()->back()->with('message', 'Você não pode inserir acréscimo e desconto ao mesmo tempo.');
         }
-        
+    
         $produto = null;
         if ($query) {
             $produto = Tprodutos::where('id', 'like', '%' . $query . '%')
@@ -28,34 +29,30 @@ class PDVController extends Controller
                                 ->where('ativo', 1)
                                 ->first();
         }
-
-        //NÃO MEXER NESSE CARALHO AQUI EM BAIXO
-        if ($produto) {
-            $total += $produto->preco_venda;
     
+        if ($produto) {
+            if (!in_array($produto, $produtos)) {
+                $produtos[] = $produto;
+                session(['produtos' => $produtos]);
+            }
+        
+            $total += $produto->preco_venda;
+        
             return view('nfce.pdv', [
-                'produto' => $produto,
+                'produtos' => $produtos,
                 'total' => max(0, $total + $acrescimo - $desconto),
                 'query' => $query,
                 'clientes' => Tclientes::all(),
                 'message' => 'Produto inserido com sucesso!',
             ]);
         }
-
-        //return redirect()->back()->with('message', 'Nenhum produto encontrado.');
-
-        $total += $acrescimo;
-        $total -= $desconto;
-
-        $total = max(0, $total);
-
-        $clientes = Tclientes::all();
-
+    
         return view('nfce.pdv', [
-            'produto' => $produto,
-            'total' => max(0, $total),
+            'produtos' => $produtos,
+            'total' => max(0, $total + $acrescimo - $desconto),
             'query' => $query,
-            'clientes' => $clientes,
-        ])->with('message', 'Operação realizada com sucesso!');
+            'clientes' => Tclientes::all(),
+            'message' => 'Nenhum produto encontrado.',
+        ]);
     }
-}
+}   
