@@ -5,20 +5,21 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>NFC-e</title>
     <link rel="stylesheet" type="text/css" href="/css/nfce.css">
+    <script src="/js/clientes.js"></script>
 </head>
 <body>
 
     <div class="container">
         @include('main.sidebar')
 
-        <div class="Buscar">
-            <form action="{{ route('pdv') }}" method="GET" id="search-form myForm">
-                @csrf
-                <input type="text" name="query" placeholder="Buscar produto" value="{{ old('query', request('query')) }}">
-                <button type="submit">Buscar</button>
-            </form>
-        </div>
+        {{-- Buscar produtos --}}
+        <form action="{{ route('pdv') }}" method="GET" id="search-form myForm">
+            @csrf
+            <input type="text" name="query" placeholder="Buscar produto" value="{{ old('query', request('query')) }}">
+            <button type="submit">Buscar</button>
+        </form>
 
+        {{-- Exibir produtos --}}
         <div class="Grid">
             @if(isset($query) && isset($produto))
                 <div class="produto">
@@ -41,39 +42,6 @@
             @endif
         </div>
 
-        <div class="valores">
-            <form action="{{ route('pdv') }}" method="GET">
-                @csrf
-                <label for="acrescimo">Acréscimo:</label>
-                <input type="number" name="acrescimo" placeholder="Inserir acréscimo" value="{{ request('acrescimo', 0) }}" step="0.01">
-                
-                <label for="desconto">Desconto:</label>
-                <input type="number" name="desconto" placeholder="Inserir desconto" value="{{ request('desconto', 0) }}" step="0.01">
-                
-                <input type="hidden" name="query" value="{{ request('query') }}">
-                <input type="hidden" name="total" value="{{ $total }}">
-
-                <h2>Total da Venda: <span id="total-display">R$ {{ number_format($total, 2, ',', '.') }}</span></h2>
-
-                @if(session('message'))
-                    <div class="alert alert-success">
-                        {{ session('message') }}
-                    </div>
-                @endif
-                
-                <button type="submit">Atualizar Total</button>
-            </form>
-        </div>
-
-        <div class="clientes">
-            <label for="cliente">Selecione o cliente:</label>
-            <select name="cliente">
-                @foreach($clientes as $cliente)
-                    <option value="{{ $cliente->id }}">{{ $cliente->nome }}</option>
-                @endforeach
-            </select>
-        </div>
-
         @if(session('produtos'))
             <h3>Produtos Selecionados:</h3>
             <ul>
@@ -83,6 +51,45 @@
             </ul>
         @endif
 
+        {{-- Todos os valores --}}
+        <form action="{{ route('pdv') }}" method="GET">
+            @csrf
+            <label for="acrescimo">Acréscimo:</label>
+            <input type="number" name="acrescimo" placeholder="Inserir acréscimo" value="{{ request('acrescimo', 0) }}" step="0.01">
+            
+            <label for="desconto">Desconto:</label>
+            <input type="number" name="desconto" placeholder="Inserir desconto" value="{{ request('desconto', 0) }}" step="0.01">
+            
+            <input type="hidden" name="query" value="{{ request('query') }}">
+            <input type="hidden" name="total" value="{{ $total }}">
+            <h2>Total da Venda: <span id="total-display">R$ {{ number_format($total, 2, ',', '.') }}</span></h2>
+
+            @if(session('message'))
+                <div class="alert alert-success">
+                    {{ session('message') }}
+                </div>
+            @endif
+            
+            <button type="submit">Atualizar Total</button>
+        </form>
+
+        {{-- Cancelar venda --}}
+        <form action="{{ route('pdv.cancelar')}}" method="POST" style="display: inline">
+            @csrf
+            <button type="submit" class="btnCancel">Cancelar Venda</button>
+        </form>
+
+        {{-- Selecionar cliente --}}
+        <div class="clientes">
+            <label for="cliente">Cliente:</label>
+            <input type="text" id="cliente" placeholder="Inserir cliente" onkeyup="buscarClientes(this.value)">
+            <button type="submit">Buscar</button>
+            
+            <div id="resultado-clientes" style="display:none;">
+                <ul id="clientes-list"></ul>
+            </div>
+        </div>
+            
     </div>
 </body>
 </html>
