@@ -6,42 +6,67 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Tprodutos;
 
+use App\Models\Tclientes;
+
 class PDVController extends Controller
 {
     public function pdv(Request $request)
     {
-        try {
-            $query = $request->input('query');
-
-            $produtos = null;
-            $total = $request->input('total', 0);
-
-            if ($query) {
-                $produtos = Tprodutos::where('id', 'like', '%' . $query . '%')
-                    ->orWhere('nome', 'like', '%' . $query . '%')
-                    ->first();
-
-                if ($produtos && is_object($produtos) && $produtos->ativo === 1) {
-                    $total += $produtos->preco_venda; 
-                    
-                } else {
-                    return response()->json([
-                        'message' => 'Não deu',
-                        'th' => 'Produto não encontrado ou inativado'
-                    ]);
-                }
-                    
+        $produtos = session('produtos', []);
+        $acrescimo = (float) $request->input('acrescimo', 0);
+        $desconto = (float) $request->input('desconto', 0);
+        $query = $request->input('query');
+        $cliente = $request->input('cliente');
+        $total = array_sum(array_column($produtos, 'preco_venda'));
+        
+        if ($acrescimo && $desconto) {
+            return redirect()->back()->with('message', 'Você não pode inserir acréscimo e desconto ao mesmo tempo.');
+        }
+    
+        $produto = null;
+        if ($query) {
+            $produto = Tprodutos::where('id', 'like', '%' . $query . '%')
+                                ->orWhere('nome', 'like', '%' . $query . '%')
+                                ->where('ativo', 1)
+                                ->first();
+        }
+    
+        if ($produto) {
+            if (!in_array($produto, $produtos)) {
+                $produtos[] = $produto;
+                session(['produtos' => $produtos]);
             }
-
-            return view('pdv', [
+        
+            $total += $produto->preco_venda;
+        
+            return view('nfce.pdv', [
                 'produtos' => $produtos,
-                'total' => $total
-            
+                'total' => max(0, $total + $acrescimo - $desconto),
+                'query' => $query,
+                'clientes' => Tclientes::all(),
+                'message' => 'Produto inserido com sucesso!',
             ]);
-            
-        } catch (\Throwable $th) {
-
-        };
+        }
+    
+        return view('nfce.pdv', [
+            'produtos' => $produtos,
+            'total' => max(0, $total + $acrescimo - $desconto),
+            'query' => $query,
+            'clientes' => Tclientes::all(),
+            'message' => 'Nenhum produto encontrado.',
+        ]);
     }
-}
- 
+
+    public function cancelarVenda(){
+        session()->forget('produtos');
+
+        return redirect()->route('pdv')->with('message', 'Venda cancelada!');
+    }
+
+    public function buscar(Request $request){
+        $query = $request->input('query');
+        $clientes = Tclientes::where('nome', 'like', '%' . $query . '%')->get();
+
+        return response()->json($clientes);
+    }
+}   

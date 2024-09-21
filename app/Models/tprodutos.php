@@ -7,6 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Tprodutos extends Model
 {
+    use HasFactory;
+
+    protected $table = 'tprodutos';
+    
     protected $fillable = [
         'nome', 
         'cod_gtin', 
@@ -19,12 +23,8 @@ class Tprodutos extends Model
     
     ];
 
-    protected static function ativo() {
-        parent::ativo();
+    public function titemvendanfce() {
+        return $this->hasMany(Titemvendanfce::class, 'produto_id');
 
-        static::addGlobalScope('ativo', function (\Illuminate\Database\Eloquent\Builder $builder) {
-            $builder->where('ativo', true);
-            
-        });
     }
 }

@@ -1,9 +1,12 @@
 <?php
+// By Kochem
 
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Tprodutos;
+use App\Services\ItemVendaNFCe;
+
 use Illuminate\Http\Request;
 
 class ProdutosController extends Controller
@@ -11,7 +14,7 @@ class ProdutosController extends Controller
     public function produto()
     {
         try {
-            $produtos = Tprodutos::all();
+            $produtos = Tprodutos::paginate(20);
 
             $ativos = $produtos->filter(function ($produto) {
                 return $produto->ativo === 1;
@@ -22,7 +25,7 @@ class ProdutosController extends Controller
                 return $produto->ativo === 0;
 
             });
-            return view('produto', [
+            return view('produtos.produto', [
                 'produtos' => $produtos,
                 'ativos' => $ativos,
                 'inativos' => $inativos
@@ -30,12 +33,12 @@ class ProdutosController extends Controller
             ]);
 
         } catch (\Throwable $th) {
-            return response()->json([
-                'message' => 'Deu errok',
-                'th' => $th->getMessage()
-            
-            ], 500);
-        }
+            return view('error_pages.500', [
+                'th' => $th
+                
+            ]);
+
+        };
 
     }
 
@@ -67,7 +70,8 @@ class ProdutosController extends Controller
             'preco_venda.numeric' => 'O preço de venda precisa ser um número.',
 
             'cfop.required' => 'O CFOP precisa ser preenchido.',
-            'cfop.max' => 'O CFOP deve ter no máximo 4 caracteres'             
+            'cfop.max' => 'O CFOP deve ter no máximo 4 caracteres',          
+            'cfop.min' => 'O CFOP deve ter menos 4 caracteres'             
 
         ]);
         
@@ -81,7 +85,7 @@ class ProdutosController extends Controller
     {
         $produto = Tprodutos::findOrFail($id);
 
-        return view('editarProduto', [
+        return view('produtos.editarProduto', [
             'produto' => $produto
         ]);
 
@@ -118,5 +122,21 @@ class ProdutosController extends Controller
 
         return redirect()->route('produto.store')->with('sucess', 'Produto deletado com sucessso!');
         
+    }
+
+    public function addItemVenda(Request $request, ItemVendaNFCe $itemVendaNFCe) {
+        $request->validate([
+            'produto_id' => 'required|exists:tprodutos,id',
+            'qte' => 'required|integer|min:1'
+        ]);
+
+        $produtoId = $request->input('produto_id');
+        $qte = $request->input('qte');
+        
+        if ($itemVendaNFCe->addProduto($produtoId, $qte)) {
+            return response()->json([
+                'message' => 'item aqui'
+            ]);
+        }
     }
 }
