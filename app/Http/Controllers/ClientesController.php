@@ -1,4 +1,5 @@
 <?php
+// By Kochem
 
 namespace App\Http\Controllers;
 
@@ -7,13 +8,17 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
-use App\Models\Tpessoas;
+use App\Models\Tclientes;
 
-class PessoasController extends Controller
+class ClientesController extends Controller
 {
-    public function pessoas()
+    public function clientes()
     {
-        //
+        $clientes = Tclientes::all();
+        return view('clientes.clientes', [
+            'clientes' => $clientes
+            
+        ]);
     }
 
     public function store(Request $request)
@@ -28,11 +33,11 @@ class PessoasController extends Controller
     
             ]);
     
-            $pessoa = Tpessoas::create($validate);
+            $cliente = Tclientes::create($validate);
             
             return response()->json([
                 'message' => 'Pessoa criada com sucesso!',
-                'pessoa' => $pessoa
+                'cliente' => $cliente
     
             ]);
 
