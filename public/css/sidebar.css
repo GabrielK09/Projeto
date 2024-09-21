@@ -6,7 +6,8 @@
 
 .sidebar {
     width: 250px;
-    background-color: #7BA084;
+    /* background-color: #7BA084; */
+    background-color: #790549;
     padding: 20px;
     display: flex;
     flex-direction: column;
@@ -18,13 +19,13 @@
     text-decoration: none;
     color: #ecf0f1;
     padding: 10px;
-    background-color: #6B8F71;
+    background-color: #9A1764;
     border-radius: 5px;
     transition: background-color 0.3s;
 }
 
 .sidebar a:hover {
-    background-color: #AAD2BA;
+    background-color: #FB84CD;
 }
 
 .produto, .pessoas, .pdv{

@@ -26,7 +26,7 @@ body {
     width: 220px;
     text-decoration: none;
     color: #fff;
-    background: #6B8F71;
+    background: #9A1764;
     border: none;
     border-radius: 5px;
     font-size: 25px;
@@ -37,7 +37,7 @@ body {
 button.inativar:hover,
 button.ativar:hover,
 button.editarProduto:hover{
-    background-color: #AAD2BA;
+    background-color: #FB84CD;
 
 }
 
@@ -51,7 +51,7 @@ button.ativar,
 button.editarProduto {
     text-decoration: none;
     color: #fff;
-    background: #6B8F71;
+    background: #9A1764;
     border: none;
     border-radius: 5px;
     font-size: 15px;
