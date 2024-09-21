@@ -47,3 +47,5 @@ Route::get('/pessoas/cadastro', function () {
      
 });
 Route::post('/pessoas', [PessoasController::class, 'store'])->name('pessoas.store');
+
+// --------------------
