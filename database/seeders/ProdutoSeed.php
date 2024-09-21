@@ -25,7 +25,18 @@ class ProdutoSeed extends Seeder
                 'ncm' => '09012100',
                 'qte' => 100,
                 'ativo' => true,
-            ]
+            ],
+            [
+                'nome' => 'Café 3 corações',
+                'cod_gtin' => '7896003700011',
+                'preco_venda' => 19.90,
+                'cfop' => '5102',
+                'csosn' => '102',
+                'ncm' => '09012100',
+                'qte' => 100,
+                'ativo' => true,
+            ],
+            
         ];
         
         foreach ($produtos as $produto) {
