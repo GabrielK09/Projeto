@@ -1,7 +1,8 @@
 <?php
 // By Kochem
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api\V2\Pdv;
+
 
 use App\Http\Controllers\Controller;
 use App\Models\ItemSaleNfce;

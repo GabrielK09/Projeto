@@ -1,28 +1,28 @@
 <?php
-// By Kochem
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api\V2\Pdv;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Consumers;
+use Illuminate\Http\JsonResponse;
 
-class ConsumerController extends Controller
+class ConsumersController extends Controller
 {
-    public function index()
+    public function index(): JsonResponse
     {
         $clientes = Consumers::all();
         return response()->json($clientes);
     }
 
-    public function store(Request $request)
+    public function store(Request $request): JsonResponse
     {
         try {
             $validate = $request->validate([
                 'nome_completo' => 'required|string|max:255',
                 'tipo_pessoa' => 'required|string',
-                'cpf' => 'required|string|min:11|max:11',
-                'data_nascimento' => 'required|string',
+                'cpf' => 'required|string|regex:/^\d{11}$/',
+                'data_nascimento' => 'required|date',
                 'tipo_cadastro' => 'required|string'
             ]);
 
@@ -40,28 +40,22 @@ class ConsumerController extends Controller
         }
     }
 
-    public function show(string $id)
+    public function show(string $id): JsonResponse
     {
-        $cliente = Consumers::find($id);
-        if (!$cliente) {
-            return response()->json(['message' => 'Cliente não encontrado'], 404);
-        }
+        $cliente = Consumers::findOrFail($id);
         return response()->json($cliente);
     }
 
-    public function update(Request $request, string $id)
+    public function update(Request $request, string $id): JsonResponse
     {
-        $cliente = Consumers::find($id);
-        if (!$cliente) {
-            return response()->json(['message' => 'Cliente não encontrado'], 404);
-        }
+        $cliente = Consumers::findOrFail($id);
 
         try {
             $validate = $request->validate([
                 'nome_completo' => 'sometimes|required|string|max:255',
                 'tipo_pessoa' => 'sometimes|required|string',
-                'cpf' => 'sometimes|required|string|min:11|max:11',
-                'data_nascimento' => 'sometimes|required|string',
+                'cpf' => 'sometimes|required|string|regex:/^\d{11}$/',
+                'data_nascimento' => 'sometimes|required|date',
                 'tipo_cadastro' => 'sometimes|required|string'
             ]);
 
@@ -79,12 +73,9 @@ class ConsumerController extends Controller
         }
     }
 
-    public function destroy(string $id)
+    public function destroy(string $id): JsonResponse
     {
-        $cliente = Consumers::find($id);
-        if (!$cliente) {
-            return response()->json(['message' => 'Cliente não encontrado'], 404);
-        }
+        $cliente = Consumers::findOrFail($id);
 
         $cliente->delete();
         return response()->json(['message' => 'Cliente deletado com sucesso']);

@@ -1,9 +1,8 @@
 <?php
 
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use App\Models\Consumers;
 use App\Models\Products;
 use LaravelJsonApi\Core\Document\Error;
