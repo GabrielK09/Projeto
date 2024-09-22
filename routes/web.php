@@ -16,6 +16,9 @@ Route::get('/', function () {
 Route::get('/pdv', [PDVController::class, 'pdv'])->name('pdv'); // <- Tela NFCe
 Route::post('/pdv/cancelar', [PDVController::class, 'cancelarVenda'])->name('pdv.cancelar'); // <- Cancelar venda
 
+
+Route::get('/pdv/c', [PDVController::class, 'buscar'])->name('pdv.cliente');
+
 // ------------------------
 
 
