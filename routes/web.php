@@ -40,7 +40,7 @@ Route::get('/clientes', [ClientesController::class, 'clientes']);
 
 Route::get('/clientes/cadastro', function () { // <- Rederiza tela de cadastro
     return view('clientes.cadastroClientes');
-     
+
 });
 
 Route::post('/clientes', [ClientesController::class, 'store'])->name('clientes.store');
