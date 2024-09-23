@@ -90,7 +90,7 @@
                 <input type="text" name="query_cliente" placeholder="Buscar produto" value="{{ old('query', request('query')) }}">
                 <button type="submit">Buscar</button>
         
-                @if(session('cliente') && count(session('cliente')) > 0)
+                @if(session('cliente') )
                     <ul>
                         @foreach(session('cliente') as $cliente)
                             <li>{{ $cliente->id }} - {{ $cliente->nome_completo }}</li> <!-- Adjust based on available fields -->

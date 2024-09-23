@@ -67,13 +67,6 @@ class PDVController extends Controller
            $clientes = Tclientes::where('id', 'like', '%' . $query . '%')->get();
 
             if($clientes) {
-            
-                // return response()->json([
-                //     'message' => 'clientes encontrados',
-                //     'clientes' => $clientes
-
-                // ]);
-
                 return redirect()->back()->with('cliente', $clientes);
                 
             } else {
