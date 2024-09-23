@@ -15,6 +15,8 @@ class Tprodutos extends Model
         'nome', 
         'cod_gtin', 
         'preco_venda', 
+        'preco_custo', 
+        'perc_lucro', 
         'cfop',
         'csosn',
         'ncm',

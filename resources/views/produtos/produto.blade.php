@@ -31,7 +31,9 @@
                     <p>Produto: {{ $produto->nome }}</p>
                     <p>Quantia: {{ $produto->qte }}</p>
                     <p>Código de barras GTIN: {{ $produto->cod_gtin }}</p>
-                    <p>R$ {{ $produto->preco_venda }}</p>
+                    <p>Preço de venda: R$ {{ $produto->preco_venda }}</p>
+                    <p>Preço de custo: R$ {{ $produto->preco_custo }}</p>
+                    <p>Percentual de lucro: {{ $produto->perc_lucro }}%</p>
                     <p>CFOP: {{ $produto->cfop }}</p>
                     <p>CSOSN/CST: {{ $produto->csosn }}</p>
                     <p>NCM: {{ $produto->ncm }}</p>

@@ -15,6 +15,10 @@ Route::get('/', function () {
 // Rota PDV ( EM TESTES )
 Route::get('/pdv', [PDVController::class, 'pdv'])->name('pdv'); // <- Tela NFCe
 Route::post('/pdv/cancelar', [PDVController::class, 'cancelarVenda'])->name('pdv.cancelar'); // <- Cancelar venda
+
+
+
+//Funcional, mas só retorna o cliente para a view
 Route::get('/pdv/c', [PDVController::class, 'buscar'])->name('pdv2');
 
 // ------------------------
@@ -23,26 +27,32 @@ Route::get('/pdv/c', [PDVController::class, 'buscar'])->name('pdv2');
 // Rotas dos produtos
 Route::get('/produto', [ProdutosController::class, 'produto']); //<- Todos os produtos
 Route::post('/produto', [ProdutosController::class, 'store'])->name('produto.store'); //<- Cadastrar produtos
-Route::get('/produto/cadastro', function() { // <- Apenas renderiza o forms do cadastro
+
+Route::get('/produto/cadastro', function() { // <- Apenas renderiza o forms do cadastro do produto
     return view('produtos.cadastroProduto');
+
 }); 
 
 Route::get('/produto/editar/{id}', [ProdutosController::class, 'show']); //<- Mostrar o produto pelo ID
 Route::put('produto/{id}', [ProdutosController::class, 'update']); // <- Editar o produto
 
 Route::post('/produto/{id}/inativar', [ProdutosController::class, 'inativar'])->name('produto.inativar'); // <- Inativar
-Route::post('/produto/{id}/ativar', [ProdutosController::class, 'ativar'])->name('produto.ativar'); // <- Inativar
+Route::post('/produto/{id}/ativar', [ProdutosController::class, 'ativar'])->name('produto.ativar'); // <- Ativar
 
 // --------------------
 
 
 // Rotas pessoas
-Route::get('/clientes', [ClientesController::class, 'clientes']);
+Route::get('/clientes', [ClientesController::class, 'clientes']); //<- Todos os cliente
 
-Route::get('/clientes/cadastro', function () { // <- Rederiza tela de cadastro
+Route::get('/clientes/cadastro', function () { // <- Apenas renderiza o forms do cadastro do cliente
     return view('clientes.cadastroClientes');
 
 });
-Route::post('/pessoas', [ClientesController::class, 'store'])->name('clientes.store');
+
+Route::get('/cliente/editar/{id}', [ClientesController::class, 'show']); //<- Mostrar o cliente pelo ID
+Route::put('cliente/{id}', [ClientesController::class, 'update']); // <- Edita o cliente
+
+Route::post('/clientes', [ClientesController::class, 'store'])->name('clientes.store');
 
 // --------------------

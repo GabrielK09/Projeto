@@ -69,10 +69,7 @@ class PDVController extends Controller
             if($clientes) {
                 return redirect()->back()->with('cliente', $clientes);
                 
-            } else {
-                return redirect()->back()->with('cliente', []);
-                
-            }
+            } 
         }
     }
 }   

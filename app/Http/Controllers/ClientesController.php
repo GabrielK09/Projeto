@@ -35,11 +35,14 @@ class ClientesController extends Controller
     
             $cliente = Tclientes::create($validate);
             
-            return response()->json([
-                'message' => 'Pessoa criada com sucesso!',
-                'cliente' => $cliente
+            // Retprnp json
+            // return response()->json([
+            //     'message' => 'Pessoa criada com sucesso!',
+            //     'cliente' => $cliente
     
-            ]);
+            // ]);
+
+            return redirect('/clientes')->with('sucess', 'Cliente cadastrado');
 
         } catch (\Throwable $th) {
             return response()->json([
@@ -56,7 +59,12 @@ class ClientesController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $cliente = Tclientes::find($id);
+
+        return view('clientes.editarCliente', [
+            'cliente' => $cliente
+
+        ]);
     }
 
     /**
@@ -64,14 +72,18 @@ class ClientesController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $cliente = Tclientes::find($id);
+
+        $cliente->update($request->all());
+
+
+                                 // Tem que passar novamente pela validação dos campos
+        return redirect()->route('clientes.store')->with('sucess', 'Produto deletado com sucessso!');
+
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(string $id)
     {
-        //
+        
     }
 }

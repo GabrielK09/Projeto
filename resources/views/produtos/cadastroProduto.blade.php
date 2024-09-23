@@ -48,6 +48,24 @@
                 </div>
 
                 <div class="form-group">
+                    <label for="preco_custo">Preço custo*</label>
+                    <input type="text" name="preco_custo" id="preco_venda" value="{{ old('preco_custo') }}">
+                    @error('preco_venda')
+                        <div class="text-danger">{{ $message }}</div>
+                    @enderror
+    
+                </div>
+    
+                <div class="form-group">
+                    <label for="perc_lucro">Percentual de lucro*</label>
+                    <input type="text" name="perc_lucro" id="perc_lucro" value="{{ old('perc_lucro') }}">
+                    @error('preco_venda')
+                        <div class="text-danger">{{ $message }}</div>
+                    @enderror
+    
+                </div>
+
+                <div class="form-group">
                     <label for="cfop">CFOP*</label>
                     <input type="text" name="cfop" id="cfop" value="{{ old('cfop') }}">
                     @error('cfop')

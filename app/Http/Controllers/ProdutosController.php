@@ -49,6 +49,8 @@ class ProdutosController extends Controller
             'qte' => 'required|numeric|gt:0',
             'cod_gtin' => 'required|string|max:14|min:8',
             'preco_venda' => 'required|numeric|gt:0',
+            'preco_custo' => 'required|numeric|gt:0',
+            'perc_lucro' => 'required|numeric|gt:0',
             'cfop' => 'required|numeric|gt:0',
             'csosn' => 'required|numeric|gt:0',
             'ncm' => 'required|numeric|gt:0',
@@ -68,6 +70,8 @@ class ProdutosController extends Controller
             'preco_venda.required' => 'O preço de vendd precisa ser preenchido.',
             'preco_venda.gt' => 'O preço de venda deve ser maior que 0.',
             'preco_venda.numeric' => 'O preço de venda precisa ser um número.',
+
+            'perc_lucro.gt' => 'O percentual de lucro deve ser maior que 0.',
 
             'cfop.required' => 'O CFOP precisa ser preenchido.',
             'cfop.max' => 'O CFOP deve ter no máximo 4 caracteres',          

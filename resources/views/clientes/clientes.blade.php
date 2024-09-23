@@ -15,11 +15,9 @@
             <p> CPF: {{$cliente->cpf }} </p>
             <p> Data de Nascimento: {{$cliente->data_nascimento }} </p>
 
+            <a href="/cliente/editar/{{ $cliente->id }}"><button>Editar cliente</button></a>
         @endforeach
 
     </div>
-
-
-
 </div>
 

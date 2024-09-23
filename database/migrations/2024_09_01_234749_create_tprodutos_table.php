@@ -16,6 +16,8 @@ return new class extends Migration
             $table->string('nome');
             $table->bigInteger('cod_gtin');
             $table->decimal('preco_venda', 10, 2 );
+            $table->decimal('preco_custo', 10, 2 );
+            $table->decimal('perc_lucro', 10, 2 );
             $table->decimal('qte');
             $table->integer('cfop');
             $table->integer('csosn');
