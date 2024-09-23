@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit5fd62baec31c55b596e36d407fcaeaab
+class ComposerStaticInit7e8c3c14ff33b199b4a0838993eb8423
 {
     public static $files = array (
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
@@ -107,7 +107,6 @@ class ComposerStaticInit5fd62baec31c55b596e36d407fcaeaab
         'N' => 
         array (
             'NunoMaduro\\Collision\\' => 21,
-            'Namespace\\' => 10,
         ),
         'M' => 
         array (
@@ -364,10 +363,6 @@ class ComposerStaticInit5fd62baec31c55b596e36d407fcaeaab
         array (
             0 => __DIR__ . '/..' . '/nunomaduro/collision/src',
         ),
-        'Namespace\\' => 
-        array (
-            0 => __DIR__ . '/../..' . '/src',
-        ),
         'Monolog\\' => 
         array (
             0 => __DIR__ . '/..' . '/monolog/monolog/src/Monolog',
@@ -476,7 +471,8 @@ class ComposerStaticInit5fd62baec31c55b596e36d407fcaeaab
         ),
         'Database\\Seeders\\' => 
         array (
-            0 => __DIR__ . '/..' . '/laravel/pint/database/seeders',
+            0 => __DIR__ . '/../..' . '/database/seeders',
+            1 => __DIR__ . '/..' . '/laravel/pint/database/seeders',
         ),
         'Database\\Factories\\' => 
         array (
@@ -512,14 +508,14 @@ class ComposerStaticInit5fd62baec31c55b596e36d407fcaeaab
         'App\\Contracts\\PathsRepository' => __DIR__ . '/..' . '/laravel/pint/app/Contracts/PathsRepository.php',
         'App\\Factories\\ConfigurationFactory' => __DIR__ . '/..' . '/laravel/pint/app/Factories/ConfigurationFactory.php',
         'App\\Factories\\ConfigurationResolverFactory' => __DIR__ . '/..' . '/laravel/pint/app/Factories/ConfigurationResolverFactory.php',
+        'App\\Http\\Controllers\\ClientesController' => __DIR__ . '/../..' . '/app/Http/Controllers/ClientesController.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
         'App\\Http\\Controllers\\PDVController' => __DIR__ . '/../..' . '/app/Http/Controllers/PDVController.php',
-        'App\\Http\\Controllers\\PessoasController' => __DIR__ . '/../..' . '/app/Http/Controllers/PessoasController.php',
         'App\\Http\\Controllers\\ProdutosController' => __DIR__ . '/../..' . '/app/Http/Controllers/ProdutosController.php',
         'App\\Kernel' => __DIR__ . '/..' . '/laravel/pint/app/Kernel.php',
-        'App\\Models\\Cliente' => __DIR__ . '/../..' . '/app/Models/Cliente.php',
+        'App\\Models\\Tclientes' => __DIR__ . '/../..' . '/app/Models/Tclientes.php',
+        'App\\Models\\Titemvendanfce' => __DIR__ . '/../..' . '/app/Models/Titemvendanfce.php',
         'App\\Models\\User' => __DIR__ . '/../..' . '/app/Models/User.php',
-        'App\\Models\\tpessoas' => __DIR__ . '/../..' . '/app/Models/tpessoas.php',
         'App\\Output\\Concerns\\InteractsWithSymbols' => __DIR__ . '/..' . '/laravel/pint/app/Output/Concerns/InteractsWithSymbols.php',
         'App\\Output\\ProgressOutput' => __DIR__ . '/..' . '/laravel/pint/app/Output/ProgressOutput.php',
         'App\\Output\\SummaryOutput' => __DIR__ . '/..' . '/laravel/pint/app/Output/SummaryOutput.php',
@@ -648,6 +644,8 @@ class ComposerStaticInit5fd62baec31c55b596e36d407fcaeaab
         'Cron\\HoursField' => __DIR__ . '/..' . '/dragonmantank/cron-expression/src/Cron/HoursField.php',
         'Cron\\MinutesField' => __DIR__ . '/..' . '/dragonmantank/cron-expression/src/Cron/MinutesField.php',
         'Cron\\MonthField' => __DIR__ . '/..' . '/dragonmantank/cron-expression/src/Cron/MonthField.php',
+        'Database\\Seeders\\DatabaseSeeder' => __DIR__ . '/../..' . '/database/seeders/DatabaseSeeder.php',
+        'Database\\Seeders\\ProdutoSeed' => __DIR__ . '/../..' . '/database/seeders/ProdutoSeed.php',
         'DateError' => __DIR__ . '/..' . '/symfony/polyfill-php83/Resources/stubs/DateError.php',
         'DateException' => __DIR__ . '/..' . '/symfony/polyfill-php83/Resources/stubs/DateException.php',
         'DateInvalidOperationException' => __DIR__ . '/..' . '/symfony/polyfill-php83/Resources/stubs/DateInvalidOperationException.php',
@@ -6593,9 +6591,9 @@ class ComposerStaticInit5fd62baec31c55b596e36d407fcaeaab
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit5fd62baec31c55b596e36d407fcaeaab::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit5fd62baec31c55b596e36d407fcaeaab::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInit5fd62baec31c55b596e36d407fcaeaab::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit7e8c3c14ff33b199b4a0838993eb8423::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit7e8c3c14ff33b199b4a0838993eb8423::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInit7e8c3c14ff33b199b4a0838993eb8423::$classMap;
 
         }, null, ClassLoader::class);
     }

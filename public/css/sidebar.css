@@ -27,13 +27,13 @@
     background-color: #AAD2BA;
 }
 
-.produto, .pessoas, .pdv{
+.produto, .clientes, .pdv{
     display: flex;
     align-items: center; 
     justify-content: left; 
 }
 
-.img_produto, .img_pessoas, .img_pdv, .img_dashboard{
+.img_produto, .img_clientes, .img_pdv, .img_dashboard{
     margin-right: 15px;
     width: 29px;
     height: 29px;

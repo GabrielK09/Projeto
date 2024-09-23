@@ -28,6 +28,7 @@ body {
 .forms_show_de_bola {
     flex: 1; /* O formulário ocupará o restante do espaço disponível */
     margin: 20px; /* Margem ao redor do formulário */
+    
 }
 
 
@@ -64,7 +65,8 @@ button:hover {
     margin-bottom: 16px;
 }
 
-.error {
-    color: red;
-    font-size: 0.875em;
+.scope .grid {
+    display: flex;
+    flex-direction: column;
+
 }

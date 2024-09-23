@@ -19,7 +19,7 @@
                     <h1>Produtos Inativos: {{ count($inativos) }}</h1>
                 </div>
                 <div class="btn_container">
-                    <a class="cadastrarProduto" target="_blank" href="produto/cadastro">
+                    <a class="cadastrarProduto" href="produto/cadastro">
                         <button class="btn cadastrarProduto">Cadastrar produto</button>
                     </a>
                 </div>
