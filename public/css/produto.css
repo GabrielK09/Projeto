@@ -37,13 +37,17 @@ body {
 button.inativar:hover,
 button.ativar:hover,
 button.editarProduto:hover{
-    background-color: #FB84CD;
-
+    /* background-color: #FB84CD; */
+    background-color: #AAD2BA;
 }
 
-button.cadastrarProduto, button.inativar, button.ativar, button.editarProduto{
+button.cadastrarProduto, 
+button.inativar, 
+button.ativar, 
+button.editarProduto{
     padding: .3rem;
     cursor: pointer;
+    
 }
 
 button.inativar,
@@ -51,7 +55,8 @@ button.ativar,
 button.editarProduto {
     text-decoration: none;
     color: #fff;
-    background: #9A1764;
+    /* background: #9A1764; */
+    background: #6B8F71;
     border: none;
     border-radius: 5px;
     font-size: 15px;
