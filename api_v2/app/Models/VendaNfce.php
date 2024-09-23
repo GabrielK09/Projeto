@@ -5,21 +5,21 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class SaleNfce extends Model
+class VendaNfce extends Model
 {
     use HasFactory;
 
-    protected $table = 'sale_nfce';
+    protected $table = 'VendaNfce';
 
     protected $fillable = [
-        'item_sale_nfce_id',
+        'ItemVendaNfce_id',
     ];
 
     /**
      * Define o relacionamento com o modelo ItemSaleNfce.
      */
-    public function itemSaleNfce()
+    public function ItemVendaNfce()
     {
-        return $this->hasMany(ItemSaleNfce::class, 'item_sale_nfce_id');
+        return $this->hasMany(ItemVendaNfce::class, 'ItemVendaNfce_id');
     }
 }

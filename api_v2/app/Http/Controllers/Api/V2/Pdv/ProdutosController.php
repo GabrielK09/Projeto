@@ -5,17 +5,17 @@ namespace App\Http\Controllers\Api\V2\Pdv;
 
 
 use App\Http\Controllers\Controller;
-use App\Models\ItemSaleNfce;
-use App\Models\Products;
+use App\Models\ItemVendaNfce;
+use App\Models\Produtos;
 //use App\Services\Item;
 use Illuminate\Http\Request;
 
-class ProductsController extends Controller
+class ProdutosController extends Controller
 {
     public function index()
     {
         try {
-            $produtos = Products::paginate(20);
+            $produtos = Produtos::paginate(20);
             return response()->json($produtos);
         } catch (\Throwable $th) {
             return response()->json([
@@ -37,7 +37,7 @@ class ProductsController extends Controller
             'ncm' => 'required|numeric|gt:0',
         ]);
 
-        $produto = Products::create($validate);
+        $produto = Produtos::create($validate);
 
         return response()->json([
             'message' => 'Produto cadastrado com sucesso!',
@@ -47,13 +47,13 @@ class ProductsController extends Controller
 
     public function show(string $id)
     {
-        $produto = Products::findOrFail($id);
+        $produto = Produtos::findOrFail($id);
         return response()->json($produto);
     }
 
     public function update(Request $request, string $id)
     {
-        $produto = Products::findOrFail($id);
+        $produto = Produtos::findOrFail($id);
         $produto->update($request->all());
 
         return response()->json([
@@ -64,7 +64,7 @@ class ProductsController extends Controller
 
     public function inativar(string $id)
     {
-        $produto = Products::findOrFail($id);
+        $produto = Produtos::findOrFail($id);
         $produto->ativo = false;
         $produto->save();
 
@@ -75,7 +75,7 @@ class ProductsController extends Controller
 
     public function ativar(string $id)
     {
-        $produto = Products::findOrFail($id);
+        $produto = Produtos::findOrFail($id);
         $produto->ativo = true;
         $produto->save();
 
@@ -84,7 +84,7 @@ class ProductsController extends Controller
         ]);
     }
 
-    public function addItemVenda(Request $request, ItemSaleNfce $itemSaleNfce)
+    public function addItemVenda(Request $request, ItemVendaNfce $itemSaleNfce)
     {
         $request->validate([
             'produto_id' => 'required|exists:tprodutos,id',

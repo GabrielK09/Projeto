@@ -3,13 +3,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Consumers;
-use App\Models\Products;
+use App\Models\Clientes;
+use App\Models\Produtos;
 use LaravelJsonApi\Core\Document\Error;
 use LaravelJsonApi\Laravel\Http\Controllers\JsonApiController;
 use Illuminate\Http\Request;
 
-class SaleNfceController extends JsonApiController
+class VendaNfceController extends JsonApiController
 {
     public function pdv(Request $request)
     {
@@ -30,7 +30,7 @@ class SaleNfceController extends JsonApiController
 
         $produto = null;
         if ($query) {
-            $produto = Products::where('id', 'like', '%' . $query . '%')
+            $produto = Produtos::where('id', 'like', '%' . $query . '%')
                 ->orWhere('nome', 'like', '%' . $query . '%')
                 ->where('ativo', 1)
                 ->first();
@@ -70,7 +70,7 @@ class SaleNfceController extends JsonApiController
     public function buscar(Request $request)
     {
         $query = $request->input('query');
-        $clientes = Consumers::where('nome', 'like', '%' . $query . '%')->get();
+        $clientes = Clientes::where('nome', 'like', '%' . $query . '%')->get();
 
         return $this->reply()->success([
             'clientes' => $clientes

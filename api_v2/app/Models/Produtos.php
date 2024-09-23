@@ -5,11 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Products extends Model
+class Produtos extends Model
 {
     use HasFactory;
 
-    protected $table = 'products';
+    protected $table = 'Produtos';
 
     protected $fillable = [
         'nome',
@@ -25,8 +25,8 @@ class Products extends Model
     /**
      * Define o relacionamento com o modelo ItemSaleNfce.
      */
-    public function itemSaleNfce()
+    public function ItemVendaNfce()
     {
-        return $this->hasMany(ItemSaleNfce::class, 'cod_produto');
+        return $this->hasMany(ItemVendaNfce::class, 'cod_produto');
     }
 }

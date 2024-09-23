@@ -3,15 +3,15 @@
 namespace App\Http\Controllers\Api\V2\Pdv;
 
 use App\Http\Controllers\Controller;
+use App\Models\Clientes;
 use Illuminate\Http\Request;
-use App\Models\Consumers;
 use Illuminate\Http\JsonResponse;
 
-class ConsumersController extends Controller
+class ClientesController extends Controller
 {
     public function index(): JsonResponse
     {
-        $clientes = Consumers::all();
+        $clientes = Clientes::all();
         return response()->json($clientes);
     }
 
@@ -20,13 +20,13 @@ class ConsumersController extends Controller
         try {
             $validate = $request->validate([
                 'nome_completo' => 'required|string|max:255',
-                'tipo_pessoa' => 'required|string',
+                //'tipo_pessoa' => 'required|string',
                 'cpf' => 'required|string|regex:/^\d{11}$/',
                 'data_nascimento' => 'required|date',
-                'tipo_cadastro' => 'required|string'
+                // 'tipo_cadastro' => 'required|string'
             ]);
 
-            $cliente = Consumers::create($validate);
+            $cliente = Clientes::create($validate);
 
             return response()->json([
                 'message' => 'Pessoa criada com sucesso!',
@@ -42,13 +42,13 @@ class ConsumersController extends Controller
 
     public function show(string $id): JsonResponse
     {
-        $cliente = Consumers::findOrFail($id);
+        $cliente = Clientes::findOrFail($id);
         return response()->json($cliente);
     }
 
     public function update(Request $request, string $id): JsonResponse
     {
-        $cliente = Consumers::findOrFail($id);
+        $cliente = Clientes::findOrFail($id);
 
         try {
             $validate = $request->validate([
@@ -75,7 +75,7 @@ class ConsumersController extends Controller
 
     public function destroy(string $id): JsonResponse
     {
-        $cliente = Consumers::findOrFail($id);
+        $cliente = Clientes::findOrFail($id);
 
         $cliente->delete();
         return response()->json(['message' => 'Cliente deletado com sucesso']);
