@@ -19,6 +19,8 @@
             <button type="submit">Buscar</button>
         </form>
 
+
+
         {{-- Exibir produtos --}}
         <div class="Grid">
             @if(isset($query) && isset($produto))
@@ -81,15 +83,14 @@
 
         {{-- Selecionar cliente --}}
         <div class="clientes">
-            <label for="cliente">Cliente:</label>
-            <input type="text" id="cliente" placeholder="Inserir cliente" onkeyup="buscarClientes(this.value)">
+           <form action="{{ route('pdv.cliente') }}" method="GET" id="search-form myForm">
+            @csrf
+            <input type="text" name="query" placeholder="Buscar produto" value="{{ old('query', request('query')) }}">
             <button type="submit">Buscar</button>
             
-            <div id="resultado-clientes" style="display:none;">
-                <ul id="clientes-list"></ul>
-            </div>
+        </form>
         </div>
-            
+                
     </div>
 </body>
 </html>

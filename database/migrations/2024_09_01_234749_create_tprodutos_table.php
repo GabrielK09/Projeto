@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('nome');
             $table->bigInteger('cod_gtin');
-            $table->decimal('preco_venda');
+            $table->decimal('preco_venda', 10, 2 );
             $table->decimal('qte');
             $table->integer('cfop');
             $table->integer('csosn');
@@ -29,7 +29,7 @@ return new class extends Migration
             $table->id();
             
             $table->unsignedBigInteger('cod_produto')->default(1);
-            $table->date('cadastro');
+        //$table->date('cadastro');
             $table->foreign('cod_produto')->references('id')->on('tprodutos')->onDelete('cascade');    
             $table->timestamps();
 
@@ -53,7 +53,7 @@ return new class extends Migration
     {
         Schema::dropIfExists('tprodutos');
         Schema::dropIfExists('titemvendanfce');
-        Schema::dropIfExists('titemvendanfce');
+        Schema::dropIfExists('tvendanfce');
         
     }
 };

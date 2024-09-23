@@ -16,6 +16,9 @@ Route::get('/', function () {
 Route::get('/pdv', [PDVController::class, 'pdv'])->name('pdv'); // <- Tela NFCe
 Route::post('/pdv/cancelar', [PDVController::class, 'cancelarVenda'])->name('pdv.cancelar'); // <- Cancelar venda
 
+
+Route::get('/pdv/c', [PDVController::class, 'buscar'])->name('pdv.cliente');
+
 // ------------------------
 
 
@@ -42,8 +45,6 @@ Route::get('/clientes/cadastro', function () { // <- Rederiza tela de cadastro
     return view('clientes.cadastroClientes');
 
 });
-
-Route::post('/clientes', [ClientesController::class, 'store'])->name('clientes.store');
-Route::get('/clientes/buscar', [PDVController::class, 'buscar'])->name('clientes.buscar');
+Route::post('/pessoas', [ClientesController::class, 'store'])->name('clientes.store');
 
 // --------------------

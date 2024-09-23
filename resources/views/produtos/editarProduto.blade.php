@@ -38,7 +38,7 @@
             </div>
 
             <div class="form-group">
-                <label for="preco_venda">Preco venda*</label>
+                <label for="preco_venda">Preço venda*</label>
                 <input type="text" name="preco_venda" id="preco_venda" value="{{ $produto->preco_venda }}">
                 @error('preco_venda')
                     <div class="text-danger">{{ $message }}</div>

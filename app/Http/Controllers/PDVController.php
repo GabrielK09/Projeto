@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Tprodutos;
-
 use App\Models\Tclientes;
 
 class PDVController extends Controller
@@ -15,9 +14,9 @@ class PDVController extends Controller
         $produtos = session('produtos', []);
         $acrescimo = (float) $request->input('acrescimo', 0);
         $desconto = (float) $request->input('desconto', 0);
-        $query = $request->input('query');
         $cliente = $request->input('cliente');
         $total = array_sum(array_column($produtos, 'preco_venda'));
+        $query = $request->input('query');
         
         if ($acrescimo && $desconto) {
             return redirect()->back()->with('message', 'Você não pode inserir acréscimo e desconto ao mesmo tempo.');
@@ -43,7 +42,6 @@ class PDVController extends Controller
                 'produtos' => $produtos,
                 'total' => max(0, $total + $acrescimo - $desconto),
                 'query' => $query,
-                'clientes' => Tclientes::all(),
                 'message' => 'Produto inserido com sucesso!',
             ]);
         }
@@ -52,7 +50,6 @@ class PDVController extends Controller
             'produtos' => $produtos,
             'total' => max(0, $total + $acrescimo - $desconto),
             'query' => $query,
-            'clientes' => Tclientes::all(),
             'message' => 'Nenhum produto encontrado.',
         ]);
     }
@@ -65,8 +62,23 @@ class PDVController extends Controller
 
     public function buscar(Request $request){
         $query = $request->input('query');
-        $clientes = Tclientes::where('nome', 'like', '%' . $query . '%')->get();
 
-        return response()->json($clientes);
+        if ($query) {
+           $clientes = Tclientes::where('id', 'like', '%' . $query . '%')->get();
+
+            if($clientes) {
+            
+                return response()->json([
+                    'message' => 'clientes encontrados',
+                    'clientes' => $clientes
+                ]);
+                
+            } else {
+                return response()->json([
+                    'message' => 'Cliente não encontrado'
+                ]);  
+                
+            }
+        }
     }
 }   
