@@ -71,6 +71,7 @@ class PDVController extends Controller
                 return response()->json([
                     'message' => 'clientes encontrados',
                     'clientes' => $clientes
+
                 ]);
                 
             } else {
