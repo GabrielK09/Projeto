@@ -9,7 +9,7 @@ class Produtos extends Model
 {
     use HasFactory;
 
-    protected $table = 'Produtos';
+    protected $table = 'produtos';
 
     protected $fillable = [
         'nome',
@@ -25,7 +25,7 @@ class Produtos extends Model
     /**
      * Define o relacionamento com o modelo ItemSaleNfce.
      */
-    public function ItemVendaNfce()
+    public function itemVendaNfce()
     {
         return $this->hasMany(ItemVendaNfce::class, 'cod_produto');
     }

@@ -9,20 +9,20 @@ class ItemVendaNfce extends Model
 {
     use HasFactory;
 
-    protected $table = 'ItemVendaNfce';
+    protected $table = 'item_vendanfce';
 
     protected $fillable = [
         'cod_produto',
         'cadastro',
     ];
 
-    public function Produtos()
+    public function produtos()
     {
         return $this->belongsTo(Produtos::class, 'cod_produto'); // Corrigido para belongsTo
     }
 
-    public function VendaNfce()
+    public function vendaNfce()
     {
-        return $this->belongsTo(VendaNfce::class, 'ItemVendaNfce_id'); // Adicionando a relação com SaleNfce
+        return $this->belongsTo(VendaNfce::class, 'item_vendanfce_id'); // Adicionando a relação com SaleNfce
     }
 }

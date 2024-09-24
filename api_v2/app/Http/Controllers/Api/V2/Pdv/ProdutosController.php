@@ -84,7 +84,7 @@ class ProdutosController extends Controller
         ]);
     }
 
-    public function addItemVenda(Request $request, ItemVendaNfce $itemSaleNfce)
+    public function addItemVenda(Request $request, ItemVendaNfce $itemVendaNfce)
     {
         $request->validate([
             'produto_id' => 'required|exists:tprodutos,id',
@@ -94,7 +94,7 @@ class ProdutosController extends Controller
         $produtoId = $request->input('produto_id');
         $qte = $request->input('qte');
 
-        if ($itemSaleNfce->addProduto($produtoId, $qte)) {
+        if ($itemVendaNfce->addProduto($produtoId, $qte)) {
             return response()->json([
                 'message' => 'Item adicionado com sucesso!'
             ]);

@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Api\V2\Pdv;
 
 use App\Http\Controllers\Controller;
-use App\Models\Clientes;
 use Illuminate\Http\Request;
+use App\Models\Clientes;
 use Illuminate\Http\JsonResponse;
 
 class ClientesController extends Controller
@@ -20,10 +20,10 @@ class ClientesController extends Controller
         try {
             $validate = $request->validate([
                 'nome_completo' => 'required|string|max:255',
-                //'tipo_pessoa' => 'required|string',
-                'cpf' => 'required|string|regex:/^\d{11}$/',
+                'tipo_pessoa' => 'required|integer',
+                'cpf' => 'required|string|regex:/^\d{3}\.\d{3}\.\d{3}\-\d{2}$/',
                 'data_nascimento' => 'required|date',
-                // 'tipo_cadastro' => 'required|string'
+                'tipo_cadastro' => 'required|integer'
             ]);
 
             $cliente = Clientes::create($validate);

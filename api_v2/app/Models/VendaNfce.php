@@ -9,17 +9,17 @@ class VendaNfce extends Model
 {
     use HasFactory;
 
-    protected $table = 'VendaNfce';
+    protected $table = 'vendanfce';
 
     protected $fillable = [
-        'ItemVendaNfce_id',
+        'item_vendanfce_id',
     ];
 
     /**
      * Define o relacionamento com o modelo ItemSaleNfce.
      */
-    public function ItemVendaNfce()
+    public function itemVendaNfce()
     {
-        return $this->hasMany(ItemVendaNfce::class, 'ItemVendaNfce_id');
+        return $this->hasMany(ItemVendaNfce::class, 'item_vendanfce_id');
     }
 }

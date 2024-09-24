@@ -11,15 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        // Verifica se a tabela já existe antes de criar
-        if (!Schema::hasTable('VendaNfce')) {
-            Schema::create('VendaNfce', function (Blueprint $table) {
-                $table->id(); // Já cria a chave primária automaticamente
-                $table->unsignedBigInteger('itemvendanfce_id');
-                $table->foreign('itemvendanfce_id')->references('id')->on('ItemVendaNfce')->onDelete('cascade');
-                $table->timestamps();
-            });
-        }
+        Schema::create('vendanfce', function (Blueprint $table) {
+            $table->id();
+            $table->unsignedBigInteger('item_vendanfce_id');
+            $table->foreign('item_vendanfce_id')->references('id')->on('item_vendanfce')->onDelete('cascade');
+            $table->timestamps();
+        });
     }
 
     /**
@@ -27,10 +24,10 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('VendaNfce', function (Blueprint $table) {
-            $table->dropForeign(['itemvendanfce_id']); // Remove a chave estrangeira
+        Schema::table('vendanfce', function (Blueprint $table) {
+            $table->dropForeign(['item_vendanfce']); // Remover a chave estrangeira
         });
 
-        Schema::dropIfExists('VendaNfce');
+        Schema::dropIfExists('vendanfce');
     }
 };

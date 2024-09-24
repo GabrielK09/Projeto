@@ -10,8 +10,6 @@ use App\Http\Controllers\Api\V2\Auth\ForgotPasswordController;
 use App\Http\Controllers\Api\V2\Auth\ResetPasswordController;
 use App\Http\Controllers\Api\V2\MeController;
 use App\Http\Controllers\Api\V2\Pdv\ClientesController;
-use App\Http\Controllers\Api\V2\Pdv\ConsumersController;
-use App\Http\Controllers\Api\V2\Pdv\ProductsController;
 use App\Http\Controllers\Api\V2\Pdv\ProdutosController;
 use LaravelJsonApi\Laravel\Facades\JsonApiRoute;
 use LaravelJsonApi\Laravel\Http\Controllers\JsonApiController;
@@ -38,21 +36,20 @@ Route::prefix('v2')->middleware('json.api')->group(function () {
 
 
 Route::prefix('v2')->group(function () {
-    // Rotas de consumidores
-    Route::get('/consumidor', [ClientesController::class, 'index'])->name('consumers.index'); // Listar todos os consumidores
-    Route::post('/consumidor', [ClientesController::class, 'store'])->name('consumers.store'); // Criar um novo consumidor
-    Route::get('/consumidor/{id}', [ClientesController::class, 'show'])->name('consumers.show'); // Mostrar um consumidor específico
-    Route::patch('/consumidor/{id}', [ClientesController::class, 'update'])->name('consumers.update'); // Atualizar um consumidor específico
-    Route::delete('/consumidor/{id}', [ClientesController::class, 'destroy'])->name('consumers.destroy'); // Deletar um consumidor específico
-
     // Rotas de produtos
-    Route::get('/produtos', [ProdutosController::class, 'index'])->name('produtos.index'); // Listar produtos
-    Route::post('/produtos', [ProdutosController::class, 'store'])->name('produtos.store'); // Criar produto
-    Route::get('/produtos/{id}', [ProdutosController::class, 'show'])->name('produtos.show'); // Mostrar produto
-    Route::patch('/produtos/{id}', [ProdutosController::class, 'update'])->name('produtos.update'); // Atualizar produto
-    Route::delete('/produtos/{id}', [ProdutosController::class, 'destroy'])->name('produtos.destroy'); // Deletar produto
+    Route::get('/produto', [ProdutosController::class, 'index'])->name('produto.index'); // Listar produtos
+    Route::post('/produto', [ProdutosController::class, 'store'])->name('produto.store'); // Criar produto
+    Route::get('/produto/{id}', [ProdutosController::class, 'show'])->name('produto.show'); // Mostrar produto
+    Route::patch('/produto/{id}', [ProdutosController::class, 'update'])->name('produto.update'); // Atualizar produto
+    Route::delete('/produto/{id}', [ProdutosController::class, 'destroy'])->name('produto.destroy'); // Deletar produto
 
 
+    // Rotas de consumidores
+    Route::get('/clientes', [ClientesController::class, 'index'])->name('clientes.index'); // Listar todos os consumidores
+    Route::post('/clientes', [ClientesController::class, 'store'])->name('clientes.store'); // Criar um novo consumidor
+    Route::get('/clientes/{id}', [ClientesController::class, 'show'])->name('clientes.show'); // Mostrar um consumidor específico
+    Route::patch('/clientes/{id}', [ClientesController::class, 'update'])->name('clientes.update'); // Atualizar um consumidor específico
+    Route::delete('/clientes/{id}', [ClientesController::class, 'destroy'])->name('clientes.destroy'); // Deletar um consumidor específico
 
 
 });

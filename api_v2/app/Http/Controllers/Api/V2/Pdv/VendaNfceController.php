@@ -9,7 +9,7 @@ use LaravelJsonApi\Core\Document\Error;
 use LaravelJsonApi\Laravel\Http\Controllers\JsonApiController;
 use Illuminate\Http\Request;
 
-class VendaNfceController extends JsonApiController
+class SaleNfceController extends JsonApiController
 {
     public function pdv(Request $request)
     {
