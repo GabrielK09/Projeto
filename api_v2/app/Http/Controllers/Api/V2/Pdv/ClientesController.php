@@ -19,7 +19,7 @@ class ClientesController extends Controller
     {
         try {
             $validate = $request->validate([
-                'nome_completo' => 'required|string|max:255',
+                'nome_completo' => 'required|string|max:100',
                 'tipo_pessoa' => 'required|integer',
                 'cpf' => 'required|string|regex:/^\d{3}\.\d{3}\.\d{3}\-\d{2}$/',
                 'data_nascimento' => 'required|date',

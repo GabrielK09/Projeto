@@ -13,7 +13,7 @@ class ItemVendaNfce extends Model
 
     protected $fillable = [
         'cod_produto',
-        'cadastro',
+        'produto',
     ];
 
     public function produtos()

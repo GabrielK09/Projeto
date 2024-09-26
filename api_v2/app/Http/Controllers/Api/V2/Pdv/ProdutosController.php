@@ -6,7 +6,7 @@ namespace App\Http\Controllers\Api\V2\Pdv;
 
 use App\Http\Controllers\Controller;
 use App\Models\ItemVendaNfce;
-use App\Models\Produtos;
+use App\Models\Estoque;
 //use App\Services\Item;
 use Illuminate\Http\Request;
 
@@ -15,7 +15,7 @@ class ProdutosController extends Controller
     public function index()
     {
         try {
-            $produtos = Produtos::paginate(20);
+            $produtos = Estoque::paginate(20);
             return response()->json($produtos);
         } catch (\Throwable $th) {
             return response()->json([
@@ -32,12 +32,14 @@ class ProdutosController extends Controller
             'qte' => 'required|numeric|gt:0',
             'cod_gtin' => 'required|string|max:14|min:8',
             'preco_venda' => 'required|numeric|gt:0',
+            'preco_custo' => 'required|numeric|gt:0',
+            'perc_lucro' => 'required|numeric|gt:0',
             'cfop' => 'required|numeric|gt:0',
             'csosn' => 'required|numeric|gt:0',
             'ncm' => 'required|numeric|gt:0',
         ]);
 
-        $produto = Produtos::create($validate);
+        $produto = Estoque::create($validate);
 
         return response()->json([
             'message' => 'Produto cadastrado com sucesso!',
@@ -47,13 +49,13 @@ class ProdutosController extends Controller
 
     public function show(string $id)
     {
-        $produto = Produtos::findOrFail($id);
+        $produto = Estoque::findOrFail($id);
         return response()->json($produto);
     }
 
     public function update(Request $request, string $id)
     {
-        $produto = Produtos::findOrFail($id);
+        $produto = Estoque::findOrFail($id);
         $produto->update($request->all());
 
         return response()->json([
@@ -64,7 +66,7 @@ class ProdutosController extends Controller
 
     public function inativar(string $id)
     {
-        $produto = Produtos::findOrFail($id);
+        $produto = Estoque::findOrFail($id);
         $produto->ativo = false;
         $produto->save();
 
@@ -75,7 +77,7 @@ class ProdutosController extends Controller
 
     public function ativar(string $id)
     {
-        $produto = Produtos::findOrFail($id);
+        $produto = Estoque::findOrFail($id);
         $produto->ativo = true;
         $produto->save();
 

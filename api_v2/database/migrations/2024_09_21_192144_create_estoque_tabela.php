@@ -11,29 +11,28 @@ return new class extends Migration
      *
      * @return void
      */
-    public function up()
+    public function up(): void
     {
-        Schema::create('produtos', function (Blueprint $table) {
+        Schema::create('estoque', function (Blueprint $table) {
             $table->id();
             $table->string('nome');
             $table->bigInteger('cod_gtin');
-            $table->decimal('preco_venda', 10, 2);
-            $table->decimal('qte', 10, 2);
+            $table->decimal('preco_venda', 10, 2 );
+            $table->decimal('preco_custo', 10, 2 );
+            $table->decimal('perc_lucro', 10, 2 );
+            $table->decimal('qte');
             $table->integer('cfop');
             $table->integer('csosn');
             $table->bigInteger('ncm');
             $table->boolean('ativo')->default(true);
             $table->timestamps();
+
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
-        Schema::dropIfExists('produtos');
+        Schema::dropIfExists('estoque');
+
     }
 };
