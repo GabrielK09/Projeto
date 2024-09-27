@@ -13,6 +13,7 @@ class VendaNfce extends Model
 
     protected $fillable = [
         'item_vendanfce_id',
+        
     ];
 
     /**

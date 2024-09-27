@@ -14,7 +14,8 @@ return new class extends Migration
         Schema::create('item_vendanfce', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('cod_produto')->default(1);
-            $table->foreign('cod_produto')->references('id')->on('produtos')->onDelete('cascade');
+            $table->foreign('cod_produto')->references('id')->on('estoque')->onDelete('cascade');
+            $table->string('nome');
             $table->timestamps();
         });
     }

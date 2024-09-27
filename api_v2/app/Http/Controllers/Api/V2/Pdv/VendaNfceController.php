@@ -9,6 +9,8 @@ use LaravelJsonApi\Core\Document\Error;
 use LaravelJsonApi\Laravel\Http\Controllers\JsonApiController;
 use Illuminate\Http\Request;
 
+use App\Models\ItemVendaNfce;
+
 class SaleNfceController extends JsonApiController
 {
     public function pdv(Request $request)
@@ -34,9 +36,16 @@ class SaleNfceController extends JsonApiController
                 ->orWhere('nome', 'like', '%' . $query . '%')
                 ->where('ativo', 1)
                 ->first();
+
         }
 
         if ($produto) {
+            ItemVendaNfce::create([
+                'cod_produto' => $produto->id,
+                'nome' => $produto->nome
+            
+            ]);
+
             if (!in_array($produto->id, array_column($produtos, 'id'))) {
                 $produtos[] = $produto;
                 session(['produtos' => $produtos]);
