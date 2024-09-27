@@ -1,5 +1,7 @@
 <?php
 
+// By Kochem
+
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -15,7 +17,13 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('cod_produto')->default(1);
             $table->foreign('cod_produto')->references('id')->on('estoque')->onDelete('cascade');
+
+            // $table->unsignedBigInteger('cod_vendanfce');
+            // $table->foreign('cod_vendanfce')->references('id')->on('vendanfce')->onDelete('cascade');
+
             $table->string('nome');
+            $table->decimal('qte');
+            $table->decimal('total');
             $table->timestamps();
         });
     }

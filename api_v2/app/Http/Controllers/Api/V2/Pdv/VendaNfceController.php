@@ -85,4 +85,16 @@ class SaleNfceController extends JsonApiController
             'clientes' => $clientes
         ]);
     }
+
+    // Quando for validado a compra 
+    /* 
+            ItemVendaNfce::create([
+                'cod_produto' => $produto->id,
+                'nome' => $produto->nome
+            
+            ]);
+
+
+            fazer a mesma coisa só q com vendanfce
+    */
 }
