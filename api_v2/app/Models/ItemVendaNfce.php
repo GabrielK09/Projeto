@@ -1,5 +1,7 @@
 <?php
 
+// By Kochem
+
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -14,6 +16,7 @@ class ItemVendaNfce extends Model
     protected $fillable = [
         'cod_produto',
         'nome',
+
     ];
 
     public function produtos()

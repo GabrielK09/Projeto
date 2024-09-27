@@ -1,5 +1,7 @@
 <?php
 
+// By Kochem
+
 namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -46,11 +48,11 @@ class ProdutoSeed extends Seeder
         foreach ($produtos as $produto) {
             $produto = Estoque::create($produto);
 
-            ItemVendaNfce::create([
-                'cod_produto' => $produto->id,
-                'nome' => $produto->nome
+            // ItemVendaNfce::create([
+            //     //'cod_produto' => $produto->id,
+            //     'nome' => $produto->nome
             
-            ]);
+            // ]);
         };
     }
 }

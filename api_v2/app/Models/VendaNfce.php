@@ -12,7 +12,9 @@ class VendaNfce extends Model
     protected $table = 'vendanfce';
 
     protected $fillable = [
-        'item_vendanfce_id',
+        'cod_cliente',
+        'produto',
+        'valor_produto'
         
     ];
 
@@ -21,6 +23,6 @@ class VendaNfce extends Model
      */
     public function itemVendaNfce()
     {
-        return $this->hasMany(ItemVendaNfce::class, 'item_vendanfce_id');
+        //return $this->hasMany(ItemVendaNfce::class, 'cod_cliente');
     }
 }

@@ -3,18 +3,26 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Clientes;
-use App\Models\Produtos;
 use LaravelJsonApi\Core\Document\Error;
 use LaravelJsonApi\Laravel\Http\Controllers\JsonApiController;
 use Illuminate\Http\Request;
 
 use App\Models\ItemVendaNfce;
+use App\Models\VendaNfce;
+use App\Models\Clientes;
+use App\Models\Produtos;
+use App\Models\Caixa;
 
 class SaleNfceController extends JsonApiController
 {
     public function pdv(Request $request)
     {
+        $validated = $request->validate([
+            'forma_pagamento' => 'required|string|max:100',
+            'acrescimo' => 'numeric|min:0',
+            'desconto' => 'numeric|min:0',
+        ]);
+
         $produtos = session('produtos', []);
         $acrescimo = (float) $request->input('acrescimo', 0);
         $desconto = (float) $request->input('desconto', 0);
@@ -31,12 +39,14 @@ class SaleNfceController extends JsonApiController
         }
 
         $produto = null;
-        if ($query) {
-            $produto = Produtos::where('id', 'like', '%' . $query . '%')
-                ->orWhere('nome', 'like', '%' . $query . '%')
-                ->where('ativo', 1)
-                ->first();
 
+        if ($query) {
+            $produto = Produtos::where('ativo', 1)
+                ->where(function ($queryBuilder) use ($query) {
+                    $queryBuilder->where('id', 'like', '%' . $query . '%')
+                         ->orWhere('nome', 'like', '%' . $query . '%');
+            })
+            ->first();
         }
 
         if ($produto) {
@@ -74,6 +84,7 @@ class SaleNfceController extends JsonApiController
         return $this->reply()->success([
             'message' => 'Venda cancelada!'
         ]);
+
     }
 
     public function buscar(Request $request)
@@ -86,15 +97,68 @@ class SaleNfceController extends JsonApiController
         ]);
     }
 
-    // Quando for validado a compra 
-    /* 
+    public function finalizarVenda(){
+
+        // Se não der pau, comenta, se der pau descomenta
+        // $produtos = session('produtos', []);
+        // $acrescimo = (float) $request->input('acrescimo', 0);
+        // $desconto = (float) $request->input('desconto', 0);
+
+        $formapagamento = $request->input('tyikjnryijnr');
+
+        if(empty('$produtos')){
+            return $this->reply()->errors([
+                Error::fromArray([
+                    'status' => '400',
+                    'title' => 'Bad request',
+                    'detail' => 'Verifique se possui produtos para poder finalizar.'
+                ])
+            ]);
+        }
+
+        $total = collect($produtos)->sum('preco_venda') + $acrescimo - $desconto;
+        $total = max(0, $total);
+
+
+        $venda = VendaNfce::create([
+            'valorproduto' => $total,
+            'cod_cliente' => 1,
+            'produto' => $produtos->nome,
+            'valor_produto' => $produtos->preco_venda
+            //'forma_pagamento' => $formapagamento,
+            
+            //Lembrar de inserir o restante do campos caraio, aliás, campos do cliente também
+
+        ]);
+
+        foreach($produtos as $produtos){
             ItemVendaNfce::create([
                 'cod_produto' => $produto->id,
-                'nome' => $produto->nome
-            
+                'quantidade' => 1,
+                'preco_venda' => $produto->preco_venda,
+
             ]);
 
+        }
 
-            fazer a mesma coisa só q com vendanfce
-    */
+        Caixa::create([
+            'origem' => 'Venda NFCe',
+            'cod_vendanfce' => $venda->id,
+            'valorentrada' => $total,
+            'valorentrada' => 0,
+            'cod_cliente' => 1, // $cliente->id
+            'cliente' => 'Teste vendan NFCe', // $cliente->nome_completo
+            'descricao_lancamento' => "NFC {$venda->id}"
+
+        ]);
+
+        session()->forget('produtos');
+
+        return $this->reply()->success([
+            'message' => 'Venda finalizada com sucesso!',
+            'total' => $total,
+            'cod_produto' => $venda->id, 
+
+        ]);
+    }
 }

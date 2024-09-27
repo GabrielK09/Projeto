@@ -16,13 +16,13 @@ return new class extends Migration
         Schema::create('vendanfce', function (Blueprint $table) {
             $table->id();
     
-            $table->unsignedBigInteger('item_vendanfce_id');
-            $table->foreign('item_vendanfce_id')->references('id')->on('item_vendanfce')->onDelete('cascade');
+            // $table->unsignedBigInteger('item_vendanfce_id');
+            // $table->foreign('item_vendanfce_id')->references('id')->on('item_vendanfce')->onDelete('cascade');
 
-            $table->unsignedBigInteger('cliente_id')->default(null);
-            $table->foreign('cliente_id')->references('id')->on('clientes')->onDelete('cascade');
-
-            $table->decimal('valorproduto');
+            $table->unsignedBigInteger('cod_cliente');;
+            $table->foreign('cod_cliente')->references('id')->on('clientes')->onDelete('cascade');
+            $table->string('produto'); 
+            $table->decimal('valor_produto');
 
             $table->timestamps();
 
@@ -36,10 +36,11 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('vendanfce', function (Blueprint $table) {
-            $table->dropForeign(['item_vendanfce']); // Remover a chave estrangeira
-            $table->dropForeign(['cliente_id']); // Remover a chave estrangeira
+            $table->dropForeign(['cod_cliente']); // Remover a chave estrangeira
+
         });
 
         Schema::dropIfExists('vendanfce');
+
     }
 };
