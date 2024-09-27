@@ -51,6 +51,15 @@ Route::prefix('v2')->group(function () {
     Route::patch('/clientes/{id}', [ClientesController::class, 'update'])->name('clientes.update'); // Atualizar um consumidor específico
     Route::delete('/clientes/{id}', [ClientesController::class, 'destroy'])->name('clientes.destroy'); // Deletar um consumidor específico
 
+    Route::get('/pdv', [PDVController::class, 'pdv'])->name('pdv'); // <- Tela NFCe
+    Route::post('/pdv/cancelar', [PDVController::class, 'cancelarVenda'])->name('pdv.cancelar'); // <- Cancelar venda
+
+
+
+    //Funcional, mas só retorna o cliente para a view
+    Route::get('/pdv/c', [PDVController::class, 'buscar'])->name('pdv2');
+
+
 
 });
 

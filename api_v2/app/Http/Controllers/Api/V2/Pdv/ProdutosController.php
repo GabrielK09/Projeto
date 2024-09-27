@@ -83,7 +83,9 @@ class ProdutosController extends Controller
 
         return response()->json([
             'message' => 'Produto ativado com sucesso!',
+
         ]);
+        
     }
 
     public function addItemVenda(Request $request, ItemVendaNfce $itemVendaNfce)
