@@ -7,7 +7,7 @@
             <div
               class="bg-gradient-info shadow-success border-radius-lg pt-4 pb-3"
             >
-              <h6 class="text-white text-capitalize ps-3">Produtos</h6>
+              <h6 class="text-white text-capitalize ps-3">Clientes</h6>
             </div>
           </div>
           <div class="card-body px-0 pb-2">
@@ -22,10 +22,17 @@
                 @input="filterClients"
                 style="width: 300px"
               />
-              <material-button class="btn btn-primary" @click="addClient">
+              <material-button
+                class="btn btn-primary"
+                @click="openAddClientModal"
+              >
                 Adicionar
               </material-button>
             </div>
+
+            <!-- Divisória Horizontal -->
+            <hr />
+
             <div class="table-responsive p-0">
               <div v-if="loading" class="text-center my-3">
                 <span
@@ -46,20 +53,21 @@
                     >
                       Nome
                     </th>
+
                     <th
                       class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2"
                     >
-                      Cpf
+                      | Cpf
                     </th>
                     <th
                       class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2"
                     >
-                      Tipo Pessoa
+                      | Tipo Pessoa
                     </th>
                     <th
                       class="text-uppercase text-secondary text-xxs font-weight-bolder text-center opacity-7 ps-2"
                     >
-                      Criado em
+                      | Criado em
                     </th>
                     <th></th>
                   </tr>
@@ -91,11 +99,11 @@
                       }}</span>
                     </td>
                     <td class="align-middle">
-                      <button class="btn btn-link text-secondary mb-0">
-                        <i
-                          class="fa fa-ellipsis-v text-xs"
-                          aria-hidden="true"
-                        ></i>
+                      <button
+                        class="btn btn-link text-secondary mb-0"
+                        @click="viewClient(cliente)"
+                      >
+                        <i class="fa fa-eye text-xs" aria-hidden="true"></i>
                       </button>
                     </td>
                   </tr>
@@ -114,15 +122,42 @@
         </div>
       </div>
     </div>
+
+    <!-- Divisória Horizontal para separar modais -->
+    <hr />
+
+    <!-- Modal de Adicionar Cliente -->
+    <form-register-consumers
+      :is-visible="isAddClientModalVisible"
+      @update:isVisible="isAddClientModalVisible = $event"
+      @client-added="getClients"
+    ></form-register-consumers>
+
+    <!-- Divisória Horizontal entre modais -->
+    <hr />
+
+    <!-- Modal de Visualização do Cliente -->
+    <form-view-consumers
+      :is-visible="isViewClientModalVisible"
+      :cliente="selectedClient"
+      @update:isVisible="isViewClientModalVisible = $event"
+    ></form-view-consumers>
   </div>
 </template>
-  
-  <script>
+
+<script>
 import MaterialButton from "@/components/MaterialButton.vue";
 import axios from "axios";
+import FormRegisterConsumers from "../components/Forms/FormRegisterConsumers.vue";
+import FormViewConsumers from "../components/Forms/FormViewConsumers.vue"; // Atualize a importação
 
 export default {
   name: "clients",
+  components: {
+    MaterialButton,
+    FormRegisterConsumers,
+    FormViewConsumers, // Adiciona o novo componente
+  },
   data() {
     return {
       clients: [],
@@ -130,10 +165,10 @@ export default {
       loading: true,
       cacheClients: null,
       searchQuery: "",
+      isAddClientModalVisible: false,
+      isViewClientModalVisible: false,
+      selectedClient: {}, // Armazena o cliente selecionado
     };
-  },
-  components: {
-    MaterialButton,
   },
   methods: {
     async getClients() {
@@ -141,7 +176,7 @@ export default {
 
       if (this.cacheClients) {
         this.clients = this.cacheClients;
-        this.filteredClients = this.clients; // Inicializa os clientes filtrados
+        this.filteredClients = this.clients;
         this.loading = false;
         return;
       }
@@ -152,7 +187,7 @@ export default {
         );
         this.clients = response.data;
         this.cacheClients = response.data;
-        this.filteredClients = this.clients; // Inicializa os clientes filtrados
+        this.filteredClients = this.clients;
       } catch (error) {
         console.error("Erro ao buscar clientes:", error);
       } finally {
@@ -160,19 +195,23 @@ export default {
       }
     },
     filterClients() {
-      if (this.searchQuery) {
-        this.filteredClients = this.clients.filter((cliente) =>
-          cliente.nome_completo
-            .toLowerCase()
-            .includes(this.searchQuery.toLowerCase())
-        );
-      } else {
-        this.filteredClients = this.clients; // Reseta para todos os clientes
+      this.filteredClients = this.searchQuery
+        ? this.clients.filter((cliente) =>
+            cliente.nome_completo
+              .toLowerCase()
+              .includes(this.searchQuery.toLowerCase())
+          )
+        : this.clients;
+    },
+    openAddClientModal() {
+      this.isAddClientModalVisible = true;
+      if (!this.isAddClientModalVisible) {
+        this.getClients();
       }
     },
-    addClient() {
-      // Lógica para adicionar um novo cliente
-      console.log("Adicionar cliente");
+    viewClient(cliente) {
+      this.selectedClient = cliente; // Armazena o cliente selecionado
+      this.isViewClientModalVisible = true; // Abre o modal de visualização
     },
     formatDate(timestamp) {
       const date = new Date(timestamp);
@@ -184,19 +223,15 @@ export default {
   },
 };
 </script>
+
 <style scoped>
+.bg-gradient-info {
+  background: linear-gradient(to right, #ffbb33, #222222);
+}
 .btn-primary {
   background: #ffbb33;
 }
 .btn-primary:hover {
   background-color: #222222;
 }
-.bg-gradient-info {
-  background: linear-gradient(
-    to right,
-    #ffbb33,
-    #222222
-  ); /* Gradiente para o cabeçalho */
-}
 </style>
-  

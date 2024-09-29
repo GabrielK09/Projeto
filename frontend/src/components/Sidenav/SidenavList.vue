@@ -9,19 +9,6 @@
           url="#"
           :aria-controls="''"
           v-bind:collapse="false"
-          collapseRef="dashboard"
-          navText="Dashboard"
-        >
-          <template v-slot:icon>
-            <i class="material-icons-round opacity-10 fs-5">dashboard</i>
-          </template>
-        </sidenav-collapse>
-      </li>
-      <li class="nav-item">
-        <sidenav-collapse
-          url="#"
-          :aria-controls="''"
-          v-bind:collapse="false"
           collapseRef="/cashregister"
           navText="Caixa"
         >
@@ -106,7 +93,7 @@
           url="#"
           :aria-controls="''"
           v-bind:collapse="false"
-          collapseRef="sale-note"
+          collapseRef="salenote"
           navText="NFC-e"
         >
           <template v-slot:icon>
@@ -119,7 +106,7 @@
           url="#"
           :aria-controls="''"
           v-bind:collapse="false"
-          collapseRef="manual-note"
+          collapseRef="manualnote"
           navText="Nota Manual"
         >
           <template v-slot:icon>
@@ -129,20 +116,7 @@
           </template>
         </sidenav-collapse>
       </li>
-
-      <li class="nav-item mt-6">
-        <sidenav-collapse
-          url="#"
-          :aria-controls="''"
-          v-bind:collapse="false"
-          collapseRef="sign-in"
-          navText="Sair"
-        >
-          <template v-slot:icon>
-            <i class="material-icons-round opacity-10 fs-5">login</i>
-          </template>
-        </sidenav-collapse>
-      </li>
+      >
     </ul>
   </div>
 </template>
@@ -156,8 +130,8 @@ export default {
   },
   data() {
     return {
-      title: "Soft UI Dashboard PRO",
-      controls: "dashboardsExamples",
+      title: "",
+      controls: "",
       isActive: "active",
     };
   },

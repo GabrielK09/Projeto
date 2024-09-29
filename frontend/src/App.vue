@@ -7,7 +7,6 @@
   <main
     class="main-content position-relative max-height-vh-100 h-100 overflow-x-hidden"
   >
-    <!-- nav -->
     <navbar
       :class="[isNavFixed ? navbarFixed : '', isAbsolute ? absolute : '']"
       :color="isAbsolute ? 'text-white opacity-8' : ''"
@@ -15,28 +14,22 @@
       v-if="showNavbar"
     />
     <router-view />
-    <configurator
-      :toggle="toggleConfigurator"
-      :class="[showConfig ? 'show' : '', hideConfigButton ? 'd-none' : '']"
-    />
   </main>
 </template>
 
 <script>
-import Configurator from "@/examples/Configurator.vue";
-import Navbar from "@/examples/Navbars/Navbar.vue";
+import Navbar from "@/components/Navbars/Navbar.vue";
+import Sidenav from "@/components/Sidenav";
 import { mapMutations, mapState } from "vuex";
-import Sidenav from "./examples/Sidenav";
 
 export default {
   name: "App",
   components: {
     Sidenav,
-    Configurator,
     Navbar,
   },
   methods: {
-    ...mapMutations(["toggleConfigurator", "navbarMinimize"]),
+    ...mapMutations("nomeDoModulo", ["navbarMinimize"]),
   },
   computed: {
     ...mapState([

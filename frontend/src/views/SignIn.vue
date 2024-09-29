@@ -110,3 +110,8 @@ export default {
   },
 };
 </script>
+<style>
+.bg-gradient-dark {
+  background: #ffbb33;
+}
+</style>

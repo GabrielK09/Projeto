@@ -1,5 +1,5 @@
 <template>
-  <div v-if="isVisible && cliente" class="overlay modal fade show">
+  <div v-if="isVisible" class="overlay modal fade show">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title">Detalhes do Cliente</h5>
@@ -10,7 +10,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <p><strong>Nome:</strong> {{ cliente.nome_completo }}</p>
+        <p><strong></strong> {{ cliente.nome_completo }}</p>
         <p><strong>CPF:</strong> {{ cliente.cpf }}</p>
         <p>
           <strong>Tipo de Pessoa:</strong>
@@ -25,10 +25,10 @@
     </div>
   </div>
 </template>
-  
-  <script>
+    
+    <script>
 export default {
-  name: "FormViewConsumers",
+  name: "FormViewProducts",
   props: {
     isVisible: {
       type: Boolean,
@@ -37,7 +37,6 @@ export default {
     cliente: {
       type: Object,
       required: true,
-      default: () => ({}),
     },
   },
   methods: {
@@ -51,8 +50,8 @@ export default {
   },
 };
 </script>
-  
-  <style scoped>
+    
+    <style scoped>
 .overlay {
   position: fixed;
   top: 0;
@@ -87,4 +86,4 @@ export default {
   font-size: 1.5rem; /* Ajusta o tamanho do botão de fechar */
 }
 </style>
-  
+    

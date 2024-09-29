@@ -226,29 +226,51 @@ export default {
     };
   },
   methods: {
-    async getProducts() {
-      this.loading = true;
+    getProducts() {
+  axios.get('/api/v2/produtos')
+    .then(response => {
+      console.log('Produtos carregados:', response.data.produtos); // Verifique o conteúdo da resposta aqui
+      this.filteredProducts = Array.isArray(response.data.produtos) ? response.data.produtos : [];
+    })
+    .catch(error => {
+      console.error('Erro ao carregar os produtos:', error);
+      this.filteredProducts = []; // Garante que filteredProducts será um array mesmo se a requisição falhar
+    });
+},
+    // async getProducts() {
+    //   this.loading = true;
 
-      if (this.cacheProducts) {
-        this.products = this.cacheProducts;
-        this.filteredProducts = this.products;
-        this.loading = false;
-        return;
-      }
+    //   if (this.cacheProducts) {
+    //     this.products = this.cacheProducts;
+    //     this.filteredProducts = this.products;
+    //     this.loading = false;
+    //     return;
+    //   }
 
-      try {
-        const response = await axios.get(
-          "http://localhost:8000/api/v2/produtos"
-        );
-        this.products = response.data;
-        this.cacheProducts = response.data;
-        this.filteredProducts = this.products; // Inicializa os produtos filtrados
-      } catch (error) {
-        console.error("Erro ao buscar produtos:", error);
-      } finally {
-        this.loading = false;
-        this.calculateTotal(); // Calcula o total inicial após obter os produtos
-      }
+    //   try {
+    //     const response = await axios.get(
+    //       "http://localhost:8000/api/v2/produto"
+    //     );
+    //     this.products = response.data;
+    //     this.cacheProducts = response.data;
+    //     this.filteredProducts = this.products; // Inicializa os produtos filtrados
+    //   } catch (error) {
+    //     console.error("Erro ao buscar produtos:", error);
+    //   } finally {
+    //     this.loading = false;
+    //     this.calculateTotal(); // Calcula o total inicial após obter os produtos
+    //   }
+    // },
+    getProducts() {
+      axios.get('/api/v2/produtos')
+        .then(response => {
+          // Certifique-se de que está recebendo um array, caso contrário, atribua um array vazio
+          this.filteredProducts = Array.isArray(response.data.produtos) ? response.data.produtos : [];
+        })
+        .catch(error => {
+          console.error(error);
+          this.filteredProducts = []; // Garante que filteredProducts será um array mesmo se a requisição falhar
+        });
     },
     filterProducts() {
       if (this.searchQuery) {
@@ -263,15 +285,27 @@ export default {
     addProduct() {
       console.log("Adicionar produto");
     },
+    // calculateTotal() {
+    //   // Calcula o total considerando descontos e acréscimos
+    //   const subtotal = this.filteredProducts.reduce((acc, produto) => {
+    //     return acc + produto.preco * produto.quantidade;
+    //   }, 0);
+    //   const descontoTotal = parseFloat(this.desconto) || 0;
+    //   const acrescimoTotal = parseFloat(this.acrescimo) || 0;
+    //   this.total = subtotal - descontoTotal + acrescimoTotal;
+    // },
     calculateTotal() {
-      // Calcula o total considerando descontos e acréscimos
-      const subtotal = this.filteredProducts.reduce((acc, produto) => {
-        return acc + produto.preco * produto.quantidade;
-      }, 0);
-      const descontoTotal = parseFloat(this.desconto) || 0;
-      const acrescimoTotal = parseFloat(this.acrescimo) || 0;
-      this.total = subtotal - descontoTotal + acrescimoTotal;
+      if (!Array.isArray(this.filteredProducts)) {
+        return 0;
+      }
+
+      return this.filteredProducts.reduce((acc, product) => {
+        // Certifique-se de que product.preco_venda não é undefined
+        const price = product.preco_venda ? parseFloat(product.preco_venda) : 0;
+        return acc + price;
+      }, 0).toFixed(2); // Use toFixed depois de garantir que o valor é válido
     },
+
     finalizarVenda() {
       // Lógica para finalizar a venda
       console.log("Venda finalizada");

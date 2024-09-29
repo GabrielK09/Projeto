@@ -1,14 +1,13 @@
+import CashRegister from "@/views/pages/CashRegister.vue";
+import Consumers from "@/views/pages/Consumers.vue";
+import ManualNote from "@/views/pages/ManualNote.vue";
+import Products from "@/views/pages/Products.vue";
+import Providers from "@/views/pages/Providers.vue";
+import SaleNoteNfce from "@/views/pages/SaleNoteNfce.vue";
 import { createRouter, createWebHistory } from "vue-router";
-import CashRegister from "../views/CashRegister.vue";
-import Consumers from "../views/Consumers.vue";
-import Dashboard from "../views/Dashboard.vue";
 import PasswordForgot from "../views/examples-api/PasswordForgot.vue";
 import PasswordReset from "../views/examples-api/PasswordReset.vue";
 import Users from "../views/examples-api/users/UsersList.vue";
-import ManualNote from "../views/ManualNote.vue";
-import Products from "../views/Products.vue";
-import Providers from "../views/Providers.vue";
-import SaleNoteNfce from "../views/SaleNoteNfce.vue";
 import SignIn from "../views/SignIn.vue";
 import SignUp from "../views/SignUp.vue";
 
@@ -16,12 +15,7 @@ const routes = [
   {
     path: "/",
     name: "/",
-    redirect: "/sign-in",
-  },
-  {
-    path: "/dashboard",
-    name: "Dashboard",
-    component: Dashboard,
+    redirect: "/salenote",
   },
   {
     path: "/cashregister",
@@ -34,12 +28,12 @@ const routes = [
     component: Products,
   },
   {
-    path: "/sign-in",
+    path: "/login",
     name: "SignIn",
     component: SignIn,
   },
   {
-    path: "/sign-up",
+    path: "/logout",
     name: "SignUp",
     component: SignUp,
   },
@@ -49,7 +43,7 @@ const routes = [
     component: Consumers,
   },
   {
-    path: "/password-forgot",
+    path: "/passwordforgot",
     name: "Password Forgot",
     component: PasswordForgot,
   },
@@ -70,12 +64,12 @@ const routes = [
   },
   //Rotas PDV
   {
-    path: "/manual-note",
+    path: "/manualnote",
     name: "Nota Manual",
     component: ManualNote,
   },
   {
-    path: "/sale-note",
+    path: "/salenote",
     name: "NFC-e",
     component: SaleNoteNfce,
   },
