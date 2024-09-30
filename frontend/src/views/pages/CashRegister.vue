@@ -17,14 +17,11 @@
               <input
                 type="text"
                 class="form-control me-2"
-                placeholder="Buscar cliente..."
+                placeholder="Buscar venda..."
                 v-model="searchQuery"
                 @input="filterClients"
                 style="width: 300px"
               />
-              <material-button class="btn btn-primary" @click="addClient">
-                Adicionar
-              </material-button>
             </div>
             <div class="table-responsive p-0">
               <div v-if="loading" class="text-center my-3">
@@ -107,7 +104,7 @@
                 "
                 class="text-center my-3"
               >
-                <span>Nenhum cliente encontrado</span>
+                <span>Nenhuma venda encontrada</span>
               </div>
             </div>
           </div>
@@ -148,7 +145,7 @@ export default {
 
       try {
         const response = await axios.get(
-          "http://localhost:8000/api/v2/clientes"
+          "http://localhost:8000/api/v2/vendanfce"
         );
         this.clients = response.data;
         this.cacheClients = response.data;
@@ -169,10 +166,6 @@ export default {
       } else {
         this.filteredClients = this.clients; // Reseta para todos os clientes
       }
-    },
-    addClient() {
-      // Lógica para adicionar um novo cliente
-      console.log("Adicionar cliente");
     },
     formatDate(timestamp) {
       const date = new Date(timestamp);

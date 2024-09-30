@@ -17,8 +17,8 @@
         href="/"
         style="margin-left: -20px !important"
       >
-        <img :src="logo" class="navbar-brand-img h-100" alt="main_logo" />
-        <span class="ms-2 font-weight-bold text-white">SG VENDAS WEB</span>
+        <!--  img :src="logo" class="navbar-brand-img h-100" alt="main_logo" /-->
+        <span class="ms-2 font-weight-bold text-white">VENDAS WEB</span>
       </a>
     </div>
     <hr class="horizontal light mt-0 mb-2" />
@@ -26,7 +26,7 @@
   </aside>
 </template>
 <script>
-import logo from "@/assets/img/logo.png";
+//import logo from "@/assets/img/logo.png";
 import { mapState } from "vuex";
 import SidenavList from "./SidenavList.vue";
 
@@ -37,7 +37,7 @@ export default {
   },
   data() {
     return {
-      logo,
+      //logo,  logo colocar futuramente falta escolher
     };
   },
   computed: {

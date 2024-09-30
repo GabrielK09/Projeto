@@ -1,7 +1,7 @@
 <template>
   <div class="container-fluid py-4">
     <div class="row">
-      <div class="col-8">
+      <div class="col-9">
         <div class="card my-4 border-0 shadow-lg">
           <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
             <div
@@ -20,9 +20,15 @@
                 @input="filterProducts"
                 style="width: 300px"
               />
-              <button class="btn btn-dark" @click="addProduct">
+              <button class="btn btn-dark" @click="openModal">
                 Adicionar Produto
               </button>
+              <ProductModal
+                v-if="showModal"
+                :show="showModal"
+                @close="showModal = false"
+                @add-product="addProductToCart"
+              />
             </div>
             <div class="table-responsive p-0">
               <div v-if="loading" class="text-center my-3">
@@ -63,7 +69,7 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr v-for="produto in filteredProducts" :key="produto.id">
+                  <tr v-for="produto in productsInCart" :key="produto.id">
                     <td>
                       <div class="d-flex px-2">
                         <div class="my-auto">
@@ -73,12 +79,12 @@
                     </td>
                     <td>
                       <p class="text-sm font-weight-bold mb-0">
-                        R$ {{ produto.preco.toFixed(2) }}
+                        R$ {{ parseFloat(produto.preco_venda).toFixed(2) }}
                       </p>
                     </td>
                     <td>
                       <span class="text-xs font-weight-bold">{{
-                        produto.quantidade
+                        produto.qte
                       }}</span>
                     </td>
                     <td class="align-middle text-center">
@@ -98,19 +104,16 @@
                 </tbody>
               </table>
               <div
-                v-if="
-                  !loading &&
-                  (!filteredProducts || filteredProducts.length === 0)
-                "
+                v-if="!loading && productsInCart.length === 0"
                 class="text-center my-3"
               >
-                <span>Nenhum produto encontrado</span>
+                <span>Nenhum produto no carrinho</span>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <div class="col-4">
+      <div class="col-3">
         <div class="card my-4 border-0 shadow-lg">
           <div class="card-body">
             <div class="mb-3 total-container">
@@ -173,16 +176,6 @@
               />
             </div>
             <div class="mb-3">
-              <label for="cpfCnpj" class="form-label">CPF/CNPJ:</label>
-              <input
-                type="text"
-                class="form-control"
-                id="cpfCnpj"
-                v-model="cpfCnpj"
-                placeholder="Digite o CPF ou CNPJ"
-              />
-            </div>
-            <div class="mb-3">
               <label for="cliente" class="form-label">Cliente:</label>
               <input
                 type="text"
@@ -206,168 +199,152 @@
 
 <script>
 import axios from "axios";
+import ProductModal from "../components/Forms/ProductModal.vue";
 
 export default {
   name: "storeCashRegister",
+  components: {
+    ProductModal,
+
+  },
   data() {
     return {
       products: [],
       filteredProducts: [],
       loading: true,
-      cacheProducts: null,
       searchQuery: "",
       desconto: 0,
       acrescimo: 0,
       total: 0,
-      funcionario: "",
-      cpfCnpj: "",
-      cliente: "",
-      formaPagamento: "", // Adicionando a variável para forma de pagamento
+      funcionario: "Funcionario Padrão",
+      cliente: "Cliente Padrão",
+      formaPagamento: "",
+      showModal: false,
+      productsInCart: [],
+
     };
   },
   methods: {
-    getProducts() {
-  axios.get('/api/v2/produtos')
-    .then(response => {
-      console.log('Produtos carregados:', response.data.produtos); // Verifique o conteúdo da resposta aqui
-      this.filteredProducts = Array.isArray(response.data.produtos) ? response.data.produtos : [];
-    })
-    .catch(error => {
-      console.error('Erro ao carregar os produtos:', error);
-      this.filteredProducts = []; // Garante que filteredProducts será um array mesmo se a requisição falhar
-    });
-},
-    // async getProducts() {
-    //   this.loading = true;
+    async getProducts() {
+      this.loading = true;
 
-    //   if (this.cacheProducts) {
-    //     this.products = this.cacheProducts;
-    //     this.filteredProducts = this.products;
-    //     this.loading = false;
-    //     return;
-    //   }
+      try {
+        const response = await axios.get(
+          "http://localhost:8000/api/v2/produto"
 
-    //   try {
-    //     const response = await axios.get(
-    //       "http://localhost:8000/api/v2/produto"
-    //     );
-    //     this.products = response.data;
-    //     this.cacheProducts = response.data;
-    //     this.filteredProducts = this.products; // Inicializa os produtos filtrados
-    //   } catch (error) {
-    //     console.error("Erro ao buscar produtos:", error);
-    //   } finally {
-    //     this.loading = false;
-    //     this.calculateTotal(); // Calcula o total inicial após obter os produtos
-    //   }
-    // },
-    getProducts() {
-      axios.get('/api/v2/produtos')
-        .then(response => {
-          // Certifique-se de que está recebendo um array, caso contrário, atribua um array vazio
-          this.filteredProducts = Array.isArray(response.data.produtos) ? response.data.produtos : [];
-        })
-        .catch(error => {
-          console.error(error);
-          this.filteredProducts = []; // Garante que filteredProducts será um array mesmo se a requisição falhar
-        });
+        );
+        this.products = response.data.data;
+        this.filteredProducts = this.products;
+
+      } catch (error) {
+        console.error("Erro ao buscar produtos:", error);
+
+      } finally {
+        this.loading = false;
+
+      }
     },
     filterProducts() {
       if (this.searchQuery) {
         this.filteredProducts = this.products.filter((produto) =>
-          produto.nome.toLowerCase().includes(this.searchQuery.toLowerCase())
+          produto.nome.toLowerCase().includes(this.searchQuery.toLowerCase()),
+          
         );
+
       } else {
-        this.filteredProducts = this.products; // Reseta para todos os produtos
+        this.filteredProducts = this.products;
+
       }
-      this.calculateTotal(); // Atualiza o total ao filtrar produtos
     },
-    addProduct() {
-      console.log("Adicionar produto");
+    addProductToCart(product) {
+      const existingProduct = this.productsInCart.find(
+        (p) => p.id === product.id,
+
+        console.log(`ID produto selecionado: ${product.id}, ${product.nome}`)
+
+      );
+      if (existingProduct) {
+        existingProduct.qte += 1;
+
+      } else {
+        product.qte = 1;
+        this.productsInCart.push(product);
+
+      }
+      this.calculateTotal();
+
     },
-    // calculateTotal() {
-    //   // Calcula o total considerando descontos e acréscimos
-    //   const subtotal = this.filteredProducts.reduce((acc, produto) => {
-    //     return acc + produto.preco * produto.quantidade;
-    //   }, 0);
-    //   const descontoTotal = parseFloat(this.desconto) || 0;
-    //   const acrescimoTotal = parseFloat(this.acrescimo) || 0;
-    //   this.total = subtotal - descontoTotal + acrescimoTotal;
-    // },
     calculateTotal() {
-      if (!Array.isArray(this.filteredProducts)) {
-        return 0;
+      const subtotal = this.productsInCart.reduce((acc, produto) => {
+        return acc + parseFloat(produto.preco_venda) * produto.qte;
+        
+      }, 0);
+
+      const descontoTotal = parseFloat(this.desconto) || 0;
+      const acrescimoTotal = parseFloat(this.acrescimo) || 0;
+      this.total = subtotal - descontoTotal + acrescimoTotal;
+
+    },
+    async finalizarVenda() {
+      const sale = {
+        forma_pagamento: this.formaPagamento,
+        acrescimo: this.acrescimo,
+        desconto: this.desconto,
+        produtos: this.productsInCart.map((produto) => ({
+          id: produto.id,
+          nome: produto.nome,
+          preco_venda: parseFloat(produto.preco_venda),
+          quantidade: produto.qte,
+
+        })),
+
+      };
+
+      if (!sale.forma_pagamento) {
+        alert("Preencha todas as informações da venda.");
+        return;
       }
 
-      return this.filteredProducts.reduce((acc, product) => {
-        // Certifique-se de que product.preco_venda não é undefined
-        const price = product.preco_venda ? parseFloat(product.preco_venda) : 0;
-        return acc + price;
-      }, 0).toFixed(2); // Use toFixed depois de garantir que o valor é válido
-    },
+      try {
+        const response = await axios.post(
+          "http://localhost:8000/api/v2/pdv/finalizar",
+          sale
 
-    finalizarVenda() {
-      // Lógica para finalizar a venda
-      console.log("Venda finalizada");
-      // Aqui você pode incluir a lógica para salvar a venda com as informações do funcionário, CPF/CNPJ, cliente e forma de pagamento
+        );
+        console.log(response);
+        alert("Venda finalizada com sucesso!");
+        this.resetSale(); // Método para reiniciar os dados da venda
+        console.log(response.data);
+
+      } catch (error) {
+        console.error("Erro ao finalizar a venda:", error);
+
+        if (error.response && error.response.data) {
+          alert(
+            error.response.data.detail ||
+              "Erro ao finalizar a venda. Tente novamente."
+
+          );
+
+        } else {
+          alert("Erro ao finalizar a venda. Tente novamente.");
+
+        }
+      }
     },
-    formatDate(timestamp) {
-      const date = new Date(timestamp);
-      return date.toLocaleDateString("pt-BR");
+    formatDate(dateString) {
+      const options = { year: "numeric", month: "long", day: "numeric" };
+      return new Date(dateString).toLocaleDateString(undefined, options);
+
+    },
+    openModal() {
+      this.showModal = true;
+
     },
   },
-  mounted() {
+  created() {
     this.getProducts();
+
   },
 };
 </script>
-
-<style scoped>
-.card {
-  border-radius: 10px; /* Arredondar os cantos do cartão */
-}
-
-.bg-gradient-info {
-  background: linear-gradient(
-    to right,
-    #ffbb33,
-    #222222
-  ); /* Gradiente para o cabeçalho */
-}
-
-.table th {
-  background-color: #f8f9fa; /* Cor de fundo para o cabeçalho da tabela */
-  border-bottom: 2px solid #dee2e6; /* Borda mais forte na parte inferior do cabeçalho */
-}
-
-.table td {
-  border-bottom: 1px solid #dee2e6; /* Borda na parte inferior das células da tabela */
-}
-
-.table tr:hover {
-  background-color: #f1f1f1; /* Cor de fundo ao passar o mouse sobre a linha */
-}
-
-.btn-primary {
-  border-radius: 20px; /* Botão com cantos arredondados */
-  padding: 5px 15px; /* Ajusta o padding do botão */
-  height: 36px; /* Define uma altura específica para os botões */
-}
-
-input.form-control {
-  border-radius: 5px; /* Campos de entrada com cantos arredondados */
-  height: 20px; /* Ajusta a altura dos campos de entrada */
-}
-
-.card-body {
-  padding: 1rem; /* Ajusta o padding do card para um visual mais compacto */
-}
-
-.mb-3 {
-  margin-bottom: 1rem; /* Reduz o espaço entre os campos */
-}
-
-.total-container {
-  margin-bottom: 1.5rem; /* Espaço extra em baixo do Total da Venda */
-}
-</style>

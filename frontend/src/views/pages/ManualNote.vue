@@ -1,7 +1,7 @@
 <template>
-  <div class="container-fluid py-4">
+  <div class="container-fluid py-2">
     <div class="row">
-      <div class="col-8">
+      <div class="col-9 m-0">
         <div class="card my-4 border-0 shadow-lg">
           <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
             <div
@@ -110,7 +110,7 @@
           </div>
         </div>
       </div>
-      <div class="col-4">
+      <div class="col-3 m-0">
         <div class="card my-4 border-0 shadow-lg">
           <div class="card-body">
             <div class="mb-3 total-container">
@@ -173,16 +173,6 @@
               />
             </div>
             <div class="mb-3">
-              <label for="cpfCnpj" class="form-label">CPF/CNPJ:</label>
-              <input
-                type="text"
-                class="form-control"
-                id="cpfCnpj"
-                v-model="cpfCnpj"
-                placeholder="Digite o CPF ou CNPJ"
-              />
-            </div>
-            <div class="mb-3">
               <label for="cliente" class="form-label">Cliente:</label>
               <input
                 type="text"
@@ -219,9 +209,9 @@ export default {
       desconto: 0,
       acrescimo: 0,
       total: 0,
-      funcionario: "",
+      funcionario: "Funcionario Padrão",
       cpfCnpj: "",
-      cliente: "",
+      cliente: "Cliente Padrão",
       formaPagamento: "", // Adicionando a variável para forma de pagamento
     };
   },

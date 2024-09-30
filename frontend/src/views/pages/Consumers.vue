@@ -22,10 +22,7 @@
                 @input="filterClients"
                 style="width: 300px"
               />
-              <material-button
-                class="btn btn-primary"
-                @click="openAddClientModal"
-              >
+              <material-button class="btn-primaryd" @click="openAddClientModal">
                 Adicionar
               </material-button>
             </div>
@@ -75,13 +72,9 @@
                 <tbody>
                   <tr v-for="cliente in filteredClients" :key="cliente.id">
                     <td>
-                      <div class="d-flex px-2">
-                        <div class="my-auto">
-                          <h6 class="mb-0 text-sm">
-                            {{ cliente.nome_completo }}
-                          </h6>
-                        </div>
-                      </div>
+                      <p class="text-sm font-weight-bold mb-0">
+                        {{ cliente.nome_completo }}
+                      </p>
                     </td>
                     <td>
                       <p class="text-sm font-weight-bold mb-0">
@@ -228,10 +221,10 @@ export default {
 .bg-gradient-info {
   background: linear-gradient(to right, #ffbb33, #222222);
 }
-.btn-primary {
+.btn-primaryd {
   background: #ffbb33;
 }
-.btn-primary:hover {
+.btn-primaryd:hover {
   background-color: #222222;
 }
 </style>

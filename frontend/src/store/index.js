@@ -1,11 +1,9 @@
 import { createStore } from "vuex";
 import { auth } from "./auth.module";
-import { profile } from "./profile.module";
 
 export default createStore({
   modules: {
     auth,
-    profile
   },
   state: {
     hideConfigButton: false,
@@ -27,9 +25,6 @@ export default createStore({
     absolute: "position-absolute px-4 mx-0 w-100 z-index-2",
   },
   mutations: {
-    toggleConfigurator(state) {
-      state.showConfig = !state.showConfig;
-    },
     navbarMinimize(state) {
       const sidenav_show = document.querySelector(".g-sidenav-show");
 

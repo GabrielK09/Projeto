@@ -102,13 +102,7 @@
               <li class="mb-2">
                 <a class="dropdown-item border-radius-md" href="javascript:;">
                   <div class="py-1 d-flex">
-                    <div class="my-auto">
-                      <img
-                        src="../../assets/img/team-2.jpg"
-                        class="avatar avatar-sm me-3"
-                        alt="user image"
-                      />
-                    </div>
+                    <div class="my-auto"></div>
                     <div class="d-flex flex-column justify-content-center">
                       <h6 class="mb-1 text-sm font-weight-normal">
                         <span class="font-weight-bold">New message</span> from
@@ -125,13 +119,7 @@
               <li class="mb-2">
                 <a class="dropdown-item border-radius-md" href="javascript:;">
                   <div class="py-1 d-flex">
-                    <div class="my-auto">
-                      <img
-                        src="../../assets/img/small-logos/logo-spotify.svg"
-                        class="avatar avatar-sm bg-gradient-dark me-3"
-                        alt="logo spotify"
-                      />
-                    </div>
+                    <div class="my-auto"></div>
                     <div class="d-flex flex-column justify-content-center">
                       <h6 class="mb-1 text-sm font-weight-normal">
                         <span class="font-weight-bold">New album</span> by

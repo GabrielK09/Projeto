@@ -9,8 +9,11 @@ use App\Http\Controllers\Api\V2\Auth\RegisterController;
 use App\Http\Controllers\Api\V2\Auth\ForgotPasswordController;
 use App\Http\Controllers\Api\V2\Auth\ResetPasswordController;
 use App\Http\Controllers\Api\V2\MeController;
+
 use App\Http\Controllers\Api\V2\Pdv\ClientesController;
 use App\Http\Controllers\Api\V2\Pdv\ProdutosController;
+use App\Http\Controllers\Api\V2\Pdv\PDVController;
+
 use LaravelJsonApi\Laravel\Facades\JsonApiRoute;
 use LaravelJsonApi\Laravel\Http\Controllers\JsonApiController;
 
@@ -53,12 +56,12 @@ Route::prefix('v2')->group(function () {
     Route::delete('/clientes/{id}', [ClientesController::class, 'destroy'])->name('clientes.destroy'); // Deletar um consumidor específico
 
 
-
-    Route::get('/pdv', [PDVController::class, 'pdv'])->name('pdv'); 
+    Route::get('/pdv/buscar', [PDVController::class, 'buscar']); 
     Route::post('/pdv/cancelar', [PDVController::class, 'cancelarVenda'])->name('pdv.cancelar'); // <- Cancelar venda
-
+    
+    Route::get('/pdv/finalizar', [PDVController::class, 'finalizarVenda']);
     //Funcional, mas só retorna o cliente para a view
-    Route::get('/pdv/c', [PDVController::class, 'buscar'])->name('pdv2');
+    //Route::get('/pdv/c', [PDVController::class, 'buscar'])->name('pdv2');
 
 });
 
@@ -66,4 +69,5 @@ JsonApiRoute::server('v2')->prefix('v2')->resources(function (ResourceRegistrar 
     $server->resource('users', JsonApiController::class);
     Route::get('me', [MeController::class, 'readProfile']);
     Route::patch('me', [MeController::class, 'updateProfile']);
+
 });

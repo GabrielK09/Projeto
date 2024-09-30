@@ -4,12 +4,12 @@ import ManualNote from "@/views/pages/ManualNote.vue";
 import Products from "@/views/pages/Products.vue";
 import Providers from "@/views/pages/Providers.vue";
 import SaleNoteNfce from "@/views/pages/SaleNoteNfce.vue";
+import Users from "@/views/pages/Users.vue";
+import PasswordForgot from "@/views/PasswordForgot.vue";
+import PasswordReset from "@/views/PasswordReset.vue";
+import SignIn from "@/views/SignIn.vue";
+import SignUp from "@/views/SignUp.vue";
 import { createRouter, createWebHistory } from "vue-router";
-import PasswordForgot from "../views/examples-api/PasswordForgot.vue";
-import PasswordReset from "../views/examples-api/PasswordReset.vue";
-import Users from "../views/examples-api/users/UsersList.vue";
-import SignIn from "../views/SignIn.vue";
-import SignUp from "../views/SignUp.vue";
 
 const routes = [
   {

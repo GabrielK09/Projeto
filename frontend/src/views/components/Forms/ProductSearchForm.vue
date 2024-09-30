@@ -1,15 +1,15 @@
 <template>
-  <div
-    class="modal fade show d-block"
-    tabindex="-1"
-    style="background: rgba(0, 0, 0, 0.5)"
-  >
-    <div class="modal-dialog modal-lg">
-      <!-- Classe adicionada aqui -->
+  <div class="modal" tabindex="-1" role="dialog" v-if="show">
+    <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title">Buscar Produto</h5>
-          <button type="button" @click="$emit('close')" class="btn">
+          <h5 class="modal-title">Adicionar Produto</h5>
+          <button
+            type="button"
+            class="btn styledb"
+            @click="closeModal"
+            aria-label="Fechar"
+          >
             <i class="material-icons-round opacity-10" aria-hidden="true"
               >close</i
             >
@@ -19,74 +19,119 @@
           <input
             type="text"
             class="form-control mb-3"
-            placeholder="Digite o nome do produto..."
+            placeholder="Buscar produto..."
             v-model="searchQuery"
             @input="filterProducts"
           />
-          <table class="table">
-            <thead>
-              <tr>
-                <th>Produto</th>
-                <th>Preço</th>
-                <th>Ações</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr v-for="produto in filteredProducts" :key="produto.id">
-                <td>{{ produto.nome }}</td>
-                <td>R$ {{ produto.preco.toFixed(2) }}</td>
-                <td>
-                  <button
-                    class="btn btn-primary btn-sm"
-                    @click="addProduct(produto)"
-                  >
-                    Adicionar ao Carrinho
-                  </button>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+          <div v-if="loading" class="text-center my-3">
+            <span
+              class="spinner-border spinner-border-sm"
+              role="status"
+              aria-hidden="true"
+            ></span>
+            <span> Carregando...</span>
+          </div>
+          <div v-else>
+            <table class="table align-items-center mb-0">
+              <thead>
+                <tr>
+                  <th>Nome do Produto</th>
+                  <th>Preço</th>
+                  <th>Ação</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr v-for="produto in filteredProducts" :key="produto.id">
+                  <td>{{ produto.nome }}</td>
+                  <td>R$ {{ produto.preco_venda }}</td>
+                  <td>
+                    <button
+                      class="btn btn-primary"
+                      @click="selectProduct(produto)"
+                    >
+                      Adicionar
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <div v-if="filteredProducts.length === 0" class="text-center my-3">
+              <span>Nenhum produto encontrado</span>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </template>
-  
-  <script>
+
+<script>
+import axios from "axios";
+
 export default {
-  props: ["products"],
+  props: {
+    show: Boolean,
+  },
   data() {
     return {
+      products: [],
+      loading: true,
       searchQuery: "",
-      filteredProducts: [],
     };
   },
-  watch: {
-    products: {
-      immediate: true,
-      handler() {
-        this.filteredProducts = this.products;
-      },
+  computed: {
+    filteredProducts() {
+      if (this.searchQuery) {
+        return this.products.filter((produto) =>
+          produto.nome.toLowerCase().includes(this.searchQuery.toLowerCase())
+        );
+      }
+      return this.products;
     },
   },
   methods: {
-    filterProducts() {
-      this.filteredProducts = this.products.filter((produto) =>
-        produto.nome.toLowerCase().includes(this.searchQuery.toLowerCase())
-      );
+    async getProducts() {
+      this.loading = true;
+      try {
+        const response = await axios.get(
+          "http://localhost:8000/api/v2/produto"
+
+        );
+        this.products = response.data.data;
+      } catch (error) {
+        console.error("Erro ao buscar produtos:", error);
+      } finally {
+        this.loading = false;
+      }
     },
-    addProduct(produto) {
-      this.$emit("add-to-cart", produto);
+    selectProduct(produto) {
+      this.$emit("add-product", produto);
+      this.searchQuery = ""; // Limpa a busca após selecionar o produto
+      this.closeModal();
     },
+    closeModal() {
+      this.$emit("close");
+    },
+  },
+  mounted() {
+    this.getProducts();
   },
 };
 </script>
-  
-  <style scoped>
+
+<style scoped>
 .modal {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  display: block;
+  background: rgba(0, 0, 0, 0.5);
+}
+.modal-dialog {
+  margin-top: 10%;
+}
+.btn-primary {
+  background-color: #ffbb33;
+}
+
+.btn-primary:hover {
+  background-color: #222222;
 }
 </style>
-  

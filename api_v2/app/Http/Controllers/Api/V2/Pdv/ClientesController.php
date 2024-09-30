@@ -13,6 +13,7 @@ class ClientesController extends Controller
     {
         $clientes = Clientes::all();
         return response()->json($clientes);
+
     }
 
     public function store(Request $request): JsonResponse
@@ -24,6 +25,7 @@ class ClientesController extends Controller
                 'cpf' => 'required|string|regex:/^\d{3}\.\d{3}\.\d{3}\-\d{2}$/',
                 'data_nascimento' => 'required|date',
                 'tipo_cadastro' => 'required|integer'
+                
             ]);
 
             $cliente = Clientes::create($validate);

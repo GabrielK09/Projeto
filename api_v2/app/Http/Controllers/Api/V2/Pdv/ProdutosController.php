@@ -17,11 +17,13 @@ class ProdutosController extends Controller
         try {
             $produtos = Estoque::paginate(20);
             return response()->json($produtos);
+            
         } catch (\Throwable $th) {
             return response()->json([
                 'error' => 'Erro ao recuperar produtos.',
                 'message' => $th->getMessage()
             ], 500);
+            
         }
     }
 
@@ -37,6 +39,7 @@ class ProdutosController extends Controller
             'cfop' => 'required|numeric|gt:0',
             'csosn' => 'required|numeric|gt:0',
             'ncm' => 'required|numeric|gt:0',
+
         ]);
 
         $produto = Estoque::create($validate);
@@ -44,6 +47,7 @@ class ProdutosController extends Controller
         return response()->json([
             'message' => 'Produto cadastrado com sucesso!',
             'produto' => $produto
+
         ], 201);
     }
 

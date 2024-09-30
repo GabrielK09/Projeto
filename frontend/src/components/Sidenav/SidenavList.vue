@@ -116,7 +116,6 @@
           </template>
         </sidenav-collapse>
       </li>
-      >
     </ul>
   </div>
 </template>
