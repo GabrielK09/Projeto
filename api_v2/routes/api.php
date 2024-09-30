@@ -41,7 +41,8 @@ Route::prefix('v2')->group(function () {
     Route::post('/produto', [ProdutosController::class, 'store'])->name('produto.store'); // Criar produto
     Route::get('/produto/{id}', [ProdutosController::class, 'show'])->name('produto.show'); // Mostrar produto
     Route::patch('/produto/{id}', [ProdutosController::class, 'update'])->name('produto.update'); // Atualizar produto
-    Route::delete('/produto/{id}', [ProdutosController::class, 'destroy'])->name('produto.destroy'); // Deletar produto
+    Route::post('/produto/{id}/ativar', [ProdutosController::class, 'ativar'])->name('produto.ativar'); // Deletar produto
+    Route::post('/produto/{id}/inativar', [ProdutosController::class, 'inativar'])->name('produto.inativar'); // Deletar produto
 
 
     // Rotas de consumidores
@@ -51,15 +52,13 @@ Route::prefix('v2')->group(function () {
     Route::patch('/clientes/{id}', [ClientesController::class, 'update'])->name('clientes.update'); // Atualizar um consumidor específico
     Route::delete('/clientes/{id}', [ClientesController::class, 'destroy'])->name('clientes.destroy'); // Deletar um consumidor específico
 
-    Route::get('/pdv', [PDVController::class, 'pdv'])->name('pdv'); // <- Tela NFCe
+
+
+    Route::get('/pdv', [PDVController::class, 'pdv'])->name('pdv'); 
     Route::post('/pdv/cancelar', [PDVController::class, 'cancelarVenda'])->name('pdv.cancelar'); // <- Cancelar venda
-
-
 
     //Funcional, mas só retorna o cliente para a view
     Route::get('/pdv/c', [PDVController::class, 'buscar'])->name('pdv2');
-
-
 
 });
 

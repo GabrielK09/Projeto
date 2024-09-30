@@ -13,7 +13,9 @@ return new class extends Migration
     {
         Schema::create('formapagamentos', function (Blueprint $table) {
             $table->id();
+            $table->interager('cod_especie');
             $table->timestamps();
+            
         });
     }
 

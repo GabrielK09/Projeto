@@ -66,7 +66,7 @@ class ProdutosController extends Controller
 
     public function inativar(string $id)
     {
-        $produto = Estoque::findOrFail($id);
+        $produto = Estoque::find($id);
         $produto->ativo = false;
         $produto->save();
 
@@ -77,7 +77,7 @@ class ProdutosController extends Controller
 
     public function ativar(string $id)
     {
-        $produto = Estoque::findOrFail($id);
+        $produto = Estoque::find($id);
         $produto->ativo = true;
         $produto->save();
 

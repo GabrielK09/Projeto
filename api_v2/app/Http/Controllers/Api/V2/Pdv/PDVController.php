@@ -13,7 +13,7 @@ use App\Models\Clientes;
 use App\Models\Produtos;
 use App\Models\Caixa;
 
-class SaleNfceController extends JsonApiController
+class PDVController extends JsonApiController
 {
     public function pdv(Request $request)
     {
