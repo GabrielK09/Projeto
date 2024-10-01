@@ -17,74 +17,80 @@ use App\Models\Caixa;
 
 class PDVController extends Controller  
 {
-    public function finalizarVenda2(Request $request) 
-    {
-        $teste = '200 OK';
-        return response()->json([
-            'message' => "Api bonbando",
-            'teste' => $teste 
+    public function finalizarVenda(Request $request)
+{
+    // Valida os dados de entrada
+    $validated = $request->validate([
+        'forma_pagamento' => 'required|string|max:100',
+        'acrescimo' => 'numeric|min:0',
+        'desconto' => 'numeric|min:0',
+        'produtos' => 'required|array', // Certifique-se de que há produtos na venda
+    ]);
 
-        ]); 
-        
-        
-    }
-    
-    public function finalizarVenda(Request $request){
+    // Pega os produtos da sessão
+    $produtos = $request->input('produtos', []);
+    $acrescimo = (float) $request->input('acrescimo', 0);
+    $desconto = (float) $request->input('desconto', 0);
 
-        // Se não der pau, comenta, se der pau descomenta
-        $produtos = session('produtos', []);
-        $acrescimo = (float) $request->input('acrescimo', 0);
-        $desconto = (float) $request->input('desconto', 0);
+    // Calcula o total da venda
+    $total = collect($produtos)->sum('preco_venda') + $acrescimo - $desconto;
+    $total = max(0, $total); // Garante que o valor total não seja negativo
 
-        //$formapagamento = $request->input('tyikjnryijnr');
+    // Inicia a transação para garantir a integridade dos dados
+    DB::beginTransaction();
 
-        $total = collect($produtos)->sum('preco_venda') + $acrescimo - $desconto;
-        $total = max(0, $total);
-
+    try {
+        // Cria a venda
         $venda = VendaNfce::create([
             'valorproduto' => $total,
-            'cod_cliente' => 1,
-            'produto' => $produtos['nome'],
-            'valor_produto' => $produtos->preco_venda
-            //'forma_pagamento' => $formapagamento,
-            
+            'cod_cliente' => 1, // Exemplo de cliente (pode ser obtido do request)
+            'forma_pagamento' => $validated['forma_pagamento'],
+            'acrescimo' => $acrescimo,
+            'desconto' => $desconto,
         ]);
 
-        foreach($produtos as $produtos){
+        // Adiciona cada produto à tabela de itens da venda
+        foreach ($produtos as $produto) {
             ItemVendaNfce::create([
                 'cod_produto' => $produto['id'],
                 'quantidade' => $produto['qte'],
                 'preco_venda' => $produto['preco_venda'],
-
+                'venda_nfce_id' => $venda->id, // Associa o item à venda
             ]);
-
         }
 
+        // Atualiza o caixa com a nova venda
         Caixa::create([
             'origem' => 'Venda NFCe',
             'cod_vendanfce' => $venda->id,
             'valorentrada' => $total,
-            'valorentrada' => 0,
-            'cod_cliente' => 1, // $cliente->id
-            'cliente' => 'Teste vendan NFCe', // $cliente->nome_completo
-            'descricao_lancamento' => "NFC {$venda->id}"
-
+            'cod_cliente' => 1, // Exemplo de cliente (pode ser obtido do request)
+            'cliente' => 'Cliente de Teste', // Exemplo (pode ser substituído pelo nome do cliente)
+            'descricao_lancamento' => "Venda NFC {$venda->id}",
         ]);
 
+        // Confirma a transação
+        DB::commit();
+
+        // Esvazia os produtos da sessão
         session()->forget('produtos');
 
-        // return $this->reply()->success([
-        //     'message' => 'Venda finalizada com sucesso!',
-        //     'total' => $total,
-        //     'cod_produto' => $venda->id, 
-
-        // ]);
-
-        $teste = "aaaaaaa";
+        // Retorna uma resposta de sucesso
         return response()->json([
-            'message' => 'Teste',
-            'teste' => $teste   
-
+            'message' => 'Venda finalizada com sucesso!',
+            'venda_id' => $venda->id,
+            'total' => $total,
         ]);
+    } catch (\Exception $e) {
+        // Em caso de erro, reverte a transação
+        DB::rollBack();
+
+        // Retorna uma resposta de erro
+        return response()->json([
+            'message' => 'Erro ao finalizar a venda. Por favor, tente novamente.',
+            'error' => $e->getMessage(),
+        ], 500);
     }
+}
+
 }

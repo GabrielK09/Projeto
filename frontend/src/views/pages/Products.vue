@@ -213,21 +213,26 @@ export default {
         this.products = Array.isArray(response.data.data)
           ? response.data.data
           : [response.data.data];
+          
       } catch (error) {
         console.error("Erro ao buscar produtos:", error);
         this.products = []; // Em caso de erro, inicializa como array vazio
+
       } finally {
         this.filteredProducts = [...this.products]; // Atualiza filteredProducts
         this.loading = false;
+
       }
     },
     filterProducts() {
       if (this.searchQuery) {
         this.filteredProducts = this.products.filter((produto) =>
           produto.nome.toLowerCase().includes(this.searchQuery.toLowerCase())
+
         );
       } else {
         this.filteredProducts = this.products; // Reseta para todos os produtos
+
       }
     },
 
