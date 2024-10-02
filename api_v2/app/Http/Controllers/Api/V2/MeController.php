@@ -112,3 +112,4 @@ class MeController extends Controller
         })->toArray();
     }
 }
+''

@@ -75,6 +75,7 @@ export default {
   data() {
     return {
       products: [],
+      filteredProducts: [],
       loading: true,
       searchQuery: "",
     };
@@ -87,7 +88,7 @@ export default {
 
         );
       }
-      return this.products;
+      return this.products || [];
     },
   },
   methods: {
@@ -95,7 +96,11 @@ export default {
       this.loading = true;
       try {
         const response = await axios.get(
-          "http://localhost:8000/api/v2/produto"
+          //"http://localhost:8000/api/v2/produto"
+          // É esse
+          "http://localhost:8000/api/v2/pdv/buscar",
+
+          { params: { selectProduct: this.productId }}
 
         );
         
@@ -109,12 +114,25 @@ export default {
 
       }
     },
-    selectProduct(produto) {
-      this.$emit("add-product", produto);
-      this.searchQuery = ""; // Limpa a busca após selecionar o produto
-      this.closeModal();
+    async selectProduct(produto) {
+    this.$emit("add-product", produto);
 
-    },
+      try {
+          const response = await axios.get("http://localhost:8000/api/v2/pdv/buscar", {
+              params: {
+                  productId: produto.id // Envia o ID do produto selecionado como parâmetro de consulta
+
+              }
+          });
+
+          // Aqui você pode lidar com a resposta, se necessário
+          console.log("Produto buscado:", response.data );
+      } catch (error) {
+          console.error("Erro ao buscar produto:", error);
+      }
+
+      this.closeModal();
+  },
     closeModal() {
       this.$emit("close");
 

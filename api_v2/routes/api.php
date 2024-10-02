@@ -55,13 +55,13 @@ Route::prefix('v2')->group(function () {
     Route::patch('/clientes/{id}', [ClientesController::class, 'update'])->name('clientes.update'); // Atualizar um consumidor específico
     Route::delete('/clientes/{id}', [ClientesController::class, 'destroy'])->name('clientes.destroy'); // Deletar um consumidor específico
 
-
-    Route::get('/pdv/buscar', [PDVController::class, 'buscar']); 
-    Route::post('/pdv/cancelar', [PDVController::class, 'cancelarVenda'])->name('pdv.cancelar'); // <- Cancelar venda
+    Route::get('/pdv/buscar', [PDVController::class, 'busca']);
+    Route::post('/pdv/buscar', [PDVController::class, 'busca']);
     
-    Route::get('/pdv/finalizar', [PDVController::class, 'finalizarVenda']);
-    //Funcional, mas só retorna o cliente para a view
-    //Route::get('/pdv/c', [PDVController::class, 'buscar'])->name('pdv2');
+    Route::get('/pdv/teste', [PDVController::class, 'teste']);
+    //Route::post('/pdv/buscar', [PDVController::class, 'teste']);
+
+    Route::post('/pdv/finalizar', [PDVController::class, 'finalizar']);
 
 });
 

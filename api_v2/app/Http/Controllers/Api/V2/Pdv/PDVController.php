@@ -6,6 +6,7 @@ use LaravelJsonApi\Core\Document\Error;
 //use LaravelJsonApi\Laravel\Http\Controllers\JsonApiController;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 use App\Http\Controllers\Controller;
 
@@ -17,7 +18,41 @@ use App\Models\Caixa;
 
 class PDVController extends Controller  
 {
-    public function finalizarVenda2(Request $request) 
+
+    // public function busca(Request $request) {
+    //     $produtos = Estoque::paginate(20);
+        
+    //     $produto = $request->input('productId');
+
+    //     // dd($produto);
+
+    //     return response()->json($produtos);
+        
+    // }
+
+    public function busca(Request $request) {
+        $productId = $request->input('productId');
+    
+        if ($productId) {
+            $produto = Estoque::where('id', $productId)->paginate(20);
+            //Log::info("Id", $productId);
+    
+            return $produto;
+        } else {
+            $produtos = Estoque::paginate();
+
+        }
+    
+        return response()->json($produtos);
+    }
+
+    public function teste(Request $request) {
+        dd($produto);
+        
+    }
+    
+
+    public function finalizar(Request $request) 
     {
         $teste = '200 OK';
         return response()->json([
@@ -25,7 +60,6 @@ class PDVController extends Controller
             'teste' => $teste 
 
         ]); 
-        
         
     }
     

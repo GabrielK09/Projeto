@@ -1,4 +1,6 @@
-<template>
+<!-- Não utilizado -->
+
+<!-- <template>
   <div class="modal" tabindex="-1" role="dialog" v-if="show">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
@@ -134,4 +136,4 @@ export default {
 .btn-primary:hover {
   background-color: #222222;
 }
-</style>
+</style> -->
