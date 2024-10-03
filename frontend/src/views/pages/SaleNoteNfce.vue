@@ -230,7 +230,7 @@ export default {
 
       try {
         const response = await axios.get(
-          "http://localhost:8000/api/v2/produto"
+          //"http://localhost:8000/api/v2/produto"
 
         );
         this.products = response.data.data;
@@ -313,7 +313,7 @@ export default {
         );
         console.log(response);
         alert("Venda finalizada com sucesso!");
-        this.resetSale(); // Método para reiniciar os dados da venda
+        //this.resetSale(); // Método para reiniciar os dados da venda
         console.log(response.data);
 
       } catch (error) {

@@ -13,7 +13,7 @@ class Server extends BaseServer
      *
      * @var string
      */
-    protected string $baseUri = '/api/v2';
+    protected string $baseUri = '/api';
 
     /**
      * Bootstrap the server when it is handling an HTTP request.

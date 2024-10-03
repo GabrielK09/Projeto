@@ -3,40 +3,14 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use LaravelJsonApi\Laravel\Routing\ResourceRegistrar;
-use App\Http\Controllers\Api\V2\Auth\LoginController;
-use App\Http\Controllers\Api\V2\Auth\LogoutController;
-use App\Http\Controllers\Api\V2\Auth\RegisterController;
-use App\Http\Controllers\Api\V2\Auth\ForgotPasswordController;
-use App\Http\Controllers\Api\V2\Auth\ResetPasswordController;
-use App\Http\Controllers\Api\V2\MeController;
+//use App\Http\Controllers\Api\V2\MeController;
 
-use App\Http\Controllers\Api\V2\Pdv\ClientesController;
-use App\Http\Controllers\Api\V2\Pdv\ProdutosController;
-use App\Http\Controllers\Api\V2\Pdv\PDVController;
+use App\Http\Controllers\Api\V2\pdv\ClientesController;
+use App\Http\Controllers\Api\V2\pdv\ProdutosController;
+use App\Http\Controllers\Api\V2\pdv\PDVController;
 
 use LaravelJsonApi\Laravel\Facades\JsonApiRoute;
 use LaravelJsonApi\Laravel\Http\Controllers\JsonApiController;
-
-/*
-|--------------------------------------------------------------------------
-| API Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| is assigned the "api" middleware group. Enjoy building your API!
-|
-*/
-
-Route::prefix('v2')->middleware('json.api')->group(function () {
-    // Rotas de autenticação
-    Route::post('/login', LoginController::class)->name('login');
-    Route::post('/logout', LogoutController::class); // Removido o middleware
-    Route::post('/register', RegisterController::class);
-    Route::post('/password-forgot', ForgotPasswordController::class);
-    Route::post('/password-reset', ResetPasswordController::class)->name('password.reset');
-});
-
 
 Route::prefix('v2')->group(function () {
     // Rotas de produtos
@@ -55,13 +29,13 @@ Route::prefix('v2')->group(function () {
     Route::patch('/clientes/{id}', [ClientesController::class, 'update'])->name('clientes.update'); // Atualizar um consumidor específico
     Route::delete('/clientes/{id}', [ClientesController::class, 'destroy'])->name('clientes.destroy'); // Deletar um consumidor específico
 
-
-    Route::get('/pdv/buscar', [PDVController::class, 'buscar']); 
-    Route::post('/pdv/cancelar', [PDVController::class, 'cancelarVenda'])->name('pdv.cancelar'); // <- Cancelar venda
+    Route::get('/pdv/buscar', [PDVController::class, 'busca']);
+    Route::post('/pdv/buscar', [PDVController::class, 'busca']);
     
-    Route::get('/pdv/finalizar', [PDVController::class, 'finalizarVenda']);
-    //Funcional, mas só retorna o cliente para a view
-    //Route::get('/pdv/c', [PDVController::class, 'buscar'])->name('pdv2');
+    Route::get('/pdv/teste', [PDVController::class, 'teste']);
+    //Route::post('/pdv/buscar', [PDVController::class, 'teste']);
+
+    Route::post('/pdv/finalizar', [PDVController::class, 'finalizar']);
 
 });
 
