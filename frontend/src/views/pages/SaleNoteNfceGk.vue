@@ -230,7 +230,7 @@ export default {
 
       try {
         const response = await axios.get(
-          "http://localhost:8000/api/v2/busca"
+          "http://localhost:8000/api/v2/pdv/busca"
 
         );
         this.products = response.data.data;
@@ -259,6 +259,8 @@ export default {
     addProductToCart(product) {
       const existingProduct = this.productsInCart.find(
         (p) => p.id === product.id,
+
+        console.log(`ID produto selecionado: ${product.id}, ${product.nome}`)
 
       );
       if (existingProduct) {
@@ -304,7 +306,11 @@ export default {
       }
 
       try {
-        const response = await axios.post();
+        const response = await axios.post(
+          "http://localhost:8000/api/v2/pdv/finalizar",
+          sale
+
+        );
         console.log(response);
         alert("Venda finalizada com sucesso!");
         //this.resetSale(); // Método para reiniciar os dados da venda

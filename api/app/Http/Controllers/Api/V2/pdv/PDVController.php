@@ -22,17 +22,23 @@ class PDVController extends Controller
         return response()->json($produtos);
 
     }
-    
 
-    public function finalizar(Request $request) 
-    {
-        $teste = '200 OK';
-        return response()->json([
-            'message' => "Api bonbando",
-            'teste' => $teste 
-
-        ]); 
+    public function buscaId($id) {
+        $teste = Estoque::find($id);
+        return response()->json($teste);
         
     }
 
+    public function itemSelecionado(Request $request)
+    {
+        $request->validate([
+            'id' => 'required|integer|exists:estoque,id'
+
+        ]);
+
+        $produto = Estoque::find($request->id);
+        return response()->json($produto);
+
+    }
+        
 }

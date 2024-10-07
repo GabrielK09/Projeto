@@ -29,13 +29,11 @@ Route::prefix('v2')->group(function () {
     Route::patch('/clientes/{id}', [ClientesController::class, 'update'])->name('clientes.update'); // Atualizar um consumidor específico
     Route::delete('/clientes/{id}', [ClientesController::class, 'destroy'])->name('clientes.destroy'); // Deletar um consumidor específico
 
-    Route::get('/pdv/buscar', [PDVController::class, 'busca']);
-    Route::post('/pdv/buscar', [PDVController::class, 'busca']);
-    
-    Route::get('/pdv/teste', [PDVController::class, 'teste']);
-    //Route::post('/pdv/buscar', [PDVController::class, 'teste']);
+    // Rota de vendas
 
-    Route::post('/pdv/finalizar', [PDVController::class, 'finalizar']);
+    Route::get('/busca', [PDVController::class, 'busca']);
+    Route::get('/busca/{id}', [PDVController::class, 'buscaId']);
+    Route::get('/itemSelecionado', [PDVController::class, 'itemSelecionado']);
 
 });
 

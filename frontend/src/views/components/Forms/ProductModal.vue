@@ -98,7 +98,7 @@ export default {
         const response = await axios.get(
           //"http://localhost:8000/api/v2/produto"
           // É esse
-          "http://localhost:8000/api/v2/pdv/buscar",
+          "http://localhost:8000/api/v2/busca",
 
           { params: { selectProduct: this.productId }}
 
@@ -118,7 +118,7 @@ export default {
     this.$emit("add-product", produto);
 
       try {
-          const response = await axios.get("http://localhost:8000/api/v2/pdv/buscar", {
+          const response = await axios.get(`http://localhost:8000/api/v2/busca/${produto.id}`, {
               params: {
                   productId: produto.id // Envia o ID do produto selecionado como parâmetro de consulta
 

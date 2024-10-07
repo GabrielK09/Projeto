@@ -7,7 +7,6 @@ namespace App\Http\Controllers\Api\V2\Pdv;
 use App\Http\Controllers\Controller;
 use App\Models\ItemVendaNfce;
 use App\Models\Estoque;
-//use App\Services\Item;
 use Illuminate\Http\Request;
 
 class ProdutosController extends Controller
@@ -22,6 +21,7 @@ class ProdutosController extends Controller
             return response()->json([
                 'error' => 'Erro ao recuperar produtos.',
                 'message' => $th->getMessage()
+
             ], 500);
             
         }
@@ -90,26 +90,5 @@ class ProdutosController extends Controller
 
         ]);
         
-    }
-
-    public function addItemVenda(Request $request, ItemVendaNfce $itemVendaNfce)
-    {
-        $request->validate([
-            'produto_id' => 'required|exists:tprodutos,id',
-            'qte' => 'required|integer|min:1'
-        ]);
-
-        $produtoId = $request->input('produto_id');
-        $qte = $request->input('qte');
-
-        if ($itemVendaNfce->addProduto($produtoId, $qte)) {
-            return response()->json([
-                'message' => 'Item adicionado com sucesso!'
-            ]);
-        }
-
-        return response()->json([
-            'message' => 'Erro ao adicionar item.'
-        ], 500);
     }
 }

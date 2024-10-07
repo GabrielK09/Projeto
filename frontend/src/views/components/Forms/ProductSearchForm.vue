@@ -1,6 +1,4 @@
-<!-- Não utilizado -->
-
-<!-- <template>
+<template>
   <div class="modal" tabindex="-1" role="dialog" v-if="show">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
@@ -12,9 +10,7 @@
             @click="closeModal"
             aria-label="Fechar"
           >
-            <i class="material-icons-round opacity-10" aria-hidden="true"
-              >close</i
-            >
+            <i class="material-icons-round opacity-10" aria-hidden="true">close</i>
           </button>
         </div>
         <div class="modal-body">
@@ -95,10 +91,7 @@ export default {
     async getProducts() {
       this.loading = true;
       try {
-        const response = await axios.get(
-          "http://localhost:8000/api/v2/produto"
-
-        );
+        const response = await axios.get("http://localhost:8000/api/v2/busca");
         this.products = response.data.data;
       } catch (error) {
         console.error("Erro ao buscar produtos:", error);
@@ -106,9 +99,24 @@ export default {
         this.loading = false;
       }
     },
-    selectProduct(produto) {
+    async selectProduct(produto) {
       this.$emit("add-product", produto);
-      this.searchQuery = ""; // Limpa a busca após selecionar o produto
+
+      try {
+        const response = await axios.get(`http://localhost:8000/api/v2/busca/${produto.id} `, {
+          params: {
+            id: produto.id
+          }
+
+        })   
+        
+        console.log("Produto selecionadeo: ", response.data)
+      } catch (error) {
+        console.error("Erro ao buscar produto:", error);
+
+      }
+
+      this.searchQuery = ""; 
       this.closeModal();
     },
     closeModal() {
@@ -136,4 +144,4 @@ export default {
 .btn-primary:hover {
   background-color: #222222;
 }
-</style> -->
+</style>
