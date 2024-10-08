@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('vendanfce', function (Blueprint $table) {
             $table->id();
-    
+            
             // $table->unsignedBigInteger('item_vendanfce_id');
             // $table->foreign('item_vendanfce_id')->references('id')->on('item_vendanfce')->onDelete('cascade');
 

@@ -125,8 +125,15 @@ export default {
               }
           });
 
-          // Aqui você pode lidar com a resposta, se necessário
-          console.log("Produto buscado:", response.data );
+          const itemResponse = await axios.get(`http://localhost:8000/api/v2/itemSelecionado`, {
+              params: { id: produto.id }
+
+          })
+
+          console.log("Produto buscado pela rota: http://localhost:8000/api/v2/busca/${produto.id}:", response.data );
+
+          console.log("Produto buscado pela rota: http://localhost:8000/api/v2/itemSelecionado:", JSON.stringify(itemResponse.data, null, 2));
+
       } catch (error) {
           console.error("Erro ao buscar produto:", error);
       }
@@ -159,4 +166,5 @@ export default {
 .btn-primary:hover {
   background-color: #222222;
 }
-</style>
+
+</style>1

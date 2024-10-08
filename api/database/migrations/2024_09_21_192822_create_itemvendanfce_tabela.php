@@ -16,12 +16,12 @@ return new class extends Migration
         Schema::create('item_vendanfce', function (Blueprint $table) {
             $table->id(); // Controle
             $table->timestamps(); // Cadastro
-            //$table->unsignedBigInteger('cod_produto')->default(1);
-            //$table->foreign('cod_produto')->references('id')->on('estoque')->onDelete('cascade');
+            
+            $table->unsignedBigInteger('cod_nfce');
+            $table->foreign('cod_nfce')->references('id')->on('vendanfce')->onDelete('cascade');
 
-            $table->unsignedBigInteger('cod_vendanfce');
-            $table->foreign('cod_vendanfce')->references('id')->on('vendanfce')->onDelete('cascade');
-
+            $table->integer('codproduto')
+            
             $table->string('nome');
             $table->decimal('qte');
             $table->decimal('preco_unitario');

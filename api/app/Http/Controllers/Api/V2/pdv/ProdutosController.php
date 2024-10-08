@@ -3,10 +3,11 @@
 
 namespace App\Http\Controllers\Api\V2\Pdv;
 
-
 use App\Http\Controllers\Controller;
 use App\Models\ItemVendaNfce;
 use App\Models\Estoque;
+
+use Illuminate\Validation\Rule;
 use Illuminate\Http\Request;
 
 class ProdutosController extends Controller
@@ -32,7 +33,13 @@ class ProdutosController extends Controller
         $validate = $request->validate([
             'nome' => 'required|string|max:255',
             'qte' => 'required|numeric|gt:0',
-            'cod_gtin' => 'required|string|max:14|min:8',
+            'cod_gtin' => [
+                'required',
+                'string',
+                'max:14',
+                'min:8',
+                Rule::unique('estoque') // Adjust if necessary
+            ],
             'preco_venda' => 'required|numeric|gt:0',
             'preco_custo' => 'required|numeric|gt:0',
             'perc_lucro' => 'required|numeric|gt:0',

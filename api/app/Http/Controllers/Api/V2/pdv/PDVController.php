@@ -31,14 +31,24 @@ class PDVController extends Controller
 
     public function itemSelecionado(Request $request)
     {
-        $request->validate([
-            'id' => 'required|integer|exists:estoque,id'
+        $produto = Estoque::find($request->id);
+        $cliente = Clientes::find(1);
+
+        if ($produto && $cliente) {
+            $vendaNFCe = VendaNfce::create([
+                'cod_cliente' => $cliente->id,
+                'produto' => $produto->nome,
+                'valor_produto' => $produto->preco_venda,
+
+            ]);
+        };
+
+        return response()->json([
+            'message' => 'sucesso',
+            'produto' => $produto,
+            'vendaNFCe' => $vendaNFCe
 
         ]);
 
-        $produto = Estoque::find($request->id);
-        return response()->json($produto);
-
-    }
-        
+    }        
 }
