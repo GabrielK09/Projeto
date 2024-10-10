@@ -41,14 +41,15 @@ class PDVController extends Controller
                 'valor_produto' => $produto->preco_venda,
 
             ]);
+
         };
 
-        return response()->json([
-            'message' => 'sucesso',
-            'produto' => $produto,
-            'vendaNFCe' => $vendaNFCe
+            return response()->json([
+                'message' => 'sucesso',
+                'produto' => $produto,
+                'vendaNFCe' => $vendaNFCe
 
-        ]);
+            ]);
 
     }        
 }

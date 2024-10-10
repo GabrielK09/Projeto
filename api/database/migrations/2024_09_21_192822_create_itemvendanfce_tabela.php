@@ -20,7 +20,7 @@ return new class extends Migration
             $table->unsignedBigInteger('cod_nfce');
             $table->foreign('cod_nfce')->references('id')->on('vendanfce')->onDelete('cascade');
 
-            $table->integer('codproduto')
+            $table->integer('codproduto');            
             
             $table->string('nome');
             $table->decimal('qte');
