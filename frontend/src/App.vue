@@ -1,7 +1,10 @@
 <script setup>
+
+import HelloWorld from './components/HelloWorld.vue'
+import HomePage from './views/HomePage.vue'
+
 import axios from "axios";
 import { ref } from 'vue';
-import HelloWorld from './components/HelloWorld.vue'
 
 const produtos = ref([]);
 
@@ -17,7 +20,7 @@ axios.get('http://127.0.0.1:8000/api/produto')
   });
 
 </script>
-
+<!--
 <template>
   <div>
     <a href="https://vitejs.dev" target="_blank">
@@ -31,9 +34,19 @@ axios.get('http://127.0.0.1:8000/api/produto')
 
   <h2>Produtos</h2>
   <div v-for="produto in produtos" :key="produto.id">
-      Produto: {{ produto.nome }}
-    </div>
+    Produto: {{ produto.nome }}
+  </div>
 </template>
+-->
+
+
+
+<template>
+  <HomePage />
+  
+</template>
+
+
 
 <style scoped>
 .logo {
