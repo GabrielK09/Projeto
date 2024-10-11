@@ -1,19 +1,25 @@
+<<<<<<< HEAD
 <script setup>
 import Estoque from './views/Estoque.vue'
+=======
+<template>
+  <div ip="app">
+    <router-view></router-view>
+
+  </div>
+</template>
+
+<script>
+export default {
+  name: 'App',
+  
+}
+
+>>>>>>> 3caea59f4a4d199b12bc2ed48b8995b9608be79c
 
 </script>
-<!--
-<template>
-  <div>
-    <a href="https://vitejs.dev" target="_blank">
-      <img src="/vite.svg" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://vuejs.org/" target="_blank">
-      <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
-    </a>
-  </div>
-  <HelloWorld msg="Vite + Vue" />
 
+<<<<<<< HEAD
   <h2>Produtos</h2>
   <div v-for="produto in produtos" :key="produto.id">
     Produto: {{ produto.nome }}
@@ -42,5 +48,16 @@ import Estoque from './views/Estoque.vue'
 }
 .logo.vue:hover {
   filter: drop-shadow(0 0 2em #42b883aa);
+=======
+<style>
+#app {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+  margin-top: 60px;
+>>>>>>> 3caea59f4a4d199b12bc2ed48b8995b9608be79c
 }
 </style>
+
