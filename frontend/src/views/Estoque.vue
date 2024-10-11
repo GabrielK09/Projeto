@@ -1,8 +1,14 @@
 <template>
-    <h2>Home Page</h2>
+    <h2>EstoquePage</h2>
 
     <div v-for="produto in produtos" :key="produto.id">
-        {{ produto.nome }}
+        Código: {{ produto.id }} ||
+        Código de barras GTIN: {{ produto.cod_gtin }} ||
+        Produto: {{ produto.nome }} ||
+        R$ {{ produto.preco_venda }} ||
+        Quantia: {{ produto.qte}} ||
+        CFOP: {{ produto.cfop }} ||
+        NCM: {{ produto.ncm }} ||
 
     </div>
 </template>

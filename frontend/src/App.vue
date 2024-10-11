@@ -1,23 +1,5 @@
 <script setup>
-
-import HelloWorld from './components/HelloWorld.vue'
-import HomePage from './views/HomePage.vue'
-
-import axios from "axios";
-import { ref } from 'vue';
-
-const produtos = ref([]);
-
-// Faz a requisição à API
-axios.get('http://127.0.0.1:8000/api/produto')
-  .then((response) => {
-    console.log('Resposta da API:', response.data);
-    // Acesse o array de produtos corretamente
-    produtos.value = response.data.data; // Ajuste aqui
-  })
-  .catch((error) => {
-    console.error('Erro ao buscar os dados:', error);
-  });
+import Estoque from './views/Estoque.vue'
 
 </script>
 <!--
@@ -42,7 +24,7 @@ axios.get('http://127.0.0.1:8000/api/produto')
 
 
 <template>
-  <HomePage />
+  <Estoque />
   
 </template>
 

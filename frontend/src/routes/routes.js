@@ -1,11 +1,11 @@
 import { createRouter, createWebHistory } from "vue-router";
-import HomePage from "@/views/HomePage.vue";
+import Estoque from "@/views/Estoque.vue";
 
 const routes = [
   {
     path: "/",
-    name: "HomePage",
-    component: HomePage,
+    name: "Estoque",
+    component: Estoque,
   }
 ];
 
