@@ -2,7 +2,11 @@
     <h2>Home Page</h2>
 
     <div v-for="produto in produtos" :key="produto.id">
-        {{ produto.nome }}
+        Código: {{ produto.id }} |
+        Produto: {{ produto.nome }} |
+        Preço: {{ produto.preco_venda }} |
+        Produto: {{ produto.nome }} 
+
 
     </div>
 </template>
@@ -12,7 +16,7 @@
     import axios from "axios";
 
     export default {
-        name: "Estoque",
+        name: "EstoqueView",
 
         data (){
             return {
