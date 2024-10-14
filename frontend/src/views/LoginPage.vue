@@ -1,4 +1,4 @@
 <template>
-    <header><h2>Login</h2></header>
+    <header><h2></h2></header>
     
 </template>
