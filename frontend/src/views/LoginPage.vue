@@ -1,4 +1,7 @@
 <template>
-    <header><h2></h2></header>
+    <header>
+        <h2>Teste</h2>
+        
+    </header>
     
 </template>
