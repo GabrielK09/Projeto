@@ -72,40 +72,43 @@ export default {
         };
     },
     methods: {
-        // formatoCPF(cpf){
-        //     const cpfNovo = cpf.replace(/\D/g, "");
-        //     if (cpfNovo.length === 11) {
-        //         return `${cpfNovo.slice(0, 3)}.${cpfNovo.slice(3, 6)}.${cpfNovo.slice(6, 9)}-${cpfNovo.slice(9)}`
-        //     }
+
+        // Usar isso tudo
+        formatoCPF(cpf){
+            const cpfNovo = cpf.replace(/\D/g, "");
+            if (cpfNovo.length === 11) {
+                return `${cpfNovo.slice(0, 3)}.${cpfNovo.slice(3, 6)}.${cpfNovo.slice(6, 9)}-${cpfNovo.slice(9)}`
+            }
             
-        //     return cpf
+            return cpf
 
-        // },  
+        },  
 
-        // formatoCNPJ(cnpj) {
-        //     const cnpjNovo = cnpj.replace(/\D/g, "");
+        formatoCNPJ(cnpj) {
+            const cnpjNovo = cnpj.replace(/\D/g, "");
             
-        //     if (cnpjNovo.length === 14) {
-        //         return `${cnpjNovo.slice(0, 2)}.${cnpjNovo.slice(2, 5)}.${cnpjNovo.slice(5, 8)}/${cnpjNovo.slice(8, 12)}-${cnpjNovo.slice(12)}`;
-        //     }
+            if (cnpjNovo.length === 14) {
+                return `${cnpjNovo.slice(0, 2)}.${cnpjNovo.slice(2, 5)}.${cnpjNovo.slice(5, 8)}/${cnpjNovo.slice(8, 12)}-${cnpjNovo.slice(12)}`;
+            }
 
-        //     return cnpjNovo; // Retorna o CNPJ sem formatação se não tiver 14 dígitos
-        // },
+            return cnpjNovo; //Retorna o CNPJ sem formatação se não tiver 14 dígitos
+        },
 
         async novoCliente() {
-            // const formatoCPF = this.formatoCPF(this.cpf)
-            // const formatoCNPJ = this.formatoCNPJ(this.cnpj)
+            const formatoCPF = this.formatoCPF(this.cpf)
+            const formatoCNPJ = this.formatoCNPJ(this.cnpj)
             console.log("Tipo de pessoa:", this.tipo_pessoa);
             console.log(this.cpf);
             console.log(this.cnpj);
 
             const novoClienteData = {
                 nome_completo: this.nome_completo,
-                cpf: this.tipo_pessoa === "1" ? this.cpf : null,
-                cnpj: this.tipo_pessoa === "2" ? this.cnpj : null,
+                cpf: this.tipo_pessoa === "1" ? formatoCPF : null,
+                cnpj: this.tipo_pessoa === "2" ? formatoCNPJ : null,
                 data_nascimento: this.data_nascimento,
                 tipo_pessoa: this.tipo_pessoa,
                 tipo_cadastro: this.tipo_cadastro,
+                
             };
 
             console.log("Dados enviados:", novoClienteData)
