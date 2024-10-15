@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from "vue-router";
 import EstoqueView from '../views/EstoqueView.vue'
 import LoginPage from "../views/LoginPage.vue";
-import NovoCliete from "@/views/FormCliente/NovoCliete.vue";
+import NovoCliete from "@/views/FormCliente/NovoClinete.vue";
 
 const routes = [
   {

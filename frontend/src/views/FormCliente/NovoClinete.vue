@@ -10,8 +10,6 @@
                 required
             />
 
-
-
             <label for="data_nascimento" class="form-label">Data de Nascimento</label>
             <input
                 type="date"
@@ -108,21 +106,35 @@ export default {
                 data_nascimento: this.data_nascimento,
                 tipo_pessoa: this.tipo_pessoa,
                 tipo_cadastro: this.tipo_cadastro,
-                
+
             };
 
             console.log("Dados enviados:", novoClienteData)
 
             try {
-                const response = await axios.post('http://127.0.0.1:8000/api/clientes', novoClienteData);
+                const response = await axios.post('http://192.168.99.38:8080/api/clientes', novoClienteData);
                 console.log("Cliente criado: ", response);
 
             } catch (error) {
                 console.error("Erro ao criar: ", error);
 
             }
+        },
+        
+        closeModal(){
+            this.$emit()
+            //this.res
+        },
+
+        resetForm() {
+            this.nome_completo = "";
+            this.cpf = "";
+            this.cnpj = "";
+
         }
+
     }
+    
 };
 </script>
 

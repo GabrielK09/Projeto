@@ -22,8 +22,14 @@ class ClientesController extends Controller
             $validate = $request->validate([
                 'nome_completo' => 'required|string|max:100',
                 'tipo_pessoa' => 'required|string',
-                'cpf' => 'required_if:tipo_pessoa,1', /* required_if:tipo_pessoa,1|regex:/^\d{3}\.\d{3}\.\d{3}\-\d{2}$/*/
-                'cnpj' => 'required_if:tipo_pessoa,2', /*'required_if:tipo_pessoa,2|regex:/^\d{2}\.\d{3}\.\d{3}\/\d{4}\-\d{2}$/',*/
+                'cpf' => [
+                        'required_if:tipo_pessoa,1'
+                        Rule::unique('clientes') // Adjust if necessary
+                    ], 
+                'cnpj' => => [
+                        'required_if:tipo_pessoa,2'
+                        Rule::unique('clientes') // Adjust if necessary
+                    ],,
                 'data_nascimento' => 'required|date',
                 'tipo_cadastro' => 'required|integer'
                 
