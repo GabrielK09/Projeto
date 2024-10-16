@@ -121,6 +121,7 @@ export default {
 
                 this.$emit('clienteAdicionado');
                 this.cleanForm()
+                
             } catch (error) {
                 console.error("Erro ao criar: ", error);
 

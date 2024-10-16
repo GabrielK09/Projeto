@@ -7,10 +7,10 @@
         Preço: {{ produto.preco_venda }} |
         Produto: {{ produto.nome }} 
 
-
     </div>
 
     <button @click="openAddProdutoModal">Adicionar produto</button>
+    <a href="/"><button>Voltar</button></a>
 
     <form-cadastro-produto
         :is-visible="isCadastroProdutoVisible"
@@ -43,10 +43,12 @@
         methods: {
             async todosProdutos() {
                 try {
-                    const response = await axios.get('http://127.0.0.1:8000/api/produto');
+                    // const response = await axios.get('http://127.0.0.1:8000/api/produto'); //LOCAL
+                    const response = await axios.get('http://192.168.98.51:8081/api/produto'); // REDE
                     console.log(response)
 
-                    this.produtos = Array.isArray(response.data) ? response.data : []
+                    this.produtos = Array.isArray(response.data.data) ? response.data.data : []
+                
 
                 } catch (error) {
                     console.error('Erro ao buscar os dados:', error);
@@ -56,7 +58,10 @@
 
             openAddProdutoModal() {
                 this.isCadastroProdutoVisible = !this.isCadastroProdutoVisible
-            }
+
+            },
+
+           
         },
 
         mounted() {

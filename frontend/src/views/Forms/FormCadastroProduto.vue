@@ -121,24 +121,38 @@
                     nome: this.nome,
                     qte: parseFloat(this.qte),
                     cod_gtin: this.codGtin,
-                    preco_venda: parseFloat(this.precoVenda),
                     preco_custo: parseFloat(this.precoCusto),
                     perc_lucro: parseFloat(this.percLucro),
+                    preco_venda: parseFloat(this.precoVenda),
                     cfop: this.cfop,
                     csosn: this.csosn,
                     ncm: this.ncm
                 };
 
                 try {
-                    //const response = await axios.get('http://127.0.0.1:8000/api/produto', novoProduto); // LOCAL 
-                    const response = await axios.get('http://192.168.98.51:8081/api/produto', novoProduto); // REDE
+                    //const response = await axios.post('http://127.0.0.1:8000/api/produto', novoProduto); // LOCAL 
+                    const response = await axios.post('http://192.168.98.51:8081/api/produto', novoProduto); // REDE
                     
                     console.log("Produto adicionado com sucesso!", response);
-
+        
+                    
                 } catch (error) {
                     console.error("Erro ao adicionar produto:", error);
                 }
-            }
+            },
+
+            // cleanForm() {
+            //     this.nome = "";
+            //     this.qte = "";
+            //     this.codGtin = "";
+            //     this.preco_custo = "";
+            //     this.perc_lucro = "";
+            //     this.preco_venda = "";
+            //     this.cfop = ""
+            //     this.csosn = ""
+            //     this.ncm = ""
+                
+            // }
 
         }
     }

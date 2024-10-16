@@ -1,8 +1,9 @@
 import { createRouter, createWebHistory } from "vue-router";
-import LoginPage from "@/views/LoginPage.vue";
+import LoginPage from "@/views/HomePage.vue";
 
 import EstoqueView from "@/views/EstoqueView.vue"
 import ClienteView from "@/views/ClienteView.vue";
+import FormCadastroUsuario from "@/views/Forms/FormCadastroUsuario.vue";
 
 const routes = [
   {
@@ -22,6 +23,11 @@ const routes = [
     name: "ClienteView",
     component: ClienteView
 
+  },
+  {
+    path: "/teste",
+    name: "CadastroUsuario",
+    component: FormCadastroUsuario
   }
 
 ];
