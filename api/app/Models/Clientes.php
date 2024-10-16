@@ -16,6 +16,7 @@ class Clientes extends Model
         'nome_completo',
         'tipo_pessoa',
         'cpf',
+        'cnpj',
         'data_nascimento',
         'tipo_cadastro'
     ];

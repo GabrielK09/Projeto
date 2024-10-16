@@ -22,7 +22,6 @@
             return {
                 produtos: []
 
-
             };
         },
 
@@ -32,7 +31,7 @@
                     const response = await axios.get('http://127.0.0.1:8000/api/produto');
                     console.log(response)
 
-                    this.produtos = Array.isArray(response.data.data) ? response.data.data : []
+                    this.produtos = Array.isArray(response.data) ? response.data : []
 
                 } catch (error) {
                     console.error('Erro ao buscar os dados:', error);

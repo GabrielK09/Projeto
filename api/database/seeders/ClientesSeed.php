@@ -9,7 +9,7 @@ use Illuminate\Database\Seeder;
 
 use App\Models\Estoque;
 
-class  extends Seeder {
+class ClientesSeed extends Seeder {
     public function run()
     {
        $produtos = [
