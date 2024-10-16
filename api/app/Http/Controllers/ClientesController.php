@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Models\Clientes;
+
+use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 use Illuminate\Http\JsonResponse;
 
 class ClientesController extends Controller
@@ -23,13 +25,13 @@ class ClientesController extends Controller
                 'nome_completo' => 'required|string|max:100',
                 'tipo_pessoa' => 'required|string',
                 'cpf' => [
-                        'required_if:tipo_pessoa,1'
+                        'required_if:tipo_pessoa,1',
                         Rule::unique('clientes') // Adjust if necessary
                     ], 
-                'cnpj' => => [
-                        'required_if:tipo_pessoa,2'
+                'cnpj' => [
+                        'required_if:tipo_pessoa,2',
                         Rule::unique('clientes') // Adjust if necessary
-                    ],,
+                    ],
                 'data_nascimento' => 'required|date',
                 'tipo_cadastro' => 'required|integer'
                 
