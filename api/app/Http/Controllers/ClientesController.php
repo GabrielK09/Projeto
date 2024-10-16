@@ -13,8 +13,20 @@ class ClientesController extends Controller
 {
     public function index(): JsonResponse
     {
-        $clientes = Clientes::all();
-        return response()->json($clientes);
+      
+        try {
+            $clientes = Clientes::all();
+            return response()->json($clientes);
+
+            
+        } catch (\Throwable $th) {
+            return response()->json([
+                'error' => 'Erro ao carregar os clientes.',
+                'message' => $th->getMessage()
+
+            ], 500);
+            
+        }
 
     }
 
@@ -24,14 +36,19 @@ class ClientesController extends Controller
             $validate = $request->validate([
                 'nome_completo' => 'required|string|max:100',
                 'tipo_pessoa' => 'required|string',
+
                 'cpf' => [
-                        'required_if:tipo_pessoa,1',
-                        Rule::unique('clientes') // Adjust if necessary
-                    ], 
+                            'required_if:tipo_pessoa,1',
+                            'nullable',
+                            Rule::unique('clientes')
+                        ],
+
                 'cnpj' => [
-                        'required_if:tipo_pessoa,2',
-                        Rule::unique('clientes') // Adjust if necessary
-                    ],
+                            'required_if:tipo_pessoa,2',
+                            'nullable',
+                            Rule::unique('clientes')
+                        ],
+
                 'data_nascimento' => 'required|date',
                 'tipo_cadastro' => 'required|integer'
                 

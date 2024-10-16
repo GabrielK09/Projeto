@@ -5,7 +5,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProdutosController;
 use App\Http\Controllers\ClientesController;
 
-Route::middleware('api')->get('/teste', function () {
+use App\Http\Controllers\NFCeController;
+
+Route::get('/teste', function () {
     return response()->json(['message' => 'API funcionando!']);
 
 });

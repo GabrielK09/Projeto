@@ -35,10 +35,10 @@ class ProdutosController extends Controller
             'qte' => 'required|numeric|gt:0',
             'cod_gtin' => [
                 'required',
-                'string',
-                'max:14',
-                'min:8',
-                Rule::unique('estoque') // Adjust if necessary
+                'numeric',
+                'digits_between:8,14',
+                Rule::unique('estoque')
+
             ],
             'preco_venda' => 'required|numeric|gt:0',
             'preco_custo' => 'required|numeric|gt:0',

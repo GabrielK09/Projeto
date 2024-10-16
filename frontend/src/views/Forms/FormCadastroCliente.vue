@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div v-if="isVisible">
         <form @submit.prevent="novoCliente">
             <label for="nome_completo" class="form-label">Nome Completo</label>
             <input
@@ -57,8 +57,13 @@
 import axios from 'axios';
 
 export default {
-    name: "NovoCliente",
-
+    name: "FormCadastroCliente",
+    props: {
+        isVisible: {
+            type: Boolean,
+            required: true
+        },
+    },
     data() {
         return {
             nome_completo: "",
@@ -70,8 +75,6 @@ export default {
         };
     },
     methods: {
-
-        // Usar isso tudo
         formatoCPF(cpf){
             const cpfNovo = cpf.replace(/\D/g, "");
             if (cpfNovo.length === 11) {
@@ -112,27 +115,26 @@ export default {
             console.log("Dados enviados:", novoClienteData)
 
             try {
-                const response = await axios.post('http://192.168.99.38:8080/api/clientes', novoClienteData);
+                //const response = await axios.post('http://127.0.0.1:8000/api/clientes', novoClienteData);
+                const response = await axios.post('http://192.168.98.51:8081/api/clientes', novoClienteData);
                 console.log("Cliente criado: ", response);
 
+                this.$emit('clienteAdicionado');
+                this.cleanForm()
             } catch (error) {
                 console.error("Erro ao criar: ", error);
 
             }
         },
-        
-        closeModal(){
-            this.$emit()
-            //this.res
-        },
 
-        resetForm() {
-            this.nome_completo = "";
+        cleanForm() {
+            this.nome_completo = ""
             this.cpf = "";
             this.cnpj = "";
+            this.tipo_pessoa = "";
+            this.data_nascimento = "";
 
         }
-
     }
     
 };
