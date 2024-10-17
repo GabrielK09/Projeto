@@ -28,3 +28,12 @@ Route::post('/clientes', [ClientesController::class, 'store']);
 // Rotas Usuarios
 Route::get('/usuarios', [UsuarioController::class, 'index']);
 Route::post('/usuarios', [UsuarioController::class, 'store']);
+
+//----------------
+
+
+// Rotas - VENDAS
+// Route::get('/nfce', [NFCeController::class])
+
+
+//----------------

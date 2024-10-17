@@ -1,9 +1,11 @@
 import { createRouter, createWebHistory } from "vue-router";
-import LoginPage from "@/views/HomePage.vue";
+import LoginPage from "@/views/LoginPage.vue";
 
 import EstoqueView from "@/views/EstoqueView.vue"
 import ClienteView from "@/views/ClienteView.vue";
 import FormCadastroUsuario from "@/views/Forms/FormCadastroUsuario.vue";
+import NFCeView from "@/views/SalePages/NFCeView.vue";
+import NotaManual from "@/views/SalePages/NotaManual.vue";
 
 const routes = [
   {
@@ -28,7 +30,21 @@ const routes = [
     path: "/teste",
     name: "CadastroUsuario",
     component: FormCadastroUsuario
+  },
+
+  {
+    path: "/nfce",
+    name: "VendasNFCe",
+    component: NFCeView
+
+  },
+  {
+    path: "/nota-manual",
+    name: "VendasNotaManual",
+    component: NotaManual
+
   }
+
 
 ];
 

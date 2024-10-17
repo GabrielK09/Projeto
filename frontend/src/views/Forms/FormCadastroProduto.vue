@@ -145,7 +145,7 @@
                     
                     console.log("Produto adicionado com sucesso!", response);
         
-                    
+                    this.closeForms()
                 } catch (error) {
                     console.error("Erro ao adicionar produto:", error);
                 }
@@ -170,18 +170,24 @@
                     this.precoVenda = Math.trunc(this.precoCusto * (1 + this.percLucro / 100) * 100) / 100;
                 }
             },
-            // cleanForm() {
-            //     this.nome = "";
-            //     this.qte = "";
-            //     this.codGtin = "";
-            //     this.preco_custo = "";
-            //     this.perc_lucro = "";
-            //     this.preco_venda = "";
-            //     this.cfop = ""
-            //     this.csosn = ""
-            //     this.ncm = ""
+
+            closeForms(){
+                this.$emit("update:isVisible", false)
+                this.cleanForm()
+            },
+
+            cleanForm() {
+                this.nome = "";
+                this.qte = "";
+                this.codGtin = "";
+                this.preco_custo = "";
+                this.perc_lucro = "";
+                this.preco_venda = "";
+                this.cfop = ""
+                this.csosn = ""
+                this.ncm = ""
                 
-            // }
+            }
 
         }
     }
