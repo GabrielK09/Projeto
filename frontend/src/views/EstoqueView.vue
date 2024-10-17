@@ -5,7 +5,7 @@
         Código: {{ produto.id }} |
         Produto: {{ produto.nome }} |
         Preço: {{ produto.preco_venda }} |
-        Produto: {{ produto.nome }} 
+        
 
     </div>
 
@@ -43,8 +43,8 @@
         methods: {
             async todosProdutos() {
                 try {
-                    // const response = await axios.get('http://127.0.0.1:8000/api/produto'); //LOCAL
-                    const response = await axios.get('http://192.168.98.51:8081/api/produto'); // REDE
+                     const response = await axios.get('http://127.0.0.1:8000/api/produto'); //LOCAL
+                    //const response = await axios.get('http://192.168.98.51:8081/api/produto'); // REDE
                     console.log(response)
 
                     this.produtos = Array.isArray(response.data.data) ? response.data.data : []
@@ -60,7 +60,6 @@
                 this.isCadastroProdutoVisible = !this.isCadastroProdutoVisible
 
             },
-
            
         },
 

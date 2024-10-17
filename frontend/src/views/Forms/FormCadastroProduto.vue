@@ -22,20 +22,28 @@
                 required
             />
 
-            <label for="codGtin" class="form-label">codGtin</label>
-            <input
-                type="number"
-                class="form-control border p-2"
-                id="codGtin"
-                v-model="codGtin"
-                required
-            />
-
+            <div>
+                <label for="codGtin" class="form-label">codGtin</label>
+                    <input
+                    type="number"
+                    class="form-control border p-2"
+                    id="codGtin"
+                    v-model="codGtin"
+                    required
+                />
+                <button
+                    type="button"
+                    @click="codGTINgenerate"
+                >
+                    Gerar    
+                </button>
+            </div>
             <label for="precoCusto" class="form-label">Preço Custo</label>
             <input
                 type="number"
                 class="form-control border p-2"
                 id="precoCusto"
+                @input="calculateValues('custo')"
                 v-model="precoCusto"
                 required
             />
@@ -45,6 +53,7 @@
                 type="number"
                 class="form-control border p-2"
                 id="percLucro"
+                @input="calculateValues('lucro')"
                 v-model="percLucro"
                 required
             />
@@ -54,6 +63,7 @@
                 type="number"
                 class="form-control border p-2"
                 id="precoVenda"
+                @input="calculateValues('venda')"
                 v-model="precoVenda"
                 required
             />
@@ -130,8 +140,8 @@
                 };
 
                 try {
-                    //const response = await axios.post('http://127.0.0.1:8000/api/produto', novoProduto); // LOCAL 
-                    const response = await axios.post('http://192.168.98.51:8081/api/produto', novoProduto); // REDE
+                    const response = await axios.post('http://127.0.0.1:8000/api/produto', novoProduto); // LOCAL 
+                    //const response = await axios.post('http://192.168.98.51:8081/api/produto', novoProduto); // REDE
                     
                     console.log("Produto adicionado com sucesso!", response);
         
@@ -141,6 +151,25 @@
                 }
             },
 
+            codGTINgenerate(){
+                this.codGtin = String(
+                    Math.floor(1000000000000 + Math.random() * 9000000000000)
+
+                )
+            },
+
+            calculateValues(changedField) {
+                if ( changedField === "custo" && this.precoCusto && this.percLucro !== null ) {
+                    // Se o preço de custo foi alterado, calcula o preço de venda
+                    this.precoVenda = Math.trunc(this.precoCusto * (1 + this.percLucro / 100) * 100) / 100;
+                } else if ( changedField === "venda" && this.precoVenda && this.precoCusto !== null ) {
+                    // Se o preço de venda foi alterado, calcula o percentual de lucro
+                    this.percLucro = Math.trunc(((this.precoVenda - this.precoCusto) / this.precoCusto) * 100);
+                } else if ( changedField === "lucro" && this.percLucro !== null && this.precoCusto ) {
+                    // Se o percentual de lucro foi alterado, calcula o preço de venda
+                    this.precoVenda = Math.trunc(this.precoCusto * (1 + this.percLucro / 100) * 100) / 100;
+                }
+            },
             // cleanForm() {
             //     this.nome = "";
             //     this.qte = "";

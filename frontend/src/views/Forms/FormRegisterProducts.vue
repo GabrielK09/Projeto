@@ -175,12 +175,12 @@ export default {
       if (cleanGtin.length > 13) {
         this.codGtin = cleanGtin.slice(0, 13); // Truncar se exceder 13 dígitos
       } else {
-        this.codGtin = cleanGtin; // Apenas limpar
+        this.codGtin = cleanGtin; 
       }
     },
 
     generateRandomGtin() {
-      // Gera um GTIN aleatório de 13 dígitos
+      
       this.codGtin = String(
         Math.floor(1000000000000 + Math.random() * 9000000000000)
       );
