@@ -115,8 +115,8 @@ export default {
             console.log("Dados enviados:", novoClienteData)
 
             try {
-                const response = await axios.post('http://127.0.0.1:8000/api/clientes', novoClienteData);
-                //const response = await axios.post('http://192.168.98.51:8081/api/clientes', novoClienteData);
+                //const response = await axios.post('http://127.0.0.1:8000/api/clientes', novoClienteData);
+                const response = await axios.post('http://192.168.98.51:8081/api/clientes', novoClienteData);
                 console.log("Cliente criado: ", response);
 
                 this.closeForms()

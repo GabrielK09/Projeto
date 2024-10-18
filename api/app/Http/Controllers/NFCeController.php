@@ -17,39 +17,43 @@ use App\Models\Caixa;
 
 class NFCeController extends Controller  
 {
-    public function busca(Request $request) {
-        $produtos = Estoque::paginate(20);
+    public function adicionar(Request $request) {
+        $produtos = Estoque::paginate(10);
+
         return response()->json($produtos);
 
     }
 
-    public function buscaId($id) {
-        $teste = Estoque::find($id);
-        return response()->json($teste);
-        
+    public function carrinho(Request $request)
+    {
+        $produtosSelecionados = $request->input('produtos');
+        foreach ($produtosSelecionados as $produto) {
+            $produto = $produto;
+        }
+
+        $venda = VendaNfce::create([
+            'cod_cliente' => 1,
+            'produto' => 'produto' ,
+            'valor_produto' => 1
+
+        ]);
+
+        try{
+            return response()->json([
+                'Produtos' => 'Todos os produtos',
+                'produtosSelecionados' => $produtosSelecionados,
+                'venda' => $venda
+
+            ]);            
+
+        } catch(Exception $e) {
+            return response()->json([
+                'Error' => 'Sem produtos adicionados',
+                'e' => $e
+
+            ]);
+
+        }   
     }
 
-    public function itemSelecionado(Request $request)
-    {
-        $produto = Estoque::find($request->id);
-        $cliente = Clientes::find(1);
-
-        if ($produto && $cliente) {
-            $vendaNFCe = VendaNfce::create([
-                'cod_cliente' => $cliente->id,
-                'produto' => $produto->nome,
-                'valor_produto' => $produto->preco_venda,
-
-            ]);
-
-        };
-
-            return response()->json([
-                'message' => 'sucesso',
-                'produto' => $produto,
-                'vendaNFCe' => $vendaNFCe
-
-            ]);
-
-    }        
 }

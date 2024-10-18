@@ -33,7 +33,9 @@ Route::post('/usuarios', [UsuarioController::class, 'store']);
 
 
 // Rotas - VENDAS
-// Route::get('/nfce', [NFCeController::class])
+Route::get('/nfce/adicionar', [NFCeController::class, 'adicionar']);
+Route::get('/nfce/carrinho', [NFCeController::class, 'carrinho']);
+Route::post('/nfce/carrinho', [NFCeController::class, 'carrinho']);
 
 
 //----------------

@@ -140,8 +140,8 @@
                 };
 
                 try {
-                    const response = await axios.post('http://127.0.0.1:8000/api/produto', novoProduto); // LOCAL 
-                    //const response = await axios.post('http://192.168.98.51:8081/api/produto', novoProduto); // REDE
+                    //const response = await axios.post('http://127.0.0.1:8000/api/produto', novoProduto); // LOCAL 
+                    const response = await axios.post('http://192.168.98.51:8081/api/produto', novoProduto); // REDE
                     
                     console.log("Produto adicionado com sucesso!", response);
         
@@ -167,7 +167,7 @@
                     this.percLucro = Math.trunc(((this.precoVenda - this.precoCusto) / this.precoCusto) * 100);
                 } else if ( changedField === "lucro" && this.percLucro !== null && this.precoCusto ) {
                     // Se o percentual de lucro foi alterado, calcula o preço de venda
-                    this.precoVenda = Math.trunc(this.precoCusto * (1 + this.percLucro / 100) * 100) / 100;
+                    this.precoVenda = this.precoCusto * (1 + this.percLucro / 100) ;
                 }
             },
 
