@@ -49,7 +49,8 @@
 
                 try {
                     //const response = await axios.post('http://127.0.0.1:8000/api/produto', novoUsuario); // LOCAL 
-                    const response = await axios.post('http://192.168.98.51:8081/api/usuarios' , novoUsuario); // REDE
+                    //const response = await axios.post('http://192.168.1.101:8081/api/usuarios' , novoUsuario); // REDE
+                    const response = await axios.post('http://192.168.1.101:8081/api/usuarios' , novoUsuario); // REDE
                     console.log('Usuario adicionado com sucesso', response.data)
 
                 } catch (error) {

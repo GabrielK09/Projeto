@@ -37,5 +37,7 @@ Route::get('/nfce/adicionar', [NFCeController::class, 'adicionar']);
 Route::get('/nfce/carrinho', [NFCeController::class, 'carrinho']);
 Route::post('/nfce/carrinho', [NFCeController::class, 'carrinho']);
 
+Route::get('/nfce/finalizar', [NFCeController::class, 'finalizarVenda']);
+Route::post('/nfce/finalizar', [NFCeController::class, 'finalizarVenda']);
 
 //----------------

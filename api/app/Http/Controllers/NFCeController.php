@@ -26,34 +26,26 @@ class NFCeController extends Controller
 
     public function carrinho(Request $request)
     {
-        $produtosSelecionados = $request->input('produtos');
+        $produtosSelecionados = $request->input('produtosSelecionados', []); // Aqui pega tudo que ta sendo selecionado nessa merda
+
+        $produtos[] = $produtosSelecionados;
+        
         foreach ($produtosSelecionados as $produto) {
-            $produto = $produto;
+            $produtos[] = $produto;
         }
 
-        $venda = VendaNfce::create([
-            'cod_cliente' => 1,
-            'produto' => 'produto' ,
-            'valor_produto' => 1
-
+        return response()->json([
+            'resposta' => 'RESPOSTA DO BACKKKKKKK',
+            'teste_nome' => $produtos
         ]);
+    }
 
-        try{
-            return response()->json([
-                'Produtos' => 'Todos os produtos',
-                'produtosSelecionados' => $produtosSelecionados,
-                'venda' => $venda
+    public function finalizarVenda(Request $request)
+    {   
+        $faturarProdutos = $request->input('faturarProdutos');
 
-            ]);            
+        return response()->json($faturarProdutos);
 
-        } catch(Exception $e) {
-            return response()->json([
-                'Error' => 'Sem produtos adicionados',
-                'e' => $e
-
-            ]);
-
-        }   
     }
 
 }

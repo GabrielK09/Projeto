@@ -26,7 +26,10 @@
 
         </div>
         
+        
     </div>
+
+    <button @click="finalizarVenda()">Finalizar venda</button>
 </template>
 
 <script>
@@ -45,7 +48,8 @@
         data () {
             return {
                 produtos: [],
-                produtosSelecionados: []
+                produtosSelecionados: [],
+                faturarProdutos: []
 
             }
         },
@@ -54,7 +58,8 @@
             async todosProdutos() {
                 try {
                     //const response = await axios.get('http://127.0.0.1:8000/api/produto'); //LOCAL
-                    const response = await axios.get('http://192.168.98.51:8081/api/nfce/adicionar'); // REDE
+                    //const response = await axios.get('http://192.168.98.5:8081/api/nfce/adicionar'); // REDE - SGBR
+                    const response = await axios.get('http://192.168.1.101:8081/api/nfce/adicionar'); // REDE - CASA
                     console.log(response)
                     this.produtos = Array.isArray(response.data.data) ? response.data.data : []
                 
@@ -75,24 +80,47 @@
 
                 }
 
-                console.log('Produtos: ', this.produtosSelecionados)
+                console.log('Todos Produtos: ', this.produtosSelecionados)
 
                 await this.attCarrinho()
             },
 
             async attCarrinho() {
                 try {
-                    const response = await axios.post('http://192.168.98.51:8081/api/nfce/carrinho', {
-                        produtos: this.produtosSelecionados
 
+                    const response = await axios.post('http://192.168.1.101:8081/api/nfce/carrinho', { 
+                        produtosSelecionados: this.produtosSelecionados
+                    
                     });
 
-                    console.log('Carrinho atualizado', response.data)
+                    console.log('Carrinho atualizado: ', response)
+
                 } catch (error) {
                     console.error('Erro ao atualizar o carrinho:', error);
 
                 }
 
+            },
+
+            async finalizarVenda(){
+                try {
+                    this.produtosSelecionados.forEach(produto => {
+                        this.faturarProdutos.push(produto)
+
+                    });
+
+                    console.log(this.faturarProdutos)
+
+                    const response = await axios.post('http://192.168.1.101:8081/api/nfce/finalizar', {
+                        faturarProdutos: this.faturarProdutos
+                    })
+
+                    console.log(response)
+                    
+                } catch (error) {
+                    console.error('Erro ao atualizar o carrinho:', error);
+
+                }
             }
         },
         mounted() {

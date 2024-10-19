@@ -17,8 +17,8 @@ return new class extends Migration
             $table->id(); // Controle
             $table->timestamps(); // Cadastro
             
-            $table->unsignedBigInteger('cod_nfce'); // Controle VendaNFCe
-            $table->foreign('cod_nfce')->references('id')->on('vendanfce')->onDelete('cascade');
+            // $table->unsignedBigInteger('cod_nfce'); // Controle VendaNFCe
+            // $table->foreign('cod_nfce')->references('id')->on('vendanfce')->onDelete('cascade');
 
             $table->integer('codproduto');
             $table->string('nome');

@@ -51,7 +51,7 @@
             async todosClientes() {
                 try {
                     //const response = await axios.get('http://127.0.0.1:8000/api/clientes'); // LOCAL 
-                    const response = await axios.get('http://192.168.98.51:8081/api/clientes'); // REDE
+                    const response = await axios.get('http://192.168.1.101:8081/api/clientes'); // REDE
                     console.log(response)
 
                     this.clientes = Array.isArray(response.data) ? response.data : []
