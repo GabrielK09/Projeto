@@ -16,6 +16,8 @@ class ItemVendaNfce extends Model
     protected $fillable = [
         'cod_produto',
         'nome',
+        'qte',
+        'preco_unitario'
 
     ];
 

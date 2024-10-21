@@ -58,8 +58,8 @@
             async todosProdutos() {
                 try {
                     //const response = await axios.get('http://127.0.0.1:8000/api/produto'); //LOCAL
-                    //const response = await axios.get('http://192.168.98.5:8081/api/nfce/adicionar'); // REDE - SGBR
-                    const response = await axios.get('http://192.168.1.101:8081/api/nfce/adicionar'); // REDE - CASA
+                    const response = await axios.get('http://192.168.98.51:8081/api/nfce/adicionar'); // REDE - SGBR
+                    //const response = await axios.get('http://192.168.1.101:8081/api/nfce/adicionar'); // REDE - CASA
                     console.log(response)
                     this.produtos = Array.isArray(response.data.data) ? response.data.data : []
                 
@@ -87,8 +87,7 @@
 
             async attCarrinho() {
                 try {
-
-                    const response = await axios.post('http://192.168.1.101:8081/api/nfce/carrinho', { 
+                    const response = await axios.post('http://192.168.98.51:8081/api/nfce/carrinho', { 
                         produtosSelecionados: this.produtosSelecionados
                     
                     });

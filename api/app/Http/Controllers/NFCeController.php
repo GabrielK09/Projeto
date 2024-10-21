@@ -28,16 +28,38 @@ class NFCeController extends Controller
     {
         $produtosSelecionados = $request->input('produtosSelecionados', []); // Aqui pega tudo que ta sendo selecionado nessa merda
 
-        $produtos[] = $produtosSelecionados;
-        
-        foreach ($produtosSelecionados as $produto) {
-            $produtos[] = $produto;
+        $produtos = [];
+        $ids = [];
+        foreach ($produtosSelecionados as $dadosProduto) {
+            $produtos[] = [
+                'id' => $dadosProduto['id'],
+                'nome' => $dadosProduto['nome'],
+                'qte' => $dadosProduto['qte'],
+                'preco_venda' => $dadosProduto['preco_venda']
+
+            ];
+
+              
+            $itensDaVenda = ItemVendaNfce::create([
+                'codproduto' => $dadosProduto['id'],
+                'nome' => $dadosProduto['nome'],
+                'qte' => $dadosProduto['qte'],
+                'preco_unitario' => $dadosProduto['preco_venda']
+
+            ]);
         }
 
-        return response()->json([
-            'resposta' => 'RESPOSTA DO BACKKKKKKK',
-            'teste_nome' => $produtos
-        ]);
+   
+
+       // $venda = ItemVendaNfce::create([
+       //      'codproduto' => $produtos['id'],
+       //      'nome' => $produtos['nome'],
+       //      'qte' => $produtos['qte']
+
+       //  ]);
+
+        
+
     }
 
     public function finalizarVenda(Request $request)
