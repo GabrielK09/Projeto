@@ -13,7 +13,6 @@ class VendaNfce extends Model
 
     protected $fillable = [
         'cod_cliente',
-        'produto',
         'valor_produto'
         
     ];

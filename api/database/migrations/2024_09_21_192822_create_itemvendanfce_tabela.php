@@ -17,14 +17,13 @@ return new class extends Migration
             $table->id(); // Controle
             $table->timestamps(); // Cadastro
             
-            //$table->unsignedBigInteger('cod_nfce'); // Controle VendaNFCe
-            //$table->foreign('cod_nfce')->references('id')->on('vendanfce')->onDelete('cascade');
-
-            //$table->integer('codproduto');
+            $table->unsignedBigInteger('vendanfce_id')->nullable();
+            $table->foreign('vendanfce_id')->references('id')->on('vendanfce')->onDelete('cascade');
+            
             $table->string('nome');
             $table->decimal('qte');
-            $table->decimal('preco_unitario');
-            
+            $table->decimal('preco_unitario');            
+
         });
     }
 
@@ -33,8 +32,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('vendanfce', function (Blueprint $table) {
-            $table->dropForeign(['cod_vendanfce']); 
+        Schema::table('item_vendanfce', function (Blueprint $table) {
+            $table->dropForeign(['vendanfce_id']); 
         });
 
         Schema::dropIfExists('item_vendanfce');

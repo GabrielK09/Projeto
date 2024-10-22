@@ -27,47 +27,31 @@ class NFCeController extends Controller
     public function carrinho(Request $request)
     {
         $produtosSelecionados = $request->input('produtosSelecionados', []); // Aqui pega tudo que ta sendo selecionado nessa merda
-
-        $produtos = [];
-        $ids = [];
-        foreach ($produtosSelecionados as $dadosProduto) {
-            $produtos[] = [
-                'id' => $dadosProduto['id'],
-                'nome' => $dadosProduto['nome'],
-                'qte' => $dadosProduto['qte'],
-                'preco_venda' => $dadosProduto['preco_venda']
-
-            ];
-
-              
-            $itensDaVenda = ItemVendaNfce::create([
-                'codproduto' => $dadosProduto['id'],
-                'nome' => $dadosProduto['nome'],
-                'qte' => $dadosProduto['qte'],
-                'preco_unitario' => $dadosProduto['preco_venda']
-
-            ]);
-        }
-
-   
-
-       // $venda = ItemVendaNfce::create([
-       //      'codproduto' => $produtos['id'],
-       //      'nome' => $produtos['nome'],
-       //      'qte' => $produtos['qte']
-
-       //  ]);
-
-        
-
     }
 
     public function finalizarVenda(Request $request)
     {   
-        $faturarProdutos = $request->input('faturarProdutos');
+        $faturarProdutos = $request->input('faturarProdutos', []);
+        $valorTotal = 0;
 
-        return response()->json($faturarProdutos);
+        foreach ($faturarProdutos as $dadosProduto) {
+            $item = ItemVendaNfce::create([
+                'codproduto' => $dadosProduto['id'],
+                'nome' => $dadosProduto['nome'],
+                'qte' => $dadosProduto['qte'],
+                'preco_unitario' => $dadosProduto['preco_venda']
+            ]);
 
+            // Calcule o valor total
+            $valorTotal += $dadosProduto['qte'] * $dadosProduto['preco_venda'];
+        }
+
+        // Criação da venda
+        $venda = VendaNfce::create([
+            'cod_cliente' => 1, // Certifique-se de obter o ID do cliente corretamente
+            'valor_produto' => $valorTotal
+        ]);
+    
     }
 
 }
