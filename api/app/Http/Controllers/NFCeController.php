@@ -48,8 +48,9 @@ class NFCeController extends Controller
 
         // Criação da venda
         $venda = VendaNfce::create([
-            'cod_cliente' => 1, // Certifique-se de obter o ID do cliente corretamente
+            'cod_cliente' => 1,
             'valor_produto' => $valorTotal
+
         ]);
     
     }
