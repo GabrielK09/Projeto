@@ -28,8 +28,7 @@
         data () {
             return {
                 produtos: [],
-                isTodosProdutosVisible: false,
-                produtosSelecionados: []
+                isTodosProdutosVisible: false
 
             }
         },

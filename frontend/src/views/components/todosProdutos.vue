@@ -38,6 +38,7 @@ export default {
         isVisible: {
             type: Boolean,
             required: true
+
         }
     },
      
@@ -45,7 +46,9 @@ export default {
         return {
             produtos: [],
             produtosSelecionados: [],
-            faturarProdutos: []
+            faturarProdutos: [],
+            clienteSelecionado: ''
+            
         }
     },
     
@@ -74,38 +77,26 @@ export default {
                 jaSelecionado.qte += 1;
             } else {
                 produto.qte = 1;
-                this.produtosSelecionados.push({...produto}); // Copia o produto para manter a referência correta
+                this.produtosSelecionados.push({...produto}); 
             }
 
-            await this.attCarrinho();
-        },
-
-        async attCarrinho() {
-            try {
-                await axios.post('http://192.168.98.51:8081/api/nfce/carrinho', { 
-                    produtosSelecionados: this.produtosSelecionados
-                });
-            } catch (error) {
-                console.error('Erro ao atualizar o carrinho:', error);
-            }
         },
 
         async finalizarVenda() {
             try {
-                this.faturarProdutos = [...this.produtosSelecionados]; // Copia os produtos selecionados
+                this.faturarProdutos = [...this.produtosSelecionados];
 
                 const response = await axios.post('http://192.168.98.51:8081/api/nfce/finalizar', {
                     faturarProdutos: this.faturarProdutos
                 });
 
                 console.log(response);
-                // Adicione uma mensagem de sucesso
                 alert('Venda finalizada com sucesso!');
                 
-                // Limpa os produtos selecionados após a venda
                 this.produtosSelecionados = [];
             } catch (error) {
                 console.error('Erro ao finalizar a venda:', error);
+
             }
         }
     },

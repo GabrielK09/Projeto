@@ -26,7 +26,14 @@ class NFCeController extends Controller
 
     public function carrinho(Request $request)
     {
-        $produtosSelecionados = $request->input('produtosSelecionados', []); // Aqui pega tudo que ta sendo selecionado nessa merda
+        $produtosSelecionados = $request->input('produtosSelecionados', []); 
+
+    }
+
+    public function cliente()
+    {   
+        $cliente;
+        
     }
 
     public function finalizarVenda(Request $request)
