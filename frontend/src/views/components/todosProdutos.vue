@@ -2,6 +2,14 @@
     <div v-if="isVisible">
         <h3>Todos os produtos</h3>
     
+        <input 
+            type="text" 
+            placeholder="Selecionar cliente"
+            v-model="clienteSelecionado"
+            aria-label="Selecionar cliente"
+        
+        />
+
         <div v-if="produtos.length > 0">            
             <div v-for="produto in produtos" :key="produto.id">
                 <p>{{ produto.nome }}</p>
@@ -85,12 +93,23 @@ export default {
         async finalizarVenda() {
             try {
                 this.faturarProdutos = [...this.produtosSelecionados];
+                console.log('Cliente: ', this.clienteSelecionado);
+                
+                
+                if (!this.clienteSelecionado) {
+                    alert('Selecione o cliente por favor')    
+                    return
+
+                } 
 
                 const response = await axios.post('http://192.168.98.51:8081/api/nfce/finalizar', {
-                    faturarProdutos: this.faturarProdutos
+                    faturarProdutos: this.faturarProdutos,
+                    clienteSelecionado: this.clienteSelecionado
+
                 });
 
                 console.log(response);
+
                 alert('Venda finalizada com sucesso!');
                 
                 this.produtosSelecionados = [];

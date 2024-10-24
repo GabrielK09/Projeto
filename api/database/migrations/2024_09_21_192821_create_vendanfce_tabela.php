@@ -16,9 +16,9 @@ return new class extends Migration
         Schema::create('vendanfce', function (Blueprint $table) {
             $table->id();
                         
-            /*$table->unsignedBigInteger('cod_cliente');
-            $table->foreign('cod_cliente')->references('id')->on('clientes')->onDelete('cascade');*/
-            $table->string('cod_cliente');
+            $table->unsignedBigInteger('cod_cliente');
+            $table->foreign('cod_cliente')->references('id')->on('clientes')->onDelete('cascade');
+            $table->string('cliente');
             $table->decimal('valor_produto');
             $table->timestamps();
 

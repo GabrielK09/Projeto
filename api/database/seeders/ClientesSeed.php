@@ -7,43 +7,26 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-use App\Models\Estoque;
+use App\Models\Clientes;
 
 class ClientesSeed extends Seeder {
     public function run()
     {
-       $produtos = [
+        $clientes = [
             [
-                'nome' => 'Café Baggio',
-                'cod_gtin' => '7896003700011',
-                'preco_venda' => 19.90,
-                'preco_custo' => 10,
-                'perc_lucro' => 100,
-                'cfop' => '5102',
-                'csosn' => '102',
-                'ncm' => '09012100',
-                'qte' => 100,
-                'ativo' => true,
-            ],
-            [
-                'nome' => 'Café 3 corações',
-                'cod_gtin' => '7896003700011',
-                'preco_venda' => 19.90,
-                'preco_custo' => 101,
-                'perc_lucro' => 100,
-                'cfop' => '5102',
-                'csosn' => '102',
-                'ncm' => '09012100',
-                'qte' => 100,
-                'ativo' => true,
-            ],
-             
-        ]; 
+                'nome_completo' => 'Consumidor Padrão',
+                'tipo_pessoa' => 1,
+                'cpf' => '088.051.669-01',
+                'cnpj' => null,
+                'data_nascimento' => '2006-09-12',
+                'tipo_cadastro' => 1
+            ]
+        ];
+       
+        foreach ($clientes as $cliente) {
+            Clientes::create($cliente);
 
-        foreach ($produtos as $produto) {
-            Estoque::create($produto);
-
-        };
+        }
     }
     
 }

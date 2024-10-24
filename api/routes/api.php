@@ -23,6 +23,8 @@ Route::post('/produto', [ProdutosController::class, 'store']);
 Route::get('/clientes', [ClientesController::class, 'index']);
 Route::post('/clientes', [ClientesController::class, 'store']);
 
+Route::get('/clientes/verificar', [ClientesController::class, 'verifica']);
+
 //----------------
 
 // Rotas Usuarios

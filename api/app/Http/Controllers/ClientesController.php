@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\Clientes;
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Illuminate\Http\JsonResponse;
@@ -107,5 +108,11 @@ class ClientesController extends Controller
 
         $cliente->delete();
         return response()->json(['message' => 'Cliente deletado com sucesso']);
+    }
+
+    public function verifica(): JsonResponse{
+        $controles = BD::select("SELECT id FROM clientes");
+        return response()->json($controles);
+
     }
 }

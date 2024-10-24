@@ -6,6 +6,7 @@ use LaravelJsonApi\Core\Document\Error;
 //use LaravelJsonApi\Laravel\Http\Controllers\JsonApiController;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 use App\Http\Controllers\Controller;
 
@@ -27,18 +28,13 @@ class NFCeController extends Controller
     public function carrinho(Request $request)
     {
         $produtosSelecionados = $request->input('produtosSelecionados', []); 
-
-    }
-
-    public function cliente()
-    {   
-        $cliente;
-        
+ 
     }
 
     public function finalizarVenda(Request $request)
     {   
         $faturarProdutos = $request->input('faturarProdutos', []);
+        $clienteSelecionado  = $request->input('clienteSelecionado');
         $valorTotal = 0;
 
         foreach ($faturarProdutos as $dadosProduto) {
@@ -53,13 +49,21 @@ class NFCeController extends Controller
             $valorTotal += $dadosProduto['qte'] * $dadosProduto['preco_venda'];
         }
 
+        if (!$clienteSelecionado) {
+            $cliente = Clientes::find($clienteSelecionado);
+            return $cliente;
+            
+        }
+        
+    
         // Criação da venda
         $venda = VendaNfce::create([
-            'cod_cliente' => 1,
+            'cod_cliente' => $clienteSelecionado,
+            'cliente' => $cliente->nome_completo,
             'valor_produto' => $valorTotal
 
         ]);
-    
+        
     }
 
 }
